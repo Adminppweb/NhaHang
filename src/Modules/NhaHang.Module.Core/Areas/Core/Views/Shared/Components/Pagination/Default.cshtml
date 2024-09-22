@@ -1,0 +1,145 @@
+﻿@model NhaHang.Infrastructure.Web.SmartTable.Pagination
+
+@* <div class="section pagenav">
+    <nav class="clearfix relative nav_pagi w_100">
+        <ul class="pagination clearfix float-right">
+            @for (var p = 1; p <= Model.NumberOfPages; p++)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="#"><i class="fa fa-angle-left"></i>@p</a>
+                </li>
+            }
+            <li class="page-item disabled">
+                <a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
+            </li>
+
+            <li class="active page-item disabled"><a class="page-link" href="javascript:;">1</a></li>
+
+            <li class="page-item"><a class="page-link" onclick="doSearch(2)" href="?&page=2&view=grid">2</a></li>
+
+            <li class="page-item hidden-xs">
+                <a class="page-link" onclick="doSearch(2)" href="?&page=2&view=grid"><i class="fa fa-angle-right" aria-hidden="true"></i> </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<br /> *@
+
+@{
+    bool IsDiplay = false;
+    int PageSizePagition = 0, pageA = 1;
+    if (Model != null)
+    {
+        PageSizePagition = Model.PageSizePagition;
+        pageA = 1;
+        IsDiplay = Model.TotalItemCount > 0;
+    }
+
+}
+
+
+@if (IsDiplay)
+{
+    <script src="/_content/NhaHang.Module.Core/js/Pagination.js"></script>
+    <script>
+        var Param@(Model.PaginationId) = { };
+        function setLinkPage(event) {
+            event.preventDefault();
+            var page = $(event.target);
+            if ($(event.target).attr("class").includes('active')) { return; }
+
+                                    Param@(Model.PaginationId) = {
+                Action: "getSmartFilter",
+                    Data: {
+                    "Pagination": {
+                        "PageSize": page.attr("page-size"), //page-size
+                            "CurentPage": page.attr("page-number"),
+                                "Start": 1,
+                                    "TotalItemCount": page.attr("page-total-item"),
+                                        "Number": page.attr("page-number"),
+                                            "NumberOfPages": page.attr("page-number-pages")
+                    },
+                    "Search": null,
+                        "Sort": null,
+                            "Object": null
+                },
+                View: "viewcomponent"
+            };
+
+                                        GetPageParam@(Model.PaginationId)New(page);
+        }
+
+    </script>
+    <div class="section pagenav">
+        <nav class="clearfix relative nav_pagi w_100">
+            <ul class="pagination clearfix float-left">
+
+                @if (1 != Model.CurentPage)
+                {
+                    <li class="page-item hidden-xs">
+                        <a href="javascript:;" class="page-link" onclick="setLinkPage(event)" page-size="@Model.PageSize" page-total-item="@Model.TotalItemCount" page-number-pages="@Model.NumberOfPages" page-number="@(Math.Round(Convert.ToDouble(Model.NumberOfPages/Model.CurentPage)))">
+                            <i class="fa fa-angle-left" aria-hidden="true"></i><i class="fa fa-angle-left" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="page-item hidden-xs">
+                        <a href="javascript:;" onclick="setLinkPage(event)" page-size="@Model.PageSize" page-total-item="@Model.TotalItemCount" page-number-pages="@Model.NumberOfPages" page-number="@(Model.CurentPage - 1)" class="page-link">
+                            <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                }
+               @*  else
+                {
+                    <li class="page-item hidden-xs">
+                        <a href="javascript:;" class="page-link">
+                            <i class="fa fa-angle-left" aria-hidden="true"></i><i class="fa fa-angle-left" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="page-item hidden-xs">
+                        <a href="javascript:;" class="page-link">
+                            <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        </a>
+                    </li>
+
+                } *@
+
+                @for (var i = Model.Start; i <= Model.End; i++)
+                {
+
+                    @if (i == Convert.ToInt32(Model.CurentPage))
+                    {
+                        <li class="active page-item disabled"><a class="page-link" href="javascript:;">@i</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" onclick="setLinkPage(event)" page-number-pages="@Model.NumberOfPages" page-number="@i" href="javascript:;">@i</a></li>
+                    }
+
+                }
+
+                @if (@Model.CurentPage != @Model.NumberOfPages)
+                {
+                    <li class="page-item hidden-xs">
+                        <a href="javascript:;" class="page-link" onclick="setLinkPage(event)" page-size="@Model.PageSize" page-total-item="@Model.TotalItemCount" page-number="@(Model.CurentPage + 1)"><i class="fa fa-angle-right" aria-hidden="true"></i> </a>
+                    </li>
+                    <li class="page-item hidden-xs">
+                        <a href="javascript:;" class="page-link" onclick="setLinkPage(event)" page-total-item="@Model.TotalItemCount" page-number-pages="@Model.NumberOfPages" page-number="@(Model.CurentPage + Model.PageSizePagition)">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                }
+               @*  else
+                {
+                    <li class="page-item hidden-xs">
+                        <a href="javascript:;" class="page-link"><i class="fa fa-angle-right" aria-hidden="true"></i> </a>
+                    </li>
+                    <li class="page-item hidden-xs">
+                        <a href="javascript:;" class="page-link">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    
+                } *@
+            </ul>
+        </nav>
+    </div>
+}

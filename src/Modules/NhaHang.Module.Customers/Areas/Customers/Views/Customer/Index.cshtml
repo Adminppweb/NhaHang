@@ -1,0 +1,162 @@
+﻿@model NhaHang.Module.Customers.Areas.Customers.ViewModels.CustomerVm
+@inject IConfiguration Config
+
+
+@{
+    ViewData["Title"] = Localizer["APPLY"];
+}
+
+@section additionalMeta {
+    <meta name="keywords" content="@Localizer["APPLY"]  />
+    <meta name="description" content="@Localizer["APPLY"]" />
+    <meta property="og:title" content="@ViewBag.Title -  @Localizer["APPLY"]" />
+    <meta property="og:description" content="@Localizer["APPLY"]" />
+    <meta property="og:url" content="https://rapidvietnam.com/apply" />
+    <meta property="og:image" content="~/media/logo/logo-ng.png" />
+    <meta property="og:image:alt" content="@ViewBag.Title -  @Localizer["APPLY"]" />
+    <meta name="twitter:title" content="@ViewBag.Title -  @Localizer["APPLY"]" />
+    <meta name="twitter:description" content="@Localizer["APPLY"]" />
+    <meta name="twitter:title" content="@ViewBag.Title -  @Localizer["APPLY"]" />
+    <meta name="twitter:url" content="https://rapidvietnam.com/apply" />
+    <link rel="canonical" href="https://rapidvietnam.com/apply" />
+    <link rel="image_src" href="~/media/logo/logo-ng.png" />
+}
+@{
+    ViewData["Page"] = "apply-page";
+}
+@section head {
+    <link rel="stylesheet" href="~/assets/dist/css/apply.css">
+}
+<main>
+    <section class="container">
+        <div class="inner-container">
+            <div class="breadcrumb">
+                <a href="~/" class="point origin f-s-3">@Localizer["Home"]</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <a href="career" class="point sub f-s-3">@Localizer["Career"]</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <a class="point active sub f-s-3">@Localizer["Apply"]</a>
+            </div>
+        </div>
+    </section>
+    <section class="section-one-container">
+        <div class="container">
+            <div class="inner-container">
+                <div class="section-one">
+                    <section class="inner-section-one">
+                        <div class="image-container">
+                            <figure class="image-block">
+                                <img class="position-full" src="" alt="" srcset="">
+                            </figure>
+                        </div>
+                        <div class="form-container">
+                            <div class="inner-form">
+                                <h3 class="title f-s-5">Apply Now!!</h3>
+                                <form class="form-main grid">
+                                    <div class="col-12 col-xl-6">
+                                        <div class="input-block">
+                                            <label for="full-name">Full name</label>
+
+                                            <input class="input" id="full-name" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <div class="input-block">
+                                            <label for="applied-position">Applied Position</label>
+
+                                            <input class="input" id="applied-position" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <div class="input-block">
+                                            <label for="email">Email</label>
+
+                                            <input class="input" id="email" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <div class="input-block">
+                                            <label for="phone-number">Phone Number</label>
+
+                                            <input class="input" id="phone-number" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class=" col-12">
+                                        <div class="input-block">
+                                            <label for="note">Note</label>
+
+                                            <textarea class="input" id="note" rows="" cols=""></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div id="upload-container" class="upload-container">
+                                            <div style="display: flex;" class="button-fake-block">
+                                                <label id="button-upload-cv" for="upload-cv" class="button-upload">
+                                                    Upload CV
+                                                    <img src="./assets/images/icon-upload.png" alt="">
+                                                </label>
+                                            </div>
+                                            <input style="display: none;" id="upload-cv" class="input-cv" max="1"
+                                                   type="file">
+                                            <div style="display: none;" class="upload-block show-file">
+                                                <p id="name-block" class="name-block">
+                                                    <span id="name-file" class="name-file">ddd</span>
+                                                    <span id="delete-cv" class="delete-cv" type="">
+                                                        <i class="fa-regular fa-trash-can"></i>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+@* <div class="container">
+    <div class="row">
+        <form action="/customer" class="form-new" method="POST">
+            <div class="formregis">
+                <div class="tit">@Localizer["APPLY"]</div>
+                <div class="pad">
+                    <div class="row">
+                        <label>Họ tên</label>
+                        <input asp-for="Name" type="text" placeholder="Tên" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+
+                    </div>
+                    <div class="row">
+                        <label>Số điện thoại</label>
+                        <input asp-for="Phone" type="text" placeholder="Số điện thoại" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+                        <label>Email</label>
+                        <input asp-for="Email" type="text" placeholder="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+                        <label>Yêu cầu</label>
+                        <textarea asp-for="Content" type="text" placeholder="Yêu cầu" rows="3"></textarea>
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
+
+                    <div class="center">
+                        <input type="submit" value="Gửi ngay">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+ *@
+@section scripts {
+    <script src="~/assets/js/apply.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}

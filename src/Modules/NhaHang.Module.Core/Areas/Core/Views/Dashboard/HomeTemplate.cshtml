@@ -1,0 +1,543 @@
+﻿@{
+	Layout = null;
+}
+
+<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+	<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+		<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+			<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">@Localizer["Dashboard"]</h1>
+			<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+				<li class="breadcrumb-item text-muted">
+					<a href="~/admin" class="text-muted text-hover-primary">@Localizer["Home"]</a>
+				</li>
+				<li class="breadcrumb-item">
+					<span class="bullet bg-gray-400 w-5px h-2px"></span>
+				</li>
+				<li class="breadcrumb-item text-muted">@Localizer["Dashboard"]</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div id="kt_app_content" class="app-content flex-column-fluid">
+	<div id="kt_app_content_container" class="app-container container-xxl">
+		<div class="row g-xl-5">
+			<div class="col-xl-4 mb-xl-5">
+				<div class="card h-md-100" dir="ltr">
+					<div class="card-body d-flex flex-column flex-center">
+						@*<div class="mb-2">
+							<h1 class="fw-semibold text-gray-800 text-center lh-lg">
+								Have you tried
+								<br />new
+								<span class="fw-bolder">eCommerce App ?</span>
+							</h1>
+							<div class="py-10 text-center">
+								<img src="assets/media/svg/illustrations/easy/2.svg" class="theme-light-show w-200px" alt="" />
+								<img src="assets/media/svg/illustrations/easy/2-dark.svg" class="theme-dark-show w-200px" alt="" />
+							</div>
+						</div>
+						<div class="text-center mb-1">
+							<a class="btn btn-sm btn-primary me-2" href="../../demo1/dist/apps/ecommerce/sales/listing.html">View App</a>
+							<a class="btn btn-sm btn-light" href="../../demo1/dist/apps/ecommerce/catalog/add-product.html">New Product</a>
+						</div>*@
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-8 mb-5 mb-xl-5">
+				<order-widget status="0" num-records="5"></order-widget>
+			</div>
+		</div>
+		<div class="row g-xl-5">
+			<div class="col-xl-4 mb-5 mb-xl-5">
+				<most-viewed-products></most-viewed-products>
+			</div>
+			<div class="col-xl-8 mb-5 mb-xl-5">
+				<review-reply-widget status="1" num-records="5"></review-reply-widget>
+			</div>
+		</div>
+		<div class="row g-xl-5">
+			<div class="col-xl-4 mb-5 mb-xl-5">
+				<most-search-keyword></most-search-keyword>
+			</div>
+			<div class="col-xl-8 mb-5 mb-xl-5">
+				<review-widget status="1" num-records="5"></review-widget>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+@*<div class="row">
+	<div class="col-xl-3">
+		<div class="card card-custom card-stretch gutter-b">
+			<div class="card-body">
+				<span class="svg-icon svg-icon-2x svg-icon-success">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							<rect x="0" y="0" width="24" height="24" />
+							<path d="M18.1446364,11.84388 L17.4471627,16.0287218 C17.4463569,16.0335568 17.4455155,16.0383857 17.4446387,16.0432083 C17.345843,16.5865846 16.8252597,16.9469884 16.2818833,16.8481927 L4.91303792,14.7811299 C4.53842737,14.7130189 4.23500006,14.4380834 4.13039941,14.0719812 L2.30560137,7.68518803 C2.28007524,7.59584656 2.26712532,7.50338343 2.26712532,7.4104669 C2.26712532,6.85818215 2.71484057,6.4104669 3.26712532,6.4104669 L16.9929851,6.4104669 L17.606173,3.78251876 C17.7307772,3.24850086 18.2068633,2.87071314 18.7552257,2.87071314 L20.8200821,2.87071314 C21.4717328,2.87071314 22,3.39898039 22,4.05063106 C22,4.70228173 21.4717328,5.23054898 20.8200821,5.23054898 L19.6915238,5.23054898 L18.1446364,11.84388 Z" fill="#000000" opacity="0.3" />
+							<path d="M6.5,21 C5.67157288,21 5,20.3284271 5,19.5 C5,18.6715729 5.67157288,18 6.5,18 C7.32842712,18 8,18.6715729 8,19.5 C8,20.3284271 7.32842712,21 6.5,21 Z M15.5,21 C14.6715729,21 14,20.3284271 14,19.5 C14,18.6715729 14.6715729,18 15.5,18 C16.3284271,18 17,18.6715729 17,19.5 C17,20.3284271 16.3284271,21 15.5,21 Z" fill="#000000" />
+						</g>
+					</svg>
+				</span>
+				<ordersum-widget status="0"></ordersum-widget>
+				<span class="font-weight-bold text-muted font-size-sm">Đơn hàng mới</span>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3">
+		<div class="card card-custom card-stretch gutter-b">
+			<div class="card-body">
+				<span class="svg-icon svg-icon-2x svg-icon-danger">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							<polygon points="0 0 24 0 24 24 0 24"></polygon>
+							<path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+							<path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
+						</g>
+					</svg>
+				</span>
+				<span class="font-weight-bold text-muted font-size-sm">Khách hàng mới</span>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3">
+		<div class="card card-custom card-stretch gutter-b">
+			<div class="card-body">
+				<span class="svg-icon svg-icon-2x svg-icon-info">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							<rect x="0" y="0" width="24" height="24" />
+							<path d="M2,6 L21,6 C21.5522847,6 22,6.44771525 22,7 L22,17 C22,17.5522847 21.5522847,18 21,18 L2,18 C1.44771525,18 1,17.5522847 1,17 L1,7 C1,6.44771525 1.44771525,6 2,6 Z M11.5,16 C13.709139,16 15.5,14.209139 15.5,12 C15.5,9.790861 13.709139,8 11.5,8 C9.290861,8 7.5,9.790861 7.5,12 C7.5,14.209139 9.290861,16 11.5,16 Z" fill="#000000" opacity="0.3" transform="translate(11.500000, 12.000000) rotate(-345.000000) translate(-11.500000, -12.000000) " />
+							<path d="M2,6 L21,6 C21.5522847,6 22,6.44771525 22,7 L22,17 C22,17.5522847 21.5522847,18 21,18 L2,18 C1.44771525,18 1,17.5522847 1,17 L1,7 C1,6.44771525 1.44771525,6 2,6 Z M11.5,16 C13.709139,16 15.5,14.209139 15.5,12 C15.5,9.790861 13.709139,8 11.5,8 C9.290861,8 7.5,9.790861 7.5,12 C7.5,14.209139 9.290861,16 11.5,16 Z M11.5,14 C12.6045695,14 13.5,13.1045695 13.5,12 C13.5,10.8954305 12.6045695,10 11.5,10 C10.3954305,10 9.5,10.8954305 9.5,12 C9.5,13.1045695 10.3954305,14 11.5,14 Z" fill="#000000" />
+						</g>
+					</svg>
+				</span>
+				<span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block">0</span>
+				<span class="font-weight-bold text-muted  font-size-sm">Doanh thu hôm nay</span>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3">
+		<div class="card card-custom card-stretch gutter-b">
+			<div class="card-body">
+				<span class="svg-icon svg-icon-2x svg-icon-warning">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							<rect x="0" y="0" width="24" height="24" />
+							<path d="M7.14296018,11.6653622 C7.06267828,11.7456441 6.95746388,11.7962128 6.84462255,11.8087507 C6.57016914,11.8392455 6.32295974,11.641478 6.29246492,11.3670246 L5.76926113,6.65819047 C5.76518362,6.62149288 5.76518362,6.58445654 5.76926113,6.54775895 C5.79975595,6.27330553 6.04696535,6.07553802 6.32141876,6.10603284 L11.0302529,6.62923663 C11.1430942,6.64177456 11.2483086,6.69234321 11.3285905,6.77262511 C11.5238526,6.96788726 11.5238526,7.28446974 11.3285905,7.47973189 L9.94288211,8.86544026 L11.4443443,10.3669024 C11.6396064,10.5621646 11.6396064,10.8787471 11.4443443,11.0740092 L10.7372375,11.781116 C10.5419754,11.9763782 10.2253929,11.9763782 10.0301307,11.781116 L8.52866855,10.2796538 L7.14296018,11.6653622 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+							<path d="M12.0799676,14.7839934 L14.2839934,12.5799676 C14.8927139,11.9712471 15.0436229,11.0413042 14.6586342,10.2713269 L14.5337539,10.0215663 C14.1487653,9.25158901 14.2996742,8.3216461 14.9083948,7.71292558 L17.6411989,4.98012149 C17.836461,4.78485934 18.1530435,4.78485934 18.3483056,4.98012149 C18.3863063,5.01812215 18.4179321,5.06200062 18.4419658,5.11006808 L19.5459415,7.31801948 C20.3904962,9.0071287 20.0594452,11.0471565 18.7240871,12.3825146 L12.7252616,18.3813401 C11.2717221,19.8348796 9.12170075,20.3424308 7.17157288,19.6923882 L4.75709327,18.8875616 C4.49512161,18.8002377 4.35354162,18.5170777 4.4408655,18.2551061 C4.46541191,18.1814669 4.50676633,18.114554 4.56165376,18.0596666 L7.21292558,15.4083948 C7.8216461,14.7996742 8.75158901,14.6487653 9.52156634,15.0337539 L9.77132688,15.1586342 C10.5413042,15.5436229 11.4712471,15.3927139 12.0799676,14.7839934 Z" fill="#000000" />
+						</g>
+					</svg>
+				</span>
+				<contact-widget status="1"></contact-widget>
+				<span class="font-weight-bold text-muted  font-size-sm">Khách hàng liên hệ</span>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xl-8">
+		<div class="card card-custom card-stretch gutter-b">
+			<div class="card-header h-auto border-0">
+				<div class="card-title py-5">
+					<h3 class="card-label">
+						<span class="d-block text-dark font-weight-bolder">
+							Đơn đặt hàng gần đây
+						</span>
+						<span class="d-block text-muted mt-2 font-size-sm">
+							0 đơn hàng mới
+						</span>
+					</h3>
+				</div>
+				<div class="card-toolbar">
+					<ul class="nav nav-pills nav-pills-sm nav-dark-75" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link py-2 px-4" data-bs-toggle="tab" href="#kt_charts_widget_2_chart_tab_1">
+								<span class="nav-text font-size-sm">Trong tháng</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link py-2 px-4" data-bs-toggle="tab" href="#kt_charts_widget_2_chart_tab_2">
+								<span class="nav-text font-size-sm">Trong tuần</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link py-2 px-4 active" data-bs-toggle="tab" href="#kt_charts_widget_2_chart_tab_3">
+								<span class="nav-text font-size-sm">Hôm nay</span>
+							</a>
+						</li>
+					</ul>
+					@*<span class="mr-5 d-flex align-items-center font-weight-bold">
+					<i class="label label-dot label-xl label-success mr-2"></i> Bán hàng
+					</span>
+					<span class="d-flex align-items-center font-weight-bold">
+					<i class="label label-dot label-xl label-light mr-2"></i> Người dùng
+					</span>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-4 d-flex flex-column">
+						<div class="bg-light-warning p-8 rounded-xl flex-grow-1">
+							<div class="d-flex align-items-center mb-5">
+								<div class="symbol symbol-circle symbol-white symbol-30 flex-shrink-0 mr-3">
+									<div class="symbol-label">
+										<span class="svg-icon svg-icon-md svg-icon-success">
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+													<rect x="0" y="0" width="24" height="24"></rect>
+													<path d="M12,4.56204994 L7.76822128,9.6401844 C7.4146572,10.0644613 6.7840925,10.1217854 6.3598156,9.76822128 C5.9355387,9.4146572 5.87821464,8.7840925 6.23177872,8.3598156 L11.2317787,2.3598156 C11.6315738,1.88006147 12.3684262,1.88006147 12.7682213,2.3598156 L17.7682213,8.3598156 C18.1217854,8.7840925 18.0644613,9.4146572 17.6401844,9.76822128 C17.2159075,10.1217854 16.5853428,10.0644613 16.2317787,9.6401844 L12,4.56204994 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+													<path d="M3.5,9 L20.5,9 C21.0522847,9 21.5,9.44771525 21.5,10 C21.5,10.132026 21.4738562,10.2627452 21.4230769,10.3846154 L17.7692308,19.1538462 C17.3034221,20.271787 16.2111026,21 15,21 L9,21 C7.78889745,21 6.6965779,20.271787 6.23076923,19.1538462 L2.57692308,10.3846154 C2.36450587,9.87481408 2.60558331,9.28934029 3.11538462,9.07692308 C3.23725479,9.02614384 3.36797398,9 3.5,9 Z M12,17 C13.1045695,17 14,16.1045695 14,15 C14,13.8954305 13.1045695,13 12,13 C10.8954305,13 10,13.8954305 10,15 C10,16.1045695 10.8954305,17 12,17 Z" fill="#000000"></path>
+												</g>
+											</svg>
+										</span>
+									</div>
+								</div>
+								<div>
+									<div class="font-size-sm font-weight-bold">0</div>
+									<div class="font-size-sm text-muted">Đơn hàng đã hoàn thành</div>
+								</div>
+							</div>
+							<div class="d-flex align-items-center mb-5">
+								<div class="symbol symbol-circle symbol-white symbol-30 flex-shrink-0 mr-3">
+									<div class="symbol-label">
+										<span class="svg-icon svg-icon-md svg-icon-danger">
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+													<rect x="0" y="0" width="24" height="24"></rect>
+													<path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000"></path>
+													<rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519) " x="16.3255682" y="2.94551858" width="3" height="18" rx="1"></rect>
+												</g>
+											</svg>
+										</span>
+									</div>
+								</div>
+								<div>
+									<div class="font-size-sm font-weight-bold">0</div>
+									<div class="font-size-sm text-muted">Đơn hàng đã hủy</div>
+								</div>
+							</div>
+							<div class="d-flex align-items-center mb-5">
+								<div class="symbol symbol-circle symbol-white symbol-30 flex-shrink-0 mr-3">
+									<div class="symbol-label">
+										<span class="svg-icon svg-icon-md svg-icon-warning">
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+													<rect x="0" y="0" width="24" height="24"></rect>
+													<path d="M9.07117914,12.5710461 L13.8326627,12.5710461 C14.108805,12.5710461 14.3326627,12.3471885 14.3326627,12.0710461 L14.3326627,0.16733734 C14.3326627,-0.108805035 14.108805,-0.33266266 13.8326627,-0.33266266 C13.6282104,-0.33266266 13.444356,-0.208187188 13.3684243,-0.0183579985 L8.6069408,11.8853508 C8.50438409,12.1417426 8.62909204,12.4327278 8.8854838,12.5352845 C8.94454394,12.5589085 9.00756943,12.5710461 9.07117914,12.5710461 Z" fill="#000000" opacity="0.3" transform="translate(11.451854, 6.119192) rotate(-270.000000) translate(-11.451854, -6.119192) "></path>
+													<path d="M9.23851648,24.5 L14,24.5 C14.2761424,24.5 14.5,24.2761424 14.5,24 L14.5,12.0962912 C14.5,11.8201488 14.2761424,11.5962912 14,11.5962912 C13.7955477,11.5962912 13.6116933,11.7207667 13.5357617,11.9105959 L8.77427814,23.8143047 C8.67172143,24.0706964 8.79642938,24.3616816 9.05282114,24.4642383 C9.11188128,24.4878624 9.17490677,24.5 9.23851648,24.5 Z" fill="#000000" transform="translate(11.500000, 18.000000) scale(1, -1) rotate(-270.000000) translate(-11.500000, -18.000000) "></path>
+													<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="11" y="2" width="2" height="20" rx="1"></rect>
+												</g>
+											</svg>
+										</span>
+									</div>
+								</div>
+								<div>
+									<div class="font-size-sm font-weight-bold">0</div>
+									<div class="font-size-sm text-muted">Đơn hàng đang giao</div>
+								</div>
+							</div>
+							<div class="d-flex align-items-center mb-5">
+								<div class="symbol symbol-circle symbol-white symbol-30 flex-shrink-0 mr-3">
+									<div class="symbol-label">
+										<span class="svg-icon svg-icon-md svg-icon-info">
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+													<rect x="0" y="0" width="24" height="24"></rect>
+													<path d="M3.5,3 L9.5,3 C10.3284271,3 11,3.67157288 11,4.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L3.5,20 C2.67157288,20 2,19.3284271 2,18.5 L2,4.5 C2,3.67157288 2.67157288,3 3.5,3 Z M9,9 C8.44771525,9 8,9.44771525 8,10 L8,12 C8,12.5522847 8.44771525,13 9,13 C9.55228475,13 10,12.5522847 10,12 L10,10 C10,9.44771525 9.55228475,9 9,9 Z" fill="#000000" opacity="0.3"></path>
+													<path d="M14.5,3 L20.5,3 C21.3284271,3 22,3.67157288 22,4.5 L22,18.5 C22,19.3284271 21.3284271,20 20.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,4.5 C13,3.67157288 13.6715729,3 14.5,3 Z M20,9 C19.4477153,9 19,9.44771525 19,10 L19,12 C19,12.5522847 19.4477153,13 20,13 C20.5522847,13 21,12.5522847 21,12 L21,10 C21,9.44771525 20.5522847,9 20,9 Z" fill="#000000" transform="translate(17.500000, 11.500000) scale(-1, 1) translate(-17.500000, -11.500000) "></path>
+												</g>
+											</svg>
+										</span>
+									</div>
+								</div>
+								<div>
+									<div class="font-size-sm font-weight-bold">0</div>
+									<div class="font-size-sm text-muted">Tổng đơn hàng</div>
+								</div>
+							</div>
+							<div class="d-flex align-items-center">
+								<div class="symbol symbol-circle symbol-white symbol-30 flex-shrink-0 mr-3">
+									<div class="symbol-label">
+										<span class="svg-icon svg-icon-md svg-icon-danger">
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+													<rect x="0" y="0" width="24" height="24"></rect>
+													<path d="M7.825,10.225 C7.2,9.475 6.85,8.4 6.85,7.375 C6.85,4.55 9.15,2.05 12.35,2.05 C15.45,2.05 17.8,4.45 17.875,7.425 L15.075,7.425 C15.075,5.85 13.975,4.6 12.35,4.6 C10.75,4.6 9.6,5.775 9.6,7.375 C9.6,8.26626781 10.0162926,9.06146809 10.6676674,9.58392078 C10.7130614,9.62033024 10.7238389,12.2340233 10.7,17.425 L17.5444449,17.425 C17.8205873,17.425 18.0444449,17.6488576 18.0444449,17.925 C18.0444449,17.9869142 18.0329457,18.0482899 18.0105321,18.1060047 L17.3988817,19.6810047 C17.3242018,19.8733052 17.1390868,20 16.9327944,20 L6.3,20 C6.02385763,20 5.8,19.7761424 5.8,19.5 L5.8,17.925 C5.8,17.6488576 6.02385763,17.425 6.3,17.425 L7.925,17.425 L7.925,12.475 L7.825,10.225 Z" fill="#000000"></path>
+													<path d="M4.3618034,11.2763932 L4.8618034,10.2763932 C4.94649941,10.1070012 5.11963097,10 5.30901699,10 L15.190983,10 C15.4671254,10 15.690983,10.2238576 15.690983,10.5 C15.690983,10.5776225 15.6729105,10.6541791 15.6381966,10.7236068 L15.1381966,11.7236068 C15.0535006,11.8929988 14.880369,12 14.690983,12 L4.80901699,12 C4.53287462,12 4.30901699,11.7761424 4.30901699,11.5 C4.30901699,11.4223775 4.32708954,11.3458209 4.3618034,11.2763932 Z" fill="#000000" opacity="0.3"></path>
+												</g>
+											</svg>
+										</span>
+									</div>
+								</div>
+								<div>
+									<div class="font-size-sm font-weight-bold">0</div>
+									<div class="font-size-sm text-muted">Tổng doanh thu</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-8">
+						<div id="kt_charts_widget_1_chart" style="min-height: 365px;">
+							<div id="apexchartsjf0djx6xl" class="apexcharts-canvas apexchartsjf0djx6xl apexcharts-theme-light" style="width: 531px; height: 350px;">
+								<svg id="SvgjsSvg1696"
+									 width="531"
+									 height="350"
+									 xmlns="http://www.w3.org/2000/svg"
+									 version="1.1"
+									 xmlns:xlink="http://www.w3.org/1999/xlink"
+									 xmlns:svgjs="http://svgjs.com/svgjs"
+									 class="apexcharts-svg"
+									 xmlns:data="ApexChartsNS"
+									 transform="translate(0, 0)"
+									 style="background: transparent;">
+									<g id="SvgjsG1698" class="apexcharts-inner apexcharts-graphical" transform="translate(45.28750038146973, 30)">
+										<defs id="SvgjsDefs1697">
+											<linearGradient id="SvgjsLinearGradient1702" x1="0" y1="0" x2="0" y2="1">
+												<stop id="SvgjsStop1703" stop-opacity="0.4" stop-color="rgba(216,227,240,0.4)" offset="0"></stop>
+												<stop id="SvgjsStop1704" stop-opacity="0.5" stop-color="rgba(190,209,230,0.5)" offset="1"></stop>
+												<stop id="SvgjsStop1705" stop-opacity="0.5" stop-color="rgba(190,209,230,0.5)" offset="1"></stop>
+											</linearGradient>
+											<clipPath id="gridRectMaskjf0djx6xl">
+												<rect id="SvgjsRect1707" width="481.7124996185303" height="279.81759814834595" x="-3" y="-1" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect>
+											</clipPath>
+											<clipPath id="gridRectMarkerMaskjf0djx6xl">
+												<rect id="SvgjsRect1708" width="479.7124996185303" height="281.81759814834595" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect>
+											</clipPath>
+										</defs>
+										<rect id="SvgjsRect1706"
+											  width="11.892812490463257"
+											  height="277.81759814834595"
+											  x="262.7145882844925"
+											  y="0"
+											  rx="0"
+											  ry="0"
+											  opacity="1"
+											  stroke-width="0"
+											  stroke-dasharray="3"
+											  fill="url(#SvgjsLinearGradient1702)"
+											  class="apexcharts-xcrosshairs"
+											  y2="277.81759814834595"
+											  filter="none"
+											  fill-opacity="0.9"
+											  x1="262.7145882844925"
+											  x2="262.7145882844925"></rect>
+										<g id="SvgjsG1726" class="apexcharts-xaxis" transform="translate(0, 0)">
+											<g id="SvgjsG1727" class="apexcharts-xaxis-texts-g" transform="translate(0, -4)">
+												<text id="SvgjsText1729"
+													  font-family="Poppins"
+													  x="39.64270830154419"
+													  y="306.81759814834595"
+													  text-anchor="middle"
+													  dominant-baseline="auto"
+													  font-size="12px"
+													  font-weight="400"
+													  fill="#b5b5c3"
+													  class="apexcharts-text apexcharts-xaxis-label"
+													  style="font-family: Poppins;">
+													<tspan id="SvgjsTspan1730">Feb</tspan>
+													<title>Feb</title>
+												</text>
+												<text id="SvgjsText1732"
+													  font-family="Poppins"
+													  x="118.92812490463257"
+													  y="306.81759814834595"
+													  text-anchor="middle"
+													  dominant-baseline="auto"
+													  font-size="12px"
+													  font-weight="400"
+													  fill="#b5b5c3"
+													  class="apexcharts-text apexcharts-xaxis-label"
+													  style="font-family: Poppins;">
+													<tspan id="SvgjsTspan1733">Mar</tspan>
+													<title>Mar</title>
+												</text>
+												<text id="SvgjsText1735"
+													  font-family="Poppins"
+													  x="198.21354150772095"
+													  y="306.81759814834595"
+													  text-anchor="middle"
+													  dominant-baseline="auto"
+													  font-size="12px"
+													  font-weight="400"
+													  fill="#b5b5c3"
+													  class="apexcharts-text apexcharts-xaxis-label"
+													  style="font-family: Poppins;">
+													<tspan id="SvgjsTspan1736">Apr</tspan>
+													<title>Apr</title>
+												</text>
+												<text id="SvgjsText1738"
+													  font-family="Poppins"
+													  x="277.4989581108093"
+													  y="306.81759814834595"
+													  text-anchor="middle"
+													  dominant-baseline="auto"
+													  font-size="12px"
+													  font-weight="400"
+													  fill="#b5b5c3"
+													  class="apexcharts-text apexcharts-xaxis-label"
+													  style="font-family: Poppins;">
+													<tspan id="SvgjsTspan1739">May</tspan>
+													<title>May</title>
+												</text>
+												<text id="SvgjsText1741"
+													  font-family="Poppins"
+													  x="356.7843747138977"
+													  y="306.81759814834595"
+													  text-anchor="middle"
+													  dominant-baseline="auto"
+													  font-size="12px"
+													  font-weight="400"
+													  fill="#b5b5c3"
+													  class="apexcharts-text apexcharts-xaxis-label"
+													  style="font-family: Poppins;">
+													<tspan id="SvgjsTspan1742">Jun</tspan>
+													<title>Jun</title>
+												</text>
+												<text id="SvgjsText1744"
+													  font-family="Poppins"
+													  x="436.0697913169861"
+													  y="306.81759814834595"
+													  text-anchor="middle"
+													  dominant-baseline="auto"
+													  font-size="12px"
+													  font-weight="400"
+													  fill="#b5b5c3"
+													  class="apexcharts-text apexcharts-xaxis-label"
+													  style="font-family: Poppins;">
+													<tspan id="SvgjsTspan1745">Jul</tspan>
+													<title>Jul</title>
+												</text>
+											</g>
+										</g>
+										<g id="SvgjsG1758" class="apexcharts-grid">
+											<g id="SvgjsG1759" class="apexcharts-gridlines-horizontal">
+												<line id="SvgjsLine1761" x1="0" y1="0" x2="475.7124996185303" y2="0" stroke="#ebedf3" stroke-dasharray="4" class="apexcharts-gridline"></line>
+												<line id="SvgjsLine1762" x1="0" y1="69.45439953708649" x2="475.7124996185303" y2="69.45439953708649" stroke="#ebedf3" stroke-dasharray="4" class="apexcharts-gridline"></line>
+												<line id="SvgjsLine1763" x1="0" y1="138.90879907417298" x2="475.7124996185303" y2="138.90879907417298" stroke="#ebedf3" stroke-dasharray="4" class="apexcharts-gridline"></line>
+												<line id="SvgjsLine1764" x1="0" y1="208.36319861125946" x2="475.7124996185303" y2="208.36319861125946" stroke="#ebedf3" stroke-dasharray="4" class="apexcharts-gridline"></line>
+												<line id="SvgjsLine1765" x1="0" y1="277.81759814834595" x2="475.7124996185303" y2="277.81759814834595" stroke="#ebedf3" stroke-dasharray="4" class="apexcharts-gridline"></line>
+											</g>
+											<g id="SvgjsG1760" class="apexcharts-gridlines-vertical"></g>
+											<line id="SvgjsLine1767" x1="0" y1="277.81759814834595" x2="475.7124996185303" y2="277.81759814834595" stroke="transparent" stroke-dasharray="0"></line>
+											<line id="SvgjsLine1766" x1="0" y1="1" x2="0" y2="277.81759814834595" stroke="transparent" stroke-dasharray="0"></line>
+										</g>
+										<g id="SvgjsG1709" class="apexcharts-bar-series apexcharts-plot-series">
+											<g id="SvgjsG1710" class="apexcharts-series" rel="1" seriesName="NetxProfit" data:realIndex="0">
+
+											</g>
+											<g id="SvgjsG1718" class="apexcharts-series" rel="2" seriesName="Revenue" data:realIndex="1">
+
+											</g>
+											<g id="SvgjsG1711" class="apexcharts-datalabels" data:realIndex="0"></g>
+											<g id="SvgjsG1719" class="apexcharts-datalabels" data:realIndex="1"></g>
+										</g>
+										<line id="SvgjsLine1768" x1="0" y1="0" x2="475.7124996185303" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" class="apexcharts-ycrosshairs"></line>
+										<line id="SvgjsLine1769" x1="0" y1="0" x2="475.7124996185303" y2="0" stroke-dasharray="0" stroke-width="0" class="apexcharts-ycrosshairs-hidden"></line>
+										<g id="SvgjsG1770" class="apexcharts-yaxis-annotations"></g>
+										<g id="SvgjsG1771" class="apexcharts-xaxis-annotations"></g>
+										<g id="SvgjsG1772" class="apexcharts-point-annotations"></g>
+									</g>
+									<g id="SvgjsG1746" class="apexcharts-yaxis" rel="0" transform="translate(15.287500381469727, 0)">
+										<g id="SvgjsG1747" class="apexcharts-yaxis-texts-g">
+											<text id="SvgjsText1748"
+												  font-family="Poppins"
+												  x="20"
+												  y="31.4"
+												  text-anchor="end"
+												  dominant-baseline="auto"
+												  font-size="12px"
+												  font-weight="400"
+												  fill="#b5b5c3"
+												  class="apexcharts-text apexcharts-yaxis-label"
+												  style="font-family: Poppins;">
+												<tspan id="SvgjsTspan1749">120</tspan>
+											</text>
+											<text id="SvgjsText1750"
+												  font-family="Poppins"
+												  x="20"
+												  y="100.8543995370865"
+												  text-anchor="end"
+												  dominant-baseline="auto"
+												  font-size="12px"
+												  font-weight="400"
+												  fill="#b5b5c3"
+												  class="apexcharts-text apexcharts-yaxis-label"
+												  style="font-family: Poppins;">
+												<tspan id="SvgjsTspan1751">90</tspan>
+											</text>
+											<text id="SvgjsText1752"
+												  font-family="Poppins"
+												  x="20"
+												  y="170.30879907417298"
+												  text-anchor="end"
+												  dominant-baseline="auto"
+												  font-size="12px"
+												  font-weight="400"
+												  fill="#b5b5c3"
+												  class="apexcharts-text apexcharts-yaxis-label"
+												  style="font-family: Poppins;">
+												<tspan id="SvgjsTspan1753">60</tspan>
+											</text>
+											<text id="SvgjsText1754"
+												  font-family="Poppins"
+												  x="20"
+												  y="239.76319861125947"
+												  text-anchor="end"
+												  dominant-baseline="auto"
+												  font-size="12px"
+												  font-weight="400"
+												  fill="#b5b5c3"
+												  class="apexcharts-text apexcharts-yaxis-label"
+												  style="font-family: Poppins;">
+												<tspan id="SvgjsTspan1755">30</tspan>
+											</text>
+											<text id="SvgjsText1756"
+												  font-family="Poppins"
+												  x="20"
+												  y="309.2175981483459"
+												  text-anchor="end"
+												  dominant-baseline="auto"
+												  font-size="12px"
+												  font-weight="400"
+												  fill="#b5b5c3"
+												  class="apexcharts-text apexcharts-yaxis-label"
+												  style="font-family: Poppins;">
+												<tspan id="SvgjsTspan1757">0</tspan>
+											</text>
+										</g>
+									</g>
+									<g id="SvgjsG1699" class="apexcharts-annotations"></g>
+								</svg>
+								<div class="apexcharts-legend" style="max-height: 175px;"></div>
+								<div class="apexcharts-tooltip apexcharts-theme-light" style="left: 313.948px; top: 144px;">
+									<div class="apexcharts-tooltip-title" style="font-family: Poppins; font-size: 12px;">May</div>
+									<div class="apexcharts-tooltip-series-group apexcharts-active" style="order: 1; display: flex;">
+										<span class="apexcharts-tooltip-marker" style="background-color: rgb(27, 197, 189);"></span>
+										<div class="apexcharts-tooltip-text" style="font-family: Poppins; font-size: 12px;">
+											<div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-label">Net Profit: </span><span class="apexcharts-tooltip-text-value">$56 thousands</span></div>
+											<div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div>
+										</div>
+									</div>
+									<div class="apexcharts-tooltip-series-group" style="order: 2; display: none;">
+										<span class="apexcharts-tooltip-marker" style="background-color: rgb(27, 197, 189);"></span>
+										<div class="apexcharts-tooltip-text" style="font-family: Poppins; font-size: 12px;">
+											<div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-label">Net Profit: </span><span class="apexcharts-tooltip-text-value">$56 thousands</span></div>
+											<div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div>
+										</div>
+									</div>
+								</div>
+								<div class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light"><div class="apexcharts-yaxistooltip-text"></div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</div>*@
+
+

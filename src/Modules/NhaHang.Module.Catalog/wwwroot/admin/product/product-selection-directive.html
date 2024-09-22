@@ -1,0 +1,84 @@
+﻿<div class="modal fade" id="{{vm.modelId}}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content rounded">
+            <div class="modal-header">
+                <h4 class="modal-title">{{vm.title}}</h4>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <i class="ki-duotone ki-cross fs-1">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                    </i>
+                </div>
+            </div>
+            <div class="modal-body pt-0 pb-15 px-5 px-xl-20" st-pipe="vm.getProducts" st-table="vm.products">
+                <div class="d-flex align-items-center position-relative my-1 mt-5">
+                    <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-4"><span class="path1"></span><span class="path2"></span></i>
+                    <input type="text" class="form-control form-control-solid w-250px ps-12" placeholder="Tìm kiếm sản phẩm" " st-search="Name">
+                </div>
+                <div class="table-responsive">
+                    <div class="table-responsive">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5">
+                            <thead>
+                                <tr class="fs-6 fw-bold text-gray-600">
+                                    <th>Chọn</th>
+                                    <th st-sort="Name" class="sortable">Tên sản phẩm</th>
+                                    <th class="sortable">Giá</th>
+                                    <th>Cho phép gọi đặt hàng</th>
+                                    <th>Xuất bản</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fw-semibold text-gray-600" ng-show="!vm.isLoading">
+                                <tr ng-repeat="product in vm.products">
+                                    <td>
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="checkbox" ng-checked="vm.checkSelected(product)" ng-click="vm.toggleSelectedProducts(product)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <a ui-sref="product-edit({id: product.id})" class="symbol symbol-50px">
+                                                <span class="symbol-label" style="background-image: url('{{product.thumbnailImageUrl}}');">
+                                                </span>
+                                            </a>
+                                            <div class="ms-5">
+                                                <a ui-sref="product-edit({id: product.id})" class="text-gray-800 text-hover-primary fs-5 fw-bold">
+                                                    {{product.name}}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{product.price | number}}</td>
+                                    <td>
+                                        <span ng-if="product.isAllowToOrder" class="badge py-3 px-4 fs-7 badge-light-success">Cho phép</span>
+                                        <span ng-if="!product.isAllowToOrder" class="badge py-3 px-4 fs-7 badge-light-danger">Không cho phép</span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="product.isPublished" class="badge py-3 px-4 fs-7 badge-light-success">Xuất bản</span>
+                                        <span ng-if="!product.isPublished" class="badge py-3 px-4 fs-7 badge-light-danger">Không xuất bản</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-show="vm.isLoading">
+                                <tr class="odd">
+                                    <td valign="top" colspan="8" class="dataTables_empty">
+                                        <div class="d-flex flex-column flex-center">
+                                            <img src="/media/illustrations/sketchy-1/5.png" class="mw-400px">
+                                            <div class="fs-1 fw-bolder text-dark mb-4">{{::vm.translate.get('No items found.')}}</div>
+                                            <div class="text-gray-400 fs-6 fw-semibold mb-10">{{::vm.translate.get('Start creating new products')}}</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td st-pagination="" st-items-by-page="10" colspan="4" st-template="/_content/NhaHang.Module.Core/admin/common/pagination.custom.html">
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

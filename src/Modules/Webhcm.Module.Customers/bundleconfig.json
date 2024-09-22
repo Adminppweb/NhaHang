@@ -1,0 +1,21 @@
+[
+  {
+    "outputFileName": "wwwroot/admin/customers.min.js",
+    "inputFiles": [
+      "wwwroot/admin/customers.module.js",
+      "wwwroot/admin/customers/customer-service.js",
+      "wwwroot/admin/customers/customer-list.js",
+      "wwwroot/admin/customers/customer.js",
+      "wwwroot/admin/evaluate/evaluate-service.js",
+      "wwwroot/admin/evaluate/evaluate-list.js",
+      "wwwroot/admin/evaluate/evaluate-form.js",
+      "wwwroot/admin/evaluate-widget/evaluate-widget-service.js",
+      "wwwroot/admin/evaluate-widget/evaluate-widget-form.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

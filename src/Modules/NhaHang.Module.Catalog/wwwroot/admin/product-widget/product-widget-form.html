@@ -1,0 +1,182 @@
+﻿<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0n" ng-if="!vm.isEditMode">
+                {{::vm.translate.get('Create Product Display Widget')}}
+            </h1>
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0" ng-if="vm.isEditMode">
+                {{::vm.translate.get('Edit Product Display Widget')}}
+            </h1>
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <li class="breadcrumb-item text-muted">
+                    <a href="admin" class="text-muted text-hover-primary">{{::vm.translate.get('Home')}}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    <a href="javascript:;" class="text-muted text-hover-primary">
+                        {{::vm.translate.get('Website')}}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    <a href="javascript:;" class="text-muted text-hover-primary">
+                        {{::vm.translate.get('Widgets')}}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted" ng-if="!vm.isEditMode">
+                    {{::vm.translate.get('Create Product Display Widget')}}
+                </li>
+                <li class="breadcrumb-item text-muted" ng-if="vm.isEditMode">
+                    {{::vm.translate.get('Edit Product Display Widget')}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container container-xxl">
+        <div class="card card-flush py-4">
+            <div class="card-body pt-10">
+                <form name="productWidgetForm" class="form-horizontal">
+                    <div class="alert alert-danger d-flex align-items-center p-5" ng-show="vm.validationErrors">
+                        <i class="ki-outline ki-call fs-2hx text-danger me-4"></i>
+                        <div class="d-flex flex-column">
+                            <h4 class="mb-1 text-danger" ng-repeat="error in vm.validationErrors track by $index">{{error}}</h4>
+                        </div>
+                    </div>
+                    <div class="row fv-row mb-7">
+                        <div class="col-md-2">
+                            <label class="fs-6 fw-semibold form-label mt-2">
+                                {{::vm.translate.get('Widget Name')}}
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input name="name" ng-model="vm.widgetInstance.name" placeholder="{{::vm.translate.get('Widget Name')}}" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row fv-row mb-7">
+                        <div class="col-md-2">
+                            <label class="fs-6 fw-semibold form-label mt-2">
+                                {{::vm.translate.get('Widget SubName')}}
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input name="subname" ng-model="vm.widgetInstance.subName" placeholder="{{::vm.translate.get('Widget SubName')}}" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row fv-row mb-7">
+                        <div class="col-md-2">
+                            <label class="fs-6 fw-semibold form-label mt-2">
+                                {{::vm.translate.get('Widget Zone')}}
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <select ng-model="vm.widgetInstance.widgetZoneId" class="form-select" ng-options="zone.id as zone.name for zone in vm.widgetZones"></select>
+                        </div>
+                    </div>
+                    <div class="row fv-row mb-7">
+                        <div class="col-md-2">
+                            <label class="fs-6 fw-semibold form-label mt-2">
+                                {{::vm.translate.get('Time Publish')}}
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="d-flex flex-column flex-md-row gap-5">
+                                <div class="fv-row flex-row-fluid fv-plugins-icon-container">
+                                    <div class="input-group">
+                                        <input type="text" placeholder="{{::vm.translate.get('Publish Start')}}" class="form-control" datetime-picker="dd MMM yyyy HH:mm" ng-model="vm.widgetInstance.publishStart" is-open="vm.datePickerPublishStart.open" datepicker-options="vm.datePickerPublishStart.datepickerOptions" />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-icon btn-outline btn-outline-dashed me-2" type="button" ng-click="vm.openCalendar($event, 'datePickerPublishStart')">
+                                                <i class="ki-outline ki-calendar-edit fs-2x"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-row-fluid">
+                                    <div class="input-group">
+                                        <input type="text" placeholder="{{::vm.translate.get('Publish End')}}" class="form-control" datetime-picker="dd MMM yyyy HH:mm" ng-model="vm.widgetInstance.publishEnd" is-open="vm.datePickerPublishEnd.open" datepicker-options="vm.datePickerPublishEnd.datepickerOptions" />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-icon btn-outline btn-outline-dashed me-2" type="button" ng-click="vm.openCalendar($event, 'datePickerPublishEnd')">
+                                                <i class="ki-outline ki-calendar-edit fs-2x"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row fv-row mb-7">
+                        <div class="col-md-2">
+                            <label class="fs-6 fw-semibold form-label mt-2">{{::vm.translate.get('Category')}}</label>
+                        </div>
+                        <div class="col-md-9">
+                            <select class="form-select" ng-model="vm.widgetInstance.setting.categoryId"
+                                    ng-options="category.id as category.name for category in vm.categories">
+                                <option value="">{{::vm.translate.get('All Categories')}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row fv-row mb-7">
+                        <div class="col-md-2">
+                            <label class="fs-6 fw-semibold form-label mt-2">{{::vm.translate.get('Number of Products')}}</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input name="name" ng-model="vm.widgetInstance.setting.numberOfProducts" placeholder="{{::vm.translate.get('Number of Products')}}" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row fv-row mb-7">
+                        <div class="col-md-2">
+                            <label class="fs-6 fw-semibold form-label mt-2">{{::vm.translate.get('Order By')}}</label>
+                        </div>
+                        <div class="col-md-9">
+                            <select ng-model="vm.widgetInstance.setting.orderBy" class="form-select"
+                                    ng-options="sort.id as sort.name for sort in vm.sorts"></select>
+                        </div>
+                    </div>
+                    <div class="row fv-row mb-7">
+                        <div class="col-md-2">
+                            <label class="fs-6 fw-semibold form-label mt-2">
+                                {{::vm.translate.get('Display Order')}}
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="number" name="displayOrder" ng-model="vm.widgetInstance.displayOrder" placeholder="{{::vm.translate.get('Display Order')}}" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row fv-row mb-7">
+                        <div class="col-md-2">
+                            <label class="fs-6 fw-semibold form-label mt-2">
+                                {{::vm.translate.get('Description')}}
+                            </label>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea ui-tinymce="vm.tinymceDescriptionOptions" name="description" class="form-control" ng-model="vm.widgetInstance.description"></textarea>
+                        </div>
+                    </div>
+                    <div class="separator separator-dashed my-10"></div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 text-center">
+                            <button type="submit" ng-click="vm.save()" class="btn btn-primary">
+                                <span class="indicator-label" ng-hide="vm.showProgress">{{::vm.translate.get('Save Changes')}}</span>
+                                <span ng-show="vm.showProgress">
+                                    {{::vm.translate.get('Please wait...')}}
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
+                            </button>
+                            <button ui-sref="widget" class="btn btn-light-danger"><i class="la la-close mr-1"></i>{{::vm.translate.get('Cancel')}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName></SccProjectName>
+    <SccProvider></SccProvider>
+    <SccAuxPath></SccAuxPath>
+    <SccLocalPath></SccLocalPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\admin\cart-rule-usage\cart-rule-usage-list.js" />
+    <None Include="wwwroot\admin\cart-rule-usage\cart-rule-usage-service.js" />
+    <None Include="wwwroot\admin\cart-rule\cart-rule-form.js" />
+    <None Include="wwwroot\admin\cart-rule\cart-rule-list.js" />
+    <None Include="wwwroot\admin\cart-rule\cart-rule-service.js" />
+    <None Include="wwwroot\admin\pricing.module.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NhaHang.Module.Catalog\NhaHangg.Module.Catalog.csproj" />
+    <ProjectReference Include="..\NhaHang.Module.Core\NhaHangg.Module.Core.csproj" />
+  </ItemGroup>
+
+</Project>

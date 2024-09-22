@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+	<PropertyGroup Label="Globals">
+		<SccProjectName></SccProjectName>
+		<SccProvider></SccProvider>
+		<SccAuxPath></SccAuxPath>
+		<SccLocalPath></SccLocalPath>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<EmbeddedResource Include="bundleconfig.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\NhaHang.Infrastructure\NhaHang.Infrastructure.csproj" />
+		<ProjectReference Include="..\NhaHang.Module.Core\NhaHang.Module.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="Areas\Customers\Views\Customer\Index.cshtml" />
+		<None Include="Areas\Customers\Views\Customer\SubmitCustomerResult.cshtml" />
+		<None Include="Areas\Customers\Views\_ViewImports.cshtml" />
+		<None Include="Areas\Customers\Views\_ViewStart.cshtml" />
+		<None Include="wwwroot\admin\customers.module.js" />
+		<None Include="wwwroot\admin\customers\customer-list.js" />
+		<None Include="wwwroot\admin\customers\customer-service.js" />
+		<None Include="wwwroot\admin\customers\customer-widget.directive.js" />
+		<None Include="wwwroot\admin\customers\customer.js" />
+		<None Include="wwwroot\customer-form.js" />
+	</ItemGroup>
+
+</Project>

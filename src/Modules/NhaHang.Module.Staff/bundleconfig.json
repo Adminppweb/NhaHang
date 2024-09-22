@@ -1,0 +1,13 @@
+[
+  {
+    "outputFileName": "wwwroot/admin/staff.min.js",
+    "inputFiles": [
+      "wwwroot/admin/staff.module.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

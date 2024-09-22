@@ -1,0 +1,116 @@
+﻿@{
+    Layout = null;
+}
+<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                Quản lý tập tin, hình ảnh
+            </h1>
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <li class="breadcrumb-item text-muted">
+                    <a href="admin" class="text-muted text-hover-primary">Trang chủ</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    Quản lý tập tin, hình ảnh
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container container-fluid">
+        <div id="elFinder"></div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var myCommands = elFinder.prototype._options.commands;
+        elFinder.uploadURL = "/el-finder/file-system/UploadFile";
+        function Init() {
+
+            $('#elFinder').elfinder({
+                useBrowserHistory: false,
+                url: '/el-finder/file-system/connector',
+                lang: 'vi',
+                commands: [
+                    'archive', 'back', 'chmod', 'colwidth', 'copy', 'cut', 'download',
+                    'duplicate', 'edit', 'extract', 'forward', 'fullscreen', 'getfile',
+                    'help', 'home', 'info', 'mkdir', 'mkfile', 'netmount', 'open', 'opendir',
+                    'paste', 'places', 'quicklook', 'reload', 'rename', 'resize', 'rm',
+                    'search', 'selectall', 'selectinvert', 'selectnone', 'sort', 'undo',
+                    'up', 'upload', 'view', 'zipdl'
+                ],
+                cwd: {
+                    listView: {
+                        columns: ['name', 'size', 'date', 'kind'],
+                        iconsView: true
+                    },
+                    tmbSize: 150
+                },
+                commandsOptions: {
+                    upload: {
+                        multiple: true,
+                        maxFileSize: 50 * 1024 * 1024
+                    }
+                },
+                uiOptions: {
+                    toolbar: [
+                        ['back', 'forward'],
+                        ['reload'],
+                        ['home', 'up'],
+                        ['mkdir', 'mkfile', 'upload'],
+                        ['open', 'download'],
+                        ['undo', 'redo'],
+                        ['info'],
+                        ['quicklook'],
+                        ['copy', 'cut', 'paste'],
+                        ['rm'],
+                        ['quicklook'],
+                        ['duplicate', 'rename', 'edit'],
+                        ['selectall', 'selectnone', 'selectinvert'],
+                        ['view', 'sort'],
+                        ['search'],
+                        ['archive', 'extract'],
+                        ['fullscreen'],
+                        ['chmod', 'colwidth', 'resize']
+                    ],
+                    cwd: {
+                        listView: {
+                            iconsView: true
+                        }
+                    }
+                },
+                contextmenu: {
+                    files: [
+                        'getfile', '|', 'open', '|', 'copy', 'cut', 'paste', 'rm', '|', 'duplicate', 'rename', '|', 'edit', 'resize', '|', 'archive', 'extract', '|', 'info'
+                    ]
+                },
+                handlers: {
+                    tmb: function (event, elfinderInstance) {
+                        console.log('Thumbnail loaded:', event.data);
+                    }
+                },
+                resizable: false,
+                showFiles: 80,
+                requestType: 'get',
+                getFileCallback: function (file, fm) {
+                    window.parent.postMessage({
+                        mceAction: 'fileSelected',
+                        data: {
+                            file: file
+                        }
+                    }, '*');
+                },
+                width: '100%',
+                height: 800
+            }).elfinder('instance');
+        }
+        Init();
+    });
+</script>

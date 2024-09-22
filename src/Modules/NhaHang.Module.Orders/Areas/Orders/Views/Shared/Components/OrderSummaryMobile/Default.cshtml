@@ -1,0 +1,89 @@
+﻿@model NhaHang.Module.ShoppingCart.Areas.ShoppingCart.ViewModels.CartVm
+
+<summary class="order__summary--toggle border-radius-5">
+    <span class="order__summary--toggle__inner">
+        <span class="order__summary--toggle__icon">
+            <svg width="20" height="19" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.178 13.088H5.453c-.454 0-.91-.364-.91-.818L3.727 1.818H0V0h4.544c.455 0 .91.364.91.818l.09 1.272h13.45c.274 0 .547.09.73.364.18.182.27.454.18.727l-1.817 9.18c-.09.455-.455.728-.91.728zM6.27 11.27h10.09l1.454-7.362H5.634l.637 7.362zm.092 7.715c1.004 0 1.818-.813 1.818-1.817s-.814-1.818-1.818-1.818-1.818.814-1.818 1.818.814 1.817 1.818 1.817zm9.18 0c1.004 0 1.817-.813 1.817-1.817s-.814-1.818-1.818-1.818-1.818.814-1.818 1.818.814 1.817 1.818 1.817z" fill="currentColor"></path>
+            </svg>
+        </span>
+        <span class="order__summary--toggle__text show">
+            <span>@Localizer["Show order summary"]</span>
+            <svg width="11" height="6" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle__dropdown" fill="currentColor"><path d="M.504 1.813l4.358 3.845.496.438.496-.438 4.642-4.096L9.504.438 4.862 4.534h.992L1.496.69.504 1.812z"></path></svg>
+        </span>
+        <span class="order__summary--final__price" id="orderTotal">@Model.OrderTotalString</span>
+    </span>
+</summary>
+<div class="order__summary--section">
+    <div class="cart__table checkout__product--table">
+        <table class="summary__table">
+            <tbody class="summary__table--body">
+                @foreach (var item in Model.Items)
+                {
+                    <tr class=" summary__table--items">
+                        <td class=" summary__table--list">
+                            <div class="product__image two  d-flex align-items-center">
+                                <div class="product__thumbnail border-radius-5">
+                                    <a><img class="border-radius-5" src="@item.ProductImage" alt="@item.ProductName"></a>
+                                    <span class="product__thumbnail--quantity">@item.Quantity</span>
+                                </div>
+                                <div class="product__description">
+                                    <h3 class="product__description--name h4"><a>@item.ProductName</a></h3>
+                                </div>
+                            </div>
+                        </td>
+                        <td class=" summary__table--list">
+                            <span class="cart__price">@item.ProductPriceString</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="checkout__total">
+        <table class="checkout__total--table">
+            <tbody class="checkout__total--body">
+                <tr class="checkout__total--items">
+                    <td class="checkout__total--title text-left">@Localizer["Subtotal"] </td>
+                    <td class="checkout__total--amount text-right">@Model.SubTotalString<input type="hidden" id="orderSubtotal" value="@Model.SubTotal" /></td>
+                </tr>
+                <tr class="checkout__total--items">
+                    <td class="checkout__total--title text-left">@Localizer["Shipments"]</td>
+                    <td id="orderSummaryShipping" class="checkout__total--calculated__text text-right">@Model.ShippingAmountString</td>
+                </tr>
+                <tr class="checkout__total--items">
+                    <td class="checkout__total--title text-left">@Localizer["Order note"]</td>
+                    <td class="checkout__total--calculated__text text-right">
+                        <textarea class="form-control" disabled="disabled" rows="3">@Model.OrderNote</textarea>
+                    </td>
+                </tr>
+                @if (!Model.IsProductPriceIncludeTax)
+                {
+                    <tr class="checkout__total--items">
+                        <td class="checkout__total--title text-left">@Localizer["Tax"]</td>
+                        <td id="orderSummaryTax" class="checkout__total--calculated__text text-right">@Model.TaxAmountString</td>
+                    </tr>
+                }
+                <tr class="checkout__total--items">
+                    <td class="checkout__total--title text-left">@Localizer["Discount"]</td>
+                    <td class="checkout__total--calculated__text text-right">@Model.DiscountString</td>
+                </tr>
+            </tbody>
+            <tfoot class="checkout__total--footer">
+                <tr class="checkout__total--footer__items">
+                    <td class="checkout__total--footer__title checkout__total--footer__list text-left">
+                        @Localizer["Order Total"]
+                        @if (Model.IsProductPriceIncludeTax)
+                        {
+                            <span> (@Localizer["VAT included"])</span>
+                        }
+                    </td>
+                    <td class="checkout__total--footer__amount checkout__total--footer__list text-right"><strong id="orderTotal">@Model.OrderTotalString</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+
+

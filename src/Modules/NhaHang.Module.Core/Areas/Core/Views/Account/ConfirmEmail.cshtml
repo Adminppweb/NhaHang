@@ -1,0 +1,67 @@
+﻿@{
+
+	ViewData["Title"] = Localizer["Xác thực Email"];
+	var localizedTextParts = Localizer["Cảm ơn bạn đã xác nhận email của bạn. Vui lòng <a>nhấp vào đây để đăng nhập</a"].GetTextPartsFunction("<a>", "</a>");
+}
+@section additionalMeta {
+	<meta name="keywords" content=@Localizer["Xác thực Email"]>
+	<meta name="description" content=@Localizer["Xác thực Email"]>
+	<meta property="og:title" content="@ViewBag.Title">
+	<meta property="og:description" content=@Localizer["Xác thực Email"]>
+	<meta property="og:url" content="~/login">
+	<meta property="og:image" content="~/media/logo/logo-ac.png ">
+	<meta property="og:image:alt" content="@ViewBag.Title">
+	<meta name="twitter:title" content="@ViewBag.Title">
+	<meta name="twitter:description" content=@Localizer["Xác thực Email"]>
+	<meta name="twitter:title" content="@ViewBag.Title">
+	<meta name="twitter:description" content=@Localizer["Xác thực Email"]>
+	<meta name="twitter:image" content="~/media/logo/logo-ac.png ">
+	<meta name="twitter:url" content="~/login">
+	<meta itemprop="name" content="@ViewBag.Title">
+	<meta itemprop="description" content=@Localizer["Xác thực Email"]>
+	<meta itemprop="image" content="~/media/logo/logo-ac.png ">
+	<meta itemprop="url" content="~/login">
+	<link rel="canonical" href="~/login" />
+	<link rel="image_src" href="~/media/logo/logo-ac.png " />
+}
+@section head {
+	<link href="~/assets/css/account-style.css" rel="stylesheet" />
+}
+<section class="bread-crumb mb-3">
+	<span class="crumb-border"></span>
+	<div class="container">
+		<div class="row">
+			<div class="col-12 a-left">
+				<ul class="breadcrumb m-0 px-0">
+					<li>
+						<a href="~/" target="_self"><span>@Localizer["Trang chủ"]</span></a>
+						<span class="mr_lr">&nbsp;/&nbsp;</span>
+					</li>
+					<li class="active">
+						<span>@Localizer["Xác thực Email"]</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section">
+	<div class="container margin-bottom-20 card py-20">
+		<div class="wrap_background_aside margin-bottom-40 page_login">
+			<div class="heading-bar text-center">
+				<h1 class="title_page mb-0">@ViewData["Tiêu đề"]</h1>
+			</div>
+			<div class="row">
+				<div class="col-12 col-md-6 col-lg-5 offset-md-3 py-3 mx-auto">
+					<div class="page-login ">
+						<h2>.</h2>
+						<p>
+							@localizedTextParts(0)<a asp-area="Core" asp-controller="Account" asp-action="Login">@localizedTextParts(1)</a>@localizedTextParts(2).
+						</p>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,122 @@
+﻿@model ManageLoginsViewModel
+@using Microsoft.AspNetCore.Authentication
+
+@{
+    ViewBag.Title = "Quản lý thông tin đăng nhập bên ngoài của bạn";
+}
+@section additionalMeta {
+    <meta name="keywords" content="Quản lý thông tin đăng nhập bên ngoài của bạn">
+    <meta name="description" content="Quản lý thông tin đăng nhập bên ngoài của bạn">
+    <meta property="og:title" content="@ViewBag.Title">
+    <meta property="og:description" content="Quản lý thông tin đăng nhập bên ngoài của bạn">
+    <meta property="og:url" content="~/login">
+    <meta property="og:image" content="~/media/logo/logo-ng.png ">
+    <meta property="og:image:alt" content="@ViewBag.Title">
+    <meta name="twitter:title" content="@ViewBag.Title">
+    <meta name="twitter:description" content="Quản lý thông tin đăng nhập bên ngoài của bạn">
+    <meta name="twitter:title" content="@ViewBag.Title">
+    <meta name="twitter:description" content="Quản lý thông tin đăng nhập bên ngoài của bạn">
+    <meta name="twitter:image" content="~/media/logo/logo-ng.png ">
+    <meta name="twitter:url" content="~/login">
+    <meta itemprop="name" content="@ViewBag.Title">
+    <meta itemprop="description" content="Quản lý thông tin đăng nhập bên ngoài của bạn">
+    <meta itemprop="image" content="~/media/logo/logo-ng.png ">
+    <meta itemprop="url" content="~/login">
+    <link rel="canonical" href="~/login" />
+    <link rel="image_src" href="~/media/logo/logo-ng.png " />
+}
+@section head {
+    <link href="~/assets/css/account-style.css" rel="stylesheet" />
+}
+
+
+<section class="bread-crumb mb-3">
+    <span class="crumb-border"></span>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 a-left">
+                <ul class="breadcrumb m-0 px-0">
+                    <li>
+                        <a href="~/" target="_self"><span>Trang chủ</span></a>
+                        <span class="mr_lr">&nbsp;/&nbsp;</span>
+                    </li>
+                    <li>
+                        <a href="~/user" target="_self"><span>@Localizer["My Account"]</span></a>
+                        <span class="mr_lr">&nbsp;/&nbsp;</span>
+                    </li>
+
+                    <li class="active">
+                        <span><span>Quản lý thông tin đăng nhập bên ngoài của bạn</span></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="signup page_customer_account section">
+    <div class="container card p-3">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-lg-3 col-left-ac">
+                <div class="block-account">
+                    <partial name="_AccountMenu" />
+                    <ul>
+                        <li><a class="title-info active" href="~/user">@Localizer["Account Dashboard"]</a></li>
+                        <li><a class="title-info" href="~/user/info">@Localizer["Account Information"]</a></li>
+                        <li><a class="title-info" href="~/user/change-password">@Localizer["Change Password"]</a></li>
+                        <li><a class="title-info" href="~/user/address">Sổ địa chỉ</a></li>
+                        <li><a class="title-info" href="~/user/orders">@Localizer["Order History"]</a></li>
+                        <li><a class="title-info" href="~/user/wishlist">@Localizer["Wish List"]</a></li>
+                        <li>
+                            <form asp-area="Core" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+                                <button type="submit" class="btn btn_base">Đăng xuất</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-lg-9 col-right-ac">
+                <div class="head-title clearfix">
+                    <p class="text-success">@ViewData["StatusMessage"]</p>
+                </div>
+                @if (Model.CurrentLogins.Count > 0)
+                {
+                    @for (var index = 0; index < Model.CurrentLogins.Count; index++)
+                    {
+                        @Model.CurrentLogins[index].LoginProvider
+                        @if ((bool)ViewData["ShowRemoveButton"])
+                        {
+                            <form asp-area="Core" asp-controller="Manage" asp-action="RemoveLogin" method="post" class="form-horizontal">
+                                <div>
+                                    <input asp-for="@Model.CurrentLogins[index].LoginProvider" name="LoginProvider" type="hidden" />
+                                    <input asp-for="@Model.CurrentLogins[index].ProviderKey" name="ProviderKey" type="hidden" />
+                                    <input type="submit" class="btn btn-default" value="Remove" title="Remove this @Model.CurrentLogins[index].LoginProvider login from your account" />
+                                </div>
+                            </form>
+                        }
+                        else
+                        {
+                            @: &nbsp;
+                        }
+                    }
+
+                }
+                @if (Model.OtherLogins.Count > 0)
+                {
+                    <h4>@Localizer["Add another service to log in."]</h4>
+                    <hr />
+                    <form asp-area="Core" asp-controller="Manage" asp-action="LinkLogin" method="post" class="form-horizontal">
+                        <div id="socialLoginList">
+                            <p>
+                                @foreach (var provider in Model.OtherLogins)
+                                {
+                                    <button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.Name</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,192 @@
+﻿
+<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">{{::vm.translate.get('Product')}}</h1>
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <li class="breadcrumb-item text-muted">
+                    <a href="/admin" class="text-muted text-hover-primary">{{::vm.translate.get('Home')}}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">{{::vm.translate.get('Product')}}</li>
+            </ul>
+        </div>
+        <div class="d-flex align-items-center gap-2 gap-lg-3">
+            <a ui-sref="product-create" class="btn btn-sm fw-bold btn-primary">
+                <i class="ki-duotone ki-plus fs-2"></i>  {{::vm.translate.get('Create Product')}}
+            </a>
+        </div>
+    </div>
+</div>
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container container-xxl">
+        <div class="d-flex flex-column flex-row-fluid gap-5 gap-lg-5" st-pipe="vm.getProducts" st-table="vm.products">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="position-relative w-md-400px me-md-2">
+                            <i class="ki-duotone ki-magnifier fs-3 text-gray-500 position-absolute top-50 translate-middle ms-6">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                            <input type="text" placeholder="{{::vm.translate.get('Product Name')}}" class="form-control form-control-solid ps-10" st-search="Name" />
+
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <a id="kt_horizontal_search_advanced_link" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form">
+                                {{::vm.translate.get('Advanced Search')}}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="collapse" id="kt_advanced_search_form">
+                        <div class="separator separator-dashed mt-9 mb-6"></div>
+                        <div class="row g-8">
+                            <div class="col-xxl-12">
+                                <div class="row g-8">
+                                    <div class="col-lg-2">
+                                        <!--<label class="form-label">{{::vm.translate.get('Visible Individually')}}</label>-->
+                                        <select class="form-select" st-search="IsVisibleIndividually">
+                                            <option value="">
+                                                {{::vm.translate.get('All')}}
+                                            </option>
+                                            <option value="true" selected>{{::vm.translate.get('Yes Visible Individually')}}</option>
+                                            <option value="false">{{::vm.translate.get('No Visible Individually')}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <!--<label class="form-label">{{::vm.translate.get('Has Options')}}</label>-->
+                                        <select class="form-select" st-search="HasOptions">
+                                            <option value="">{{::vm.translate.get('All')}}</option>
+                                            <option value="true">{{::vm.translate.get('Yes Has Options')}}</option>
+                                            <option value="false">{{::vm.translate.get('No Has Options')}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <!--<label class="form-label">{{::vm.translate.get('Published')}}</label>-->
+                                        <select class="form-select" st-search="IsPublished">
+                                            <option value="">{{::vm.translate.get('All')}}</option>
+                                            <option value="true">{{::vm.translate.get('Yes Published')}}</option>
+                                            <option value="false">{{::vm.translate.get('No Published')}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <st-date-range predicate="CreatedOn" before="query.before" after="query.after"></st-date-range>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-flush">
+                <div class="card-body pt-10">
+                    <div class="d-flex" ng-show="!vm.isLoading">
+                        <h5 class="text-gray-700 mb-5">
+                            {{vm.tableStateRef.pagination.totalItemCount | number:0}} {{::vm.translate.get('records found')}}
+                        </h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5">
+                            <thead>
+                                <tr class="fs-6 fw-bold text-gray-600">
+                                    <!--<th class="min-w-50px pe-2">
+                                        <div class="form-check form-check-sm me-2">
+                                            <input class="form-check-input" type="checkbox" data-kt-check="true" />
+                                        </div>
+                                    </th>-->
+                                    <th st-sort="Name" class="sortable p-0 pb-3 min-w-175px text-start">{{::vm.translate.get('Product Name')}}</th>
+                                    <th st-sort="Price" class="sortable p-0 pb-3 min-w-125px text-start">{{::vm.translate.get('Price')}}</th>
+                                    <th class="p-0 pb-3 min-w-125px text-start">{{::vm.translate.get('Has Options')}}</th>
+                                    <th class="p-0 pb-3 min-w-125px text-start">{{::vm.translate.get('Visible Individually')}}</th>
+                                    <th class="p-0 pb-3 min-w-125px text-start">{{::vm.translate.get('Stock Quantity')}}</th>
+                                    <th st-sort="CreatedOn" class="sortable p-0 pb-3 min-w-125px text-start">{{::vm.translate.get('Create date')}}</th>
+                                    <th class="p-0 pb-3 min-w-100px text-start">{{::vm.translate.get('Actions')}}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fw-semibold text-gray-600" ng-show="!vm.isLoading">
+                                <tr ng-repeat="product in vm.products">
+                                    <!--<td>
+                                        <div class="form-check form-check-sm">
+                                            <input class="form-check-input" type="checkbox" value="1" />
+                                        </div>
+                                    </td>-->
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <a ui-sref="product-edit({id: product.id})" class="symbol symbol-50px me-3">
+                                                <span class="symbol-label" style="background-image: url('{{product.thumbnailImageUrl}}');">
+                                                </span>
+                                            </a>
+                                            <div class="d-flex justify-content-start flex-column">
+                                                <a ng-if="product.isPublished" ui-sref="product-edit({id: product.id})" class="fw-bold text-primary text-hover-primary mb-1 fs-6"> {{product.name}}</a>
+                                                <a ng-if="!product.isPublished" ui-sref="product-edit({id: product.id})" class="fw-bold text-danger text-hover-primary mb-1 fs-6"> {{product.name}}</a>
+                                                <span class="text-gray-400 fw-semibold d-block fs-7"> SKU: {{product.sku}}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold"> {{product.price | number}}</span>
+                                        <div class="fw-semibold text-gray-400"><del> {{product.oldPrice | number}}</del></div>
+                                    </td>
+
+                                    <!--<td>
+                        <div ng-if="product.isFeatured === true" class="badge badge-light-success">{{::vm.translate.get('Featured')}}</div>
+                        <div ng-if="product.isFeatured !== true" class="badge badge-light-danger">{{::vm.translate.get('UnFeatured')}}</div>
+                    </td>-->
+                                    <td>
+                                        <div ng-if="product.hasOptions === true" class="badge badge-light-success">{{::vm.translate.get('Has Options')}}</div>
+                                        <div ng-if="product.hasOptions !== true" class="badge badge-light-danger">{{::vm.translate.get('Not Has Options')}}</div>
+                                    </td>
+                                    <td>
+                                        <div ng-if="product.isVisibleIndividually === true" class="badge badge-light-success">{{::vm.translate.get('Visible Individually')}}</div>
+                                        <div ng-if="product.isVisibleIndividually !== true" class="badge badge-light-danger">{{::vm.translate.get('Not Visible Individually')}}</div>
+                                    </td>
+                                    <td data-order="21">
+                                        <span class="fw-bold ms-3">{{product.stockQuantity}}</span>
+                                    </td>
+                                    <td>{{product.createdOn | date:'medium'}}</td>
+                                    <td>
+                                        <a ui-sref="product-edit({id: product.id})" title="Edit" class="btn btn-clean btn-icon"> <i class="ki-outline ki-notepad-edit fs-2x"></i></a>
+                                        <a title="Delete" class="btn btn-clean btn-icon delete" ng-click="vm.deleteProduct(product)"> <i class="ki-outline ki-trash fs-2x text-danger"></i></a>
+                                        <!--<a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                            Actions
+                            <i class="ki-duotone ki-down fs-5 ms-1"></i>
+                        </a>
+                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+                            <div class="menu-item px-3">
+                                <a ui-sref="product-edit({id: product.id})" class="menu-link px-3">{{::vm.translate.get('Edit')}}</a>
+                            </div>
+                            <div class="menu-item px-3">
+                                <a href="#" class="menu-link px-3 delete" title="Delete" data-kt-ecommerce-product-filter="delete_row" ng-click="vm.deleteProduct(product)">{{::vm.translate.get('Delete')}}</a>
+                            </div>
+                        </div>-->
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody class="fw-semibold text-gray-600" ng-show="vm.products.length === 0">
+                                <tr class="odd">
+                                    <td valign="top" colspan="8" class="dataTables_empty">
+                                        <div class="d-flex flex-column flex-center">
+                                            <img src="/media/illustrations/sketchy-1/5.png" class="mw-400px">
+                                            <div class="fs-1 fw-bolder text-dark mb-4">{{::vm.translate.get('No items found.')}}</div>
+                                            <div class="text-gray-400 fs-6 fw-semibold mb-10">{{::vm.translate.get('Start creating new products')}}</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-center" st-pagination="" st-items-by-page="1000" colspan="10" st-template="/_content/NhaHang.Module.Core/admin/common/pagination.custom.html">
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

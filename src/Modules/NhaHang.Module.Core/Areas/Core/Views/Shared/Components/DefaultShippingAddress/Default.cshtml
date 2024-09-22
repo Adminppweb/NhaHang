@@ -1,0 +1,22 @@
+﻿@model NhaHang.Module.Core.Areas.Core.ViewModels.Manage.DefaultAddressViewComponentVm
+
+<div>
+    @if (Model.Address != null)
+    {
+        <p>
+            <strong>@Model.Address.ContactName </strong><br />
+            @Model.Address.AddressLine1 <br />
+            @Model.Address.DistrictName, @Model.Address.StateOrProvinceName <br />
+            @Model.Address.Phone
+        </p>
+    }
+    else
+    {
+        <p>
+            Bạn không có địa chỉ mặc định nào
+        </p>
+    }
+    <p class="text-right">
+        <a href="~/user/address">Quản lý địa chỉ</a>
+    </p>
+</div>

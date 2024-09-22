@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup Label="Globals">
+    <SccProjectName></SccProjectName>
+    <SccProvider></SccProvider>
+    <SccAuxPath></SccAuxPath>
+    <SccLocalPath></SccLocalPath>
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <EmbeddedResource Include="bundleconfig.json" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="Areas\Catalog\Views\Brand\BrandDetail.cshtml" />
+    <None Include="Areas\Catalog\Views\Category\Category.cshtml" />
+    <None Include="Areas\Catalog\Views\Category\CategoryDetailV2.cshtml" />
+    <None Include="Areas\Catalog\Views\Category\CategoryDetail.cshtml" />
+    <None Include="Areas\Catalog\Views\Product\ProductDetail.cshtml" />
+    <None Include="Areas\Catalog\Views\Product\ProductOverview.cshtml" />
+    <None Include="Areas\Catalog\Views\Shared\Components\CategoryBreadcrumb\Default.cshtml" />
+    <None Include="Areas\Catalog\Views\Shared\Components\CategoryMenuMobile\Default.cshtml" />
+    <None Include="Areas\Catalog\Views\Shared\Components\CategoryMenu\Default.cshtml" />
+    <None Include="Areas\Catalog\Views\Shared\Components\CategoryMobileWidget\Default.cshtml" />
+    <None Include="Areas\Catalog\Views\Shared\Components\CategoryProduct\Default.cshtml" />
+    <None Include="Areas\Catalog\Views\Shared\Components\CategoryWidget\Default.cshtml" />
+    <None Include="Areas\Catalog\Views\Shared\Components\LayoutProduct\Default.cshtml" />
+    <None Include="Areas\Catalog\Views\Shared\Components\LayoutProduct\Layout1.cshtml" />
+    <None Include="Areas\Catalog\Views\Shared\Components\ProductCard\Default.cshtml" />
+    <None Include="Areas\Catalog\Views\Shared\Components\ProductFeatured\Default.cshtml" />
+    <None Include="Areas\Catalog\Views\Shared\Components\ProductWidget\Default.cshtml" />
+    <None Include="Areas\Catalog\Views\Shared\Components\PromotionProduct\Default.cshtml" />
+    <None Include="Areas\Catalog\Views\Shared\Components\SimpleProductWidget\Default.cshtml" />
+    <None Include="Areas\Catalog\Views\Shared\_ProductThumbnail.cshtml" />
+    <None Include="Areas\Catalog\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Catalog\Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\admin\brand\brand-form.js" />
+    <None Include="wwwroot\admin\brand\brand-list.js" />
+    <None Include="wwwroot\admin\brand\brand-service.js" />
+    <None Include="wwwroot\admin\catalog.module.js" />
+    <None Include="wwwroot\admin\category-widget\category-widget-form.js" />
+    <None Include="wwwroot\admin\category-widget\category-widget-service.js" />
+    <None Include="wwwroot\admin\category\category-form.js" />
+    <None Include="wwwroot\admin\category\category-list.js" />
+    <None Include="wwwroot\admin\category\category-service.js" />
+    <None Include="wwwroot\admin\category\category-translation-form.js" />
+    <None Include="wwwroot\admin\product-attribute-group\product-attribute-group-form.js" />
+    <None Include="wwwroot\admin\product-attribute-group\product-attribute-group-list.js" />
+    <None Include="wwwroot\admin\product-attribute-group\product-attribute-group-service.js" />
+    <None Include="wwwroot\admin\product-attribute\product-attribute-form.js" />
+    <None Include="wwwroot\admin\product-attribute\product-attribute-list.js" />
+    <None Include="wwwroot\admin\product-attribute\product-attribute-service.js" />
+    <None Include="wwwroot\admin\product-clone\product-clone-form.js" />
+    <None Include="wwwroot\admin\product-clone\product-clone-service.js" />
+    <None Include="wwwroot\admin\product-option\product-option-form.js" />
+    <None Include="wwwroot\admin\product-option\product-option-list.js" />
+    <None Include="wwwroot\admin\product-option\product-option-service.js" />
+    <None Include="wwwroot\admin\product-price\product-price-form.js" />
+    <None Include="wwwroot\admin\product-price\product-price-service.js" />
+    <None Include="wwwroot\admin\product-template\product-template-form.js" />
+    <None Include="wwwroot\admin\product-template\product-template-list.js" />
+    <None Include="wwwroot\admin\product-template\product-template-service.js" />
+    <None Include="wwwroot\admin\product-widget\product-widget-form.js" />
+    <None Include="wwwroot\admin\product-widget\product-widget-service.js" />
+    <None Include="wwwroot\admin\product\product-form.js" />
+    <None Include="wwwroot\admin\product\product-list.js" />
+    <None Include="wwwroot\admin\product\product-option-display-directive.js" />
+    <None Include="wwwroot\admin\product\product-selection-directive.js" />
+    <None Include="wwwroot\admin\product\product-service.js" />
+    <None Include="wwwroot\admin\product\product-translation-form.js" />
+    <None Include="wwwroot\admin\simple-product-widget\simple-product-widget-form.js" />
+    <None Include="wwwroot\admin\simple-product-widget\simple-product-widget-service.js" />
+    <None Include="wwwroot\product-detail.js" />
+    <None Include="wwwroot\product-filter.js" />
+    <None Include="wwwroot\product-overview.js" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\NhaHang.Infrastructure\NhaHangg.Infrastructure.csproj" />
+    <ProjectReference Include="..\NhaHang.Module.Core\NhaHangg.Module.Core.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Update="wwwroot\product-filter.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

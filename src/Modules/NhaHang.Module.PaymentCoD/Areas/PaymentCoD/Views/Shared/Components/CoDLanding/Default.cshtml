@@ -1,0 +1,17 @@
+﻿
+<div class="card card-dashed h-xl-100 flex-row flex-stack flex-wrap p-6">
+    <div class="d-flex flex-column py-2">
+        <div class="d-flex align-items-center">
+            <img src="/media/payment/cash.svg" alt="" class="me-4">
+            <div>
+                <div class="fs-4 fw-bold">  Thanh toán tiền mặt</div>
+                <div class="fs-6 fw-semibold text-gray-400">Hình thức thanh toán tiền mặt (COD) khi nhận hàng</div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex align-items-center py-2">
+        <form asp-area="PaymentCoD" asp-controller="CoD" asp-action="CoDCheckout" method="POST" id="checkout-payment" class="form-horizontal">
+            <button type="submit" class="btn btn-order btn-primary btn-block w-100">Thanh toán</button>
+        </form>
+    </div>
+</div>

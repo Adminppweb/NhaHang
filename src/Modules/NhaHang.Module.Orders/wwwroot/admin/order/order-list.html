@@ -1,0 +1,173 @@
+﻿<div class="container-fluid flex items-center justify-between flex-wrap gap-3 pb-6">
+    <div class="flex items-center flex-wrap gap-1 lg:gap-5">
+        <h1 class="font-medium text-lg text-gray-900">
+            Danh sách hóa đơn
+        </h1>
+    </div>
+    <div class="flex items-center gap-1">
+        <a class="btn btn-light btn-sm" ui-sref="order-create">
+            <i class="ki-filled ki-plus-squared">
+            </i>
+            Tạo đơn hàng
+        </a>
+        <a href="javascript:;" ng-click="vm.getOrdersExport()" class="btn btn-light btn-sm">
+            <i class="ki-outline ki-folder-down fs-2"></i>Xuất file
+        </a>
+        <a href="javascript:;" ng-click="vm.getOrderLinesExport()" class="btn btn-light btn-sm">
+            <i class="ki-outline ki-file-down fs-2"></i>
+            Xuất đơn hàng với dòng đơn hàng
+        </a>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="grid gap-5 lg:gap-7.5" st-pipe="vm.getOrders" st-table="vm.orders">
+        <div class="card card-grid min-w-full">
+            <div class="card-header py-5 flex-wrap">
+                <h3 class="card-title">
+                    Đơn hàng
+                </h3>
+                <div class="flex gap-6">
+                    <div class="relative">
+                        <div class="input">
+                            <i class="ki-outline ki-parcel-tracking"></i>
+                            <input type="number" placeholder="Mã đơn" st-search="Id" />
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="input">
+                            <i class="ki-outline ki-user"></i>
+                            <input st-search="CustomerName" placeholder="Khách hàng" type="text" />
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <select class="select" st-search="Status">
+                            <option value="">Tất cả</option>
+                            <option ng-repeat="status in vm.orderStatus" value="{{status.id}}">
+                                {{::vm.translate.get(status.name)}}
+                            </option>
+                        </select>
+                    </div>
+                    <!--<st-date-range predicate="CreatedOn" before="query.before" after="query.after"></st-date-range>-->
+                </div>
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="scrollable-x-auto">
+                        <table class="table table-border">
+                            <thead>
+                                <tr>
+                                    <th class="w-[60px] text-center">
+                                        <input class="checkbox checkbox-sm" data-datatable-check="true" type="checkbox" />
+                                    </th>
+                                    <th class="min-w-[165px]">
+                                        Mã đơn
+                                    </th>
+                                    <th class="min-w-[165px]">
+                                        Khách hàng
+                                    </th>
+                                    <th class="min-w-[165px]">
+                                        Trạng thái
+                                    </th>
+                                    <th class="min-w-[165px]">
+                                        Ngày tạo
+                                    </th>
+                                    <th class="min-w-[165px]">
+                                        Tổng tiền
+                                    </th>
+                                    <th class="w-[165px]">
+                                        Hành động
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody ng-show="!vm.isLoading">
+                                <tr ng-repeat="order in vm.orders">
+                                    <td class="text-center">
+                                        <input class="checkbox checkbox-sm" data-datatable-row-check="true" type="checkbox" value="1" />
+                                    </td>
+                                    <td>
+                                        #{{order.id}}
+                                    </td>
+                                    <td>
+                                        {{order.customerName}}
+                                    </td>
+                                    <td>
+                                        <span ng-if="order.orderStatus === 'New'" class="badge badge-sm badge-outline badge-info">
+                                            {{::vm.translate.get(order.orderStatus)}}
+                                        </span>
+                                        <span ng-if="order.orderStatus === 'OnHold'" class="badge badge-sm badge-outline badge-dark">
+                                            {{::vm.translate.get(order.orderStatus)}}
+                                        </span>
+                                        <span ng-if="order.orderStatus === 'PendingPayment'" class="badge badge-sm badge-outline badge-warning">
+                                            {{::vm.translate.get(order.orderStatus)}}
+                                        </span>
+                                        <span ng-if="order.orderStatus === 'PaymentReceived'" class="badge badge-sm badge-outline badge-primary">
+                                            {{::vm.translate.get(order.orderStatus)}}
+                                        </span>
+                                        <span ng-if="order.orderStatus === 'PaymentFailed'" class="badge badge-sm badge-outline badge-danger">
+                                            {{::vm.translate.get(order.orderStatus)}}
+                                        </span>
+                                        <span ng-if="order.orderStatus === 'Invoiced'" class="badge badge-sm badge-outline badge-info">
+                                            {{::vm.translate.get(order.orderStatus)}}
+                                        </span>
+                                        <span ng-if="order.orderStatus === 'Shipping'" class="badge badge-sm badge-outline badge-warning">
+                                            {{::vm.translate.get(order.orderStatus)}}
+                                        </span>
+                                        <span ng-if="order.orderStatus === 'Shipped'" class="badge badge-sm badge-outline badge-success">
+                                            {{::vm.translate.get(order.orderStatus)}}
+                                        </span>
+                                        <span ng-if="order.orderStatus === 'Complete'" class="badge badge-sm badge-outline badge-success">
+                                            {{::vm.translate.get(order.orderStatus)}}
+                                        </span>
+                                        <span ng-if="order.orderStatus === 'Canceled'" class="badge badge-sm badge-outline badge-danger">
+                                            {{::vm.translate.get(order.orderStatus)}}
+                                        </span>
+                                        <span ng-if="order.orderStatus === 'Refunded'" class="badge badge-sm badge-outline badge-secondary">
+                                            {{::vm.translate.get(order.orderStatus)}}
+                                        </span>
+                                        <span ng-if="order.orderStatus === 'Closed'" class="badge badge-sm badge-outline badge-dark">
+                                            {{::vm.translate.get(order.orderStatus)}}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{order.createdOn | date:'medium'}}
+                                    </td>
+                                    <td>
+                                        {{order.orderTotalString }}
+                                    </td>
+                                    <td class="w-[60px]">
+                                        <a ui-sref="order-detail({id: order.id})" title="View" class="btn btn-light btn-xs"> <i class="la la-eye icon-lg mr-1"></i>{{::vm.translate.get('View')}}</a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                            <tbody ng-show="vm.isLoading">
+                                <tr>
+                                    <td valign="top" colspan="6">
+                                        <div class="flex items-center justify-center h-[150px] mt-20">
+                                            <img src="/media/empty.jpg" class="mw-400px">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
+                        <div class="flex items-center gap-2 order-2 md:order-1">
+                            Hiển thị
+                            <select class="select select-sm w-16" data-datatable-size="true" name="perpage">
+                            </select>
+                           mỗi trang
+                        </div>
+                        <div class="flex items-center gap-4 order-1 md:order-2">
+                            <span data-datatable-info="true">
+                            </span>
+                            <div class="pagination" data-datatable-pagination="true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

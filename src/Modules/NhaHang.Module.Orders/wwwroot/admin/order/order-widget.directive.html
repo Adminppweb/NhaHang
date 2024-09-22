@@ -1,0 +1,82 @@
+﻿<div class="card card-flush h-xl-100">
+    <div class="card-header pt-7">
+        <h3 class="card-title align-items-start flex-column">
+            <span class="card-label fw-bold text-gray-800">{{::vm.translate.get('Latest orders')}}</span>
+            <span class="text-gray-400 mt-1 fw-semibold fs-6"> {{::vm.translate.get('orders per day')}}</span>
+        </h3>
+        <div class="card-toolbar">
+            
+        </div>
+    </div>
+    <div class="card-body pt-2">
+        <table class="table align-middle table-row-dashed fs-6 gy-3">
+            <thead>
+                <tr class="fs-6 fw-bold text-gray-600">
+                    <th>{{::vm.translate.get('Order Id')}}</th>
+                    <th>{{::vm.translate.get('Create date')}}</th>
+                    <th>{{::vm.translate.get('Customer')}}</th>
+                    <th>{{::vm.translate.get('Order Total')}}</th>
+                    <th>{{::vm.translate.get('Order Status')}}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="fw-bold text-gray-600">
+                <tr ng-repeat="order in vm.orders">
+                    <td>
+                        <a ui-sref="order-detail({id: order.id})" class="text-gray-800 text-hover-primary">#{{order.id}}</a>
+                    </td>
+                    <td>{{order.createdOn | date:'medium'}}</td>
+                    <td>
+                        <a class="text-gray-600 text-hover-primary">{{order.customerName}}</a>
+                    </td>
+                    <td>
+                        <span class="text-gray-800 fw-bolder">{{order.orderTotalString }}</span>
+                    </td>
+                    <td>
+                        <span ng-if="order.orderStatus === 'New'" class="badge py-3 px-4 fs-7 badge-light-info">
+                            {{::vm.translate.get(order.orderStatus)}}
+                        </span>
+                        <span ng-if="order.orderStatus === 'OnHold'" class="badge py-3 px-4 fs-7 badge-light-dark">
+                            {{::vm.translate.get(order.orderStatus)}}
+                        </span>
+                        <span ng-if="order.orderStatus === 'PendingPayment'" class="badge py-3 px-4 fs-7 badge-light-warning">
+                            {{::vm.translate.get(order.orderStatus)}}
+                        </span>
+                        <span ng-if="order.orderStatus === 'PaymentReceived'" class="badge py-3 px-4 fs-7 badge-light-primary">
+                            {{::vm.translate.get(order.orderStatus)}}
+                        </span>
+                        <span ng-if="order.orderStatus === 'PaymentFailed'" class="badge py-3 px-4 fs-7 badge-light-danger">
+                            {{::vm.translate.get(order.orderStatus)}}
+                        </span>
+                        <span ng-if="order.orderStatus === 'Invoiced'" class="badge py-3 px-4 fs-7 badge-light-info">
+                            {{::vm.translate.get(order.orderStatus)}}
+                        </span>
+                        <span ng-if="order.orderStatus === 'Shipping'" class="badge py-3 px-4 fs-7 badge-light-warning">
+                            {{::vm.translate.get(order.orderStatus)}}
+                        </span>
+                        <span ng-if="order.orderStatus === 'Shipped'" class="badge py-3 px-4 fs-7 badge-light-success">
+                            {{::vm.translate.get(order.orderStatus)}}
+                        </span>
+                        <span ng-if="order.orderStatus === 'Complete'" class="badge py-3 px-4 fs-7 badge-light-success">
+                            {{::vm.translate.get(order.orderStatus)}}
+                        </span>
+                        <span ng-if="order.orderStatus === 'Canceled'" class="badge py-3 px-4 fs-7 badge-light-danger">
+                            {{::vm.translate.get(order.orderStatus)}}
+                        </span>
+                        <span ng-if="order.orderStatus === 'Refunded'" class="badge py-3 px-4 fs-7 badge-light-secondary">
+                            {{::vm.translate.get(order.orderStatus)}}
+                        </span>
+                        <span ng-if="order.orderStatus === 'Closed'" class="badge py-3 px-4 fs-7 badge-light-dark">
+                            {{::vm.translate.get(order.orderStatus)}}
+                        </span>
+                    </td>
+                    <td>
+                        <a ui-sref="order-detail({id: order.id})" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary w-30px h-30px">
+                            <i class="ki-duotone ki-black-right fs-2 text-gray-500"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

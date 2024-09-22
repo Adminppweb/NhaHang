@@ -1,0 +1,165 @@
+﻿
+<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0n" ng-if="!vm.isEditMode">
+                {{::vm.translate.get('Create Brand')}}
+            </h1>
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0" ng-if="vm.isEditMode">
+                {{::vm.translate.get('Edit Brand')}}
+            </h1>
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <li class="breadcrumb-item text-muted">
+                    <a href="admin" class="text-muted text-hover-primary">{{::vm.translate.get('Home')}}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    <a href="javascript:;" class="text-muted text-hover-primary">
+                        {{::vm.translate.get('Catalog')}}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    <a href="javascript:;" class="text-muted text-hover-primary">
+                        {{::vm.translate.get('Brand')}}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted" ng-if="!vm.isEditMode">
+                    {{::vm.translate.get('Create Brand')}}
+                </li>
+                <li class="breadcrumb-item text-muted" ng-if="vm.isEditMode">
+                    {{::vm.translate.get('Edit Brand')}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container container-xxl">
+        <div class="card card-flush py-4">
+            <div class="card-body pt-10">
+                <form name="brandForm" class="form-horizontal">
+                    <div class="alert alert-danger d-flex align-items-center p-5" ng-show="vm.validationErrors">
+                        <i class="ki-outline ki-call fs-2hx text-danger me-4"></i>
+                        <div class="d-flex flex-column">
+                            <h4 class="mb-1 text-danger" ng-repeat="error in vm.validationErrors">{{error}}</h4>
+                        </div>
+                    </div>
+                    <div class="mb-10 fv-row">
+                        <div class="row fv-row mb-7">
+                           <div class="col-md-2">
+                                <label class="fs-6 fw-semibold required form-label mt-2">
+                                    {{::vm.translate.get('Name')}}
+                                </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input name="name" ng-model="vm.brand.name" required ng-change="vm.updateSlug()" placeholder="{{::vm.translate.get('Name')}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row fv-row mb-7">
+                           <div class="col-md-2">
+                                <label class="fs-6 fw-semibold required form-label mt-2">
+                                    {{::vm.translate.get('Slug')}}
+                                </label>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="d-flex">
+                                    <input name="slug" required disabled="disabled" ng-model="vm.brand.slug" type="text" placeholder="{{::vm.translate.get('Slug')}}" class="form-control me-3 flex-grow-1"
+                                           value="vm.brand.slug" />
+                                    <button class="btn btn-light-primary fw-bold flex-shrink-0" id="copySlugButton" ng-disabled="!vm.brand.slug" ng-click="vm.copySlug()">
+                                        {{::vm.translate.get('Coppy link')}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row fv-row mb-7">
+                           <div class="col-md-2">
+                                <label class="fs-6 fw-semibold form-label mt-2">
+                                    {{::vm.translate.get('Meta Title')}}
+                                </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input name="metaTitle" ng-model="vm.brand.metaTitle" placeholder="{{::vm.translate.get('Meta Title')}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row fv-row mb-7">
+                           <div class="col-md-2">
+                                <label class="fs-6 fw-semibold form-label mt-2">
+                                   {{::vm.translate.get('Meta Keywords')}}
+                                </label>
+                            </div>
+                            <div class="col-md-9">
+                                <textarea name="metaKeywords" ng-model="vm.brand.metaKeywords" placeholder="{{::vm.translate.get('Meta Keywords')}}" class="form-control" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="row fv-row mb-7">
+                           <div class="col-md-2">
+                                <label class="fs-6 fw-semibold form-label mt-2">
+                                    {{::vm.translate.get('Meta Description')}}
+                                </label>
+                            </div>
+                           <div class="col-md-9">
+                               <textarea ui-tinymce="vm.tinymceMetaDescriptionOptions" name="metaDescription" class="form-control" ng-model="vm.brand.metaDescription"></textarea>
+                           </div>
+                        </div>
+                        <div class="row fv-row mb-7">
+                           <div class="col-md-2">
+                                <label class="fs-6 fw-semibold form-label mt-2">
+                                    {{::vm.translate.get('Display Order')}}
+                                </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="number" name="displayOrder" ng-model="vm.brand.displayOrder" placeholder="{{::vm.translate.get('Display Order')}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row fv-row mb-7">
+                           <div class="col-md-2"></div>
+                            <div class="col-md-9">
+                                <div class="mb-10">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch" ng-model="vm.brand.isPublished">
+                                        <label class="form-check-label">{{::vm.translate.get('Published')}}</label>
+                                    </div>
+                                </div>
+                                <div class="mb-10">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch" ng-model="vm.brand.includeInMenu" />
+                                        <label class="form-check-label">
+                                            {{::vm.translate.get('Include in Menu')}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row fv-row mb-7">
+                                <label class="fs-6 fw-semibold form-label mt-2">
+                                    {{::vm.translate.get('Description')}}
+                                </label>
+                               <textarea ui-tinymce="vm.tinymceDescriptionOptions" name="description" class="form-control" ng-model="vm.brand.description"></textarea>
+                        </div>
+                        <div class="separator separator-dashed my-6"></div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 text-center">
+                                <button class="btn btn-primary" ng-disabled="brandForm.$invalid" ng-click="vm.save()">
+                                    <span class="indicator-label" ng-hide="vm.showProgress">{{::vm.translate.get('Save Changes')}}</span>
+                                    <span ng-show="vm.showProgress">
+                                        {{::vm.translate.get('Please wait...')}}
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+                                <button ui-sref="brand" class="btn btn-light-danger"><i class="la la-close mr-1"></i>{{::vm.translate.get('Cancel')}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

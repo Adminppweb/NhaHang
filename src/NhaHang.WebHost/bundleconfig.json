@@ -1,0 +1,10 @@
+[
+  {
+    "outputFileName": "wwwroot/libs.min.css",
+    "inputFiles": [
+      "wwwroot/lib/font-awesome/css/font-awesome.css",
+      "wwwroot/lib/bootstrap-star-rating/css/star-rating.css",
+      "wwwroot/lib/toastr/build/toastr.min.css"
+    ]
+  }
+]

@@ -1,0 +1,146 @@
+﻿<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0" ng-if="!vm.isEditMode">
+                {{::vm.translate.get('Create Evaluate')}}
+            </h1>
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0" ng-if="vm.isEditMode">
+                {{::vm.translate.get('Edit Evaluate')}} {{vm.evaluate.name}}
+            </h1>
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <li class="breadcrumb-item text-muted">
+                    <a href="admin" class="text-muted text-hover-primary">{{::vm.translate.get('Home')}}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    <a ui-sref="evaluate" class="text-muted text-hover-primary">{{::vm.translate.get('Evaluate')}}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted" ng-if="!vm.isEditMode"> {{::vm.translate.get('Create Evaluate')}}</li>
+                <li class="breadcrumb-item text-muted" ng-if="vm.isEditMode"> {{::vm.translate.get('Edit Evaluate')}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container container-fluid">
+        <form name="evaluateForm" class="form-horizontal">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="alert alert-danger d-flex align-items-center p-5" ng-show="vm.validationErrors">
+                        <i class="ki-outline ki-call fs-2hx text-danger me-4"></i>
+                        <div class="d-flex flex-column">
+                            <h4 class="mb-1 text-danger" ng-repeat="error in vm.validationErrors track by $index">{{error}}</h4>
+                        </div>
+                    </div>
+                    <div class="card card-flush py-4">
+                        <div class="card-body pt-10">
+
+                            <div class="mb-10 fv-row">
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-2">
+                                        <label class="fs-5 fw-semibold form-label mt-2">
+                                            {{::vm.translate.get('Avatar')}}
+                                        </label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3">
+                                            <div class="image-input-wrapper w-150px h-150px">
+                                                <img ngf-src="vm.thumbnailImage" ngf-resize="{width: 150, height: 150, quality: 0.9}">
+                                            </div>
+                                            <div class="image-input-wrapper w-150px h-150px mt-10" ng-show="!vm.thumbnailImage && vm.evaluate.thumbnailImageUrl">
+                                                <img class="mt-5" ng-src="{{vm.evaluate.thumbnailImageUrl}}" style="width: 100px; height: 100px" />
+                                            </div>
+                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                                <i class="ki-duotone ki-pencil fs-7">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                                <input type="file" ngf-select ng-model="vm.thumbnailImage" name="thumbnailImage" ngf-accept="'image/*'" />
+                                            </label>
+                                        </div>
+                                        <div class="text-muted fs-7">
+                                            {{::vm.translate.get('Set the evaluate thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted')}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-2">
+                                        <label class="fs-6 fw-semibold required form-label mt-2">
+                                            {{::vm.translate.get('Name')}}
+                                        </label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input name="name" required ng-model="vm.evaluate.name" ng-change="vm.updateSlug()" placeholder="{{::vm.translate.get('Name')}}" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-2">
+                                        <label class="fs-6 fw-semibold required form-label mt-2">
+                                            {{::vm.translate.get('Slug')}}
+                                        </label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="d-flex">
+                                            <input name="slug" required disabled="disabled" ng-model="vm.evaluate.slug" type="text" placeholder="{{::vm.translate.get('Slug')}}" class="form-control me-3 flex-grow-1"
+                                                   value="vm.evaluate.slug" />
+                                            <button class="btn btn-light-primary fw-bold flex-shrink-0" id="copySlugButton" ng-disabled="!vm.evaluate.slug" ng-click="vm.copySlug()">
+                                                {{::vm.translate.get('Coppy link')}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-2">
+                                        <label class="fs-5 fw-semibold form-label mt-2">
+                                            {{::vm.translate.get('Vị trí')}}
+                                        </label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input name="linkImage" ng-model="vm.evaluate.linkImage" placeholder="Vị trí" class="form-control" />
+                                    </div>
+                                    </div>
+                                    <div class="row fv-row mb-7">
+                                        <div class="col-md-2">
+                                            <label class="fs-5 fw-semibold form-label mt-2">
+                                                {{::vm.translate.get('IsPublished')}}
+                                            </label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="form-check form-switch mb-5">
+                                                <input class="form-check-input" type="checkbox" role="switch" ng-model="vm.evaluate.isPublished">
+                                                <label class="form-check-label">
+                                                    {{::vm.translate.get('IsPublished')}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="separator separator-dashed my-6"></div>
+                                    <div class="row fv-row mb-7">
+                                        <label class="fs-5 fw-bold form-label mt-2">
+                                            {{::vm.translate.get('Content')}}
+                                        </label>
+                                        <textarea ui-tinymce="vm.tinymceContentOptions" name="content" class="form-control" ng-model="vm.evaluate.content"></textarea>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 gap-lg-3 justify-content-center mt-10">
+                    <button type="submit" ng-disabled="evaluateForm.$invalid" ng-click="vm.save()" class="btn btn-primary">
+                        <span class="indicator-label" ng-hide="vm.showProgress">{{::vm.translate.get('Save Changes')}}</span>
+                        <span ng-show="vm.showProgress">
+                            {{::vm.translate.get('Please wait...')}}
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                    </button>
+                    <button ui-sref="evaluate" class="btn btn-light-danger"><i class="la la-close mr-1"></i>{{::vm.translate.get('Cancel')}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

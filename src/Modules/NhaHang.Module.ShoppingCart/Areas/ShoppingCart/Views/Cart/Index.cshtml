@@ -1,0 +1,359 @@
+﻿@{
+    ViewData["Title"] = Localizer["Shopping Cart"];
+}
+
+@section head {
+    <link simpl-append-version="true" rel="stylesheet" href="~/assets/css/cartpage.css" />
+    <link simpl-append-version="true" rel="stylesheet" href="~/assets/css/datepicker.css" />
+}
+
+<section class="bread-crumb mb-3">
+    <span class="crumb-border"></span>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 a-left">
+                <ul class="breadcrumb m-0 px-0">
+                    <li>
+                        <a href="~/" target="_self"><span>Trang chủ</span></a>
+                        <span class="mr_lr">&nbsp;/&nbsp;</span>
+                    </li>
+
+                    <li class="active">
+                        <span>Giỏ hàng</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="main-cart-page main-container col1-layout mobile-tab active" id="cart-tab" data-title="Giỏ hàng" ng-app="simpl.shoppingCart" ng-controller="shoppingCartListCtrl as vm" ng-cloak>
+    <div class="wrap_background_aside padding-top-15 margin-bottom-40 padding-left-0 padding-right-0 cartmbstyle">
+        <div class="cart-mobile container card border-0 py-2" ng-if="vm.cart.items.length">
+            <form action="/cart" method="post" novalidate="" class="margin-bottom-0">
+                <div class="header-cart">
+                    <div class=" title_cart_mobile heading-bar">
+                        <h1 class="heading-bar__title">Giỏ hàng</h1>
+                    </div>
+                </div>
+                <div class="header-cart-content">
+                    <div class="cart_page_mobile content-product-list">
+                        <div class="item-product item" ng-if="vm.cart.items.length" ng-repeat="cartItem in vm.cart.items">
+                            <div class="text-center">
+                                <a class="remove-itemx remove-item-cart " title="Xóa" href="javascript:;" ng-click="vm.removeShoppingCartItem(cartItem)">
+                                    <svg class="icon" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0)">
+                                            <path d="M0.620965 12C0.462896 12 0.304826 11.9399 0.184729 11.8189C-0.0563681 11.5778 -0.0563681 11.1869 0.184729 10.9458L10.9497 0.180823C11.1908 -0.0602744 11.5817 -0.0602744 11.8228 0.180823C12.0639 0.421921 12.0639 0.8128 11.8228 1.05405L1.05795 11.8189C0.936954 11.9392 0.778884 12 0.620965 12Z" fill="#8C9196"></path>
+                                            <path d="M11.3867 12C11.2287 12 11.0707 11.9399 10.9505 11.8189L0.184729 1.05405C-0.0563681 0.8128 -0.0563681 0.421921 0.184729 0.180823C0.425827 -0.0602744 0.816706 -0.0602744 1.05795 0.180823L11.8228 10.9458C12.0639 11.1869 12.0639 11.5778 11.8228 11.8189C11.7018 11.9392 11.5439 12 11.3867 12Z" fill="#8C9196"></path>
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0">
+                                                <rect width="12" height="12" fill="white"></rect>
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </a>
+                                
+                            </div>
+                            <div class="item-product-cart-mobile">
+                                <a href="/{{cartItem.productSlug}}">
+                                </a>
+                                <a class="product-images1  pos-relative embed-responsive embed-responsive-1by1" href="/{{cartItem.productSlug}}" title="{{cartItem.productName}}">
+                                    <img class="img-fluid" src="{{cartItem.productImage}}" alt="{{cartItem.productName}}">
+                                    <div class="label_product product_gift_label hidden">
+                                        <img src="{{cartItem.productImage}}" alt="product gift">
+                                    </div>
+                                </a>
+
+                            </div>
+                            <div class="product-cart-infor">
+                                <div class="title-product-cart-mobile">
+                                    <h3 class="product-name">
+                                        <a class="text2line" href="/{{cartItem.productSlug}}" title="{{cartItem.productName}}">
+                                            {{cartItem.productName}}
+                                        </a>
+                                    </h3>
+                                    <span class="variant-title">
+                                        <span class="badge badge-pill badge-danger" ng-if="!cartItem.isProductAvailabeToOrder">Không có sẵn nữa</span>
+                                        <span class="badge badge-pill badge-danger" ng-if="cartItem.productStockTrackingIsEnabled && cartItem.productStockQuantity < cartItem.quantity"> Không đủ hàng. Có sẵn: {{cartItem.productStockQuantity}}</span>
+                                        <ul class="list-unstyled">
+                                            <li ng-repeat="opt in cartItem.variationOptions">
+                                                <span>{{opt.optionName}}:</span> {{opt.value}}
+                                            </li>
+                                        </ul>
+                                    </span>
+                                </div>
+
+                                <div class="cart-price">
+                                    <span class="product-price price">{{cartItem.productPriceString}}</span>
+                                </div>
+                                <div class="select-item-qty-mobile">
+                                    <div class="txt_center">
+                                        <button class="reduced items-count btn-minus btn quantity-button" ng-click="vm.decreaseQuantity(cartItem)" name="subtract" value="-" type="button">
+                                            <svg class="icon">
+                                                <use xlink:href="#icon-minus"></use>
+                                            </svg>
+                                        </button>
+                                        <input type="text" class="form-control input-text number-sidebar quantity-field" readonly="readonly" ng-model="cartItem.quantity">
+                                        <button class="increase items-count btn-plus btn quantity-button" ng-click="vm.increaseQuantity(cartItem)" name="subtract" value="+" type="button" style="pointer-events: auto;">
+                                            <svg class="icon">
+                                                <use xlink:href="#icon-plus"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart-note">
+                            <form>
+                                <label for="note" class="note-label">Ghi chú đơn hàng</label>
+                                <textarea rows="3" class="form-control" name="orderNote" ng-model="vm.cart.orderNote" placeholder="@Localizer["Enter order note"]"></textarea>
+                                <div class="d-flex justify-content-between align-items-center" style="margin-top:10px">
+                                    <a href="~/" class="btn form-cart-continue">Mua thêm</a>
+                                    <button type="submit" class="btn btn-main" ng-click="vm.saveOrderNote()">@Localizer["Save order note"]</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="header-cart-price">
+                        <div class="title-cart d-none d-sm-flex  margin-bottom-20">
+                            <h3 class="text-xs-left">@Localizer["Subtotal"]</h3>
+                            <span class="text-xs-right  totals_price_mobile">{{vm.cart.subTotalString}}</span>
+                        </div>
+                        <div class="title-cart d-none d-sm-flex margin-bottom-20 ">
+                            <h3 class="text-xs-left">@Localizer["Discount"]</h3>
+                            <span class="text-xs-right  totals_price_mobile">{{vm.cart.discountString}}</span>
+                        </div>
+                        <div class="title-cart d-none d-sm-flex margin-bottom-20 ">
+                            <h3 class="text-xs-left">@Localizer["Order Total"]</h3>
+                            <span class="text-xs-right  totals_price_mobile">{{vm.cart.subTotalString}}</span>
+                            <i class="text-xs-right price_vat ">(Đã bao gồm VAT nếu có)</i>
+                        </div>
+                        <form class="form-inline margin-bottom-20">
+                            <div class="form-group">
+                                <label>{{vm.cart.couponValidationErrorMessage}}</label>
+                            </div>
+                            <div class="coupon-toggle d-flex justify-content-between align-items-center">
+                                <div>
+                                    <input type="text" class="form-control" name="couponCode" ng-model="vm.couponCode" placeholder="@Localizer["Enter coupon"]">
+                                </div>
+
+                                <div class="coupon-toggle-btn">
+                                    <button type="submit" class="btn form-cart-continue" ng-click="vm.applyCoupon()">@Localizer["Apply"]</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="checkout d-none d-sm-block">
+                            <button class="btn btn-block btn-proceed-checkout-mobile" ng-class="{disabled: !vm.cart.isValid}" title="Tiến hành thanh toán" type="button" onclick="window.location.href='/checkout/shipping'">
+                                <span>Thanh Toán</span>
+                            </button>
+                        </div>
+
+                        <div ng-if="vm.cart.lockedOnCheckout">
+                            <button type="button" ng-click="vm.unlock()" class="btn btn-block btn-proceed-checkout-mobile">
+                                <i class="la la-lock mr-1"></i>
+                                Mở khóa giỏ hàng
+                            </button>
+                        </div>
+                        <div class="cart-trustbadge mt-3">
+                            <span class="title-menu">
+                                Phương thức thanh toán
+                            </span>
+                            <div class="trustbadge">
+                                <a href="/" target="_blank" title="Phương thức thanh toán">
+                                    <img class=" img-fluid" src="~/media/icon/footer_trustbadge.jpg" alt="Phương thức thanh toán" width="246" height="53">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <div class="cart-empty container card border-0 py-2" ng-if="!vm.cart.items.length">
+            <div class="alert green-alert section" role="alert">
+                <div class="title-cart text-center">
+                    <h1 class="d-none">Giỏ hàng</h1>
+                    <div>
+                        <img src="~/media/icon/cart_empty_background.png" class="img-fluid" width="298" height="152">
+                    </div>
+                    <h3>
+                        Hổng” có gì trong giỏ hết
+                    </h3>
+                    <p>	Về trang cửa hàng để chọn mua sản phẩm bạn nhé!!</p>
+                    <a href="~/" title="Mua sắm ngay" class="btn btn-main">Mua sắm ngay</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section mobile-tab" id="product-tab" data-title="Sản phẩm thường mua cùng">
+    <div class="container card py-md-4 px-md-4">
+        <div class="title_module heading-bar d-none d-sm-flex justify-content-between align-items-center">
+            <h2 class="bf_flower heading-bar__title">
+                <a href="/collections/dien-thoai" title="Sản phẩm thường mua cùng">Sản phẩm thường mua cùng</a>
+            </h2>
+        </div>
+        <div class="row recent-view-list slickrelated">
+            <div class="col-12 col-md-15">
+                <div class="item_product_main">
+                    <form action="/cart/add" method="post" class="variants product-action" data-id="product-actions-1037739910" enctype="multipart/form-data">
+                        <div class="product-thumbnail pos-relative">
+                            <span class="product-promo-tag product-promo-tag--1 product-promo-tag--image" style="--color: #333; --background: #f0f0f0; --border-color: #f0f0f0;">
+                                <img src="//theme.hstatic.net/200000458129/1001035927/14/promo_tag_1.png?v=51" alt="Điện thoại iPhone 13" />
+                            </span>
+                            <a class="image_thumb pos-relative embed-responsive embed-responsive-1by1" href="/products/dien-thoai-iphone-13" title="Điện thoại iPhone 13">
+                                <img loading="lazy"
+                                     class="product-thumbnail__img product-thumbnail__img--primary"
+                                     width="480"
+                                     height="480"
+                                     style="--image-scale: 1;"
+                                     src="//product.hstatic.net/200000458129/product/upload_9d86438018484768875e8ef5fb8bc5a2_medium.jpg"
+                                     alt="Điện thoại iPhone 13" />
+                                <img loading="lazy"
+                                     class="product-thumbnail__img product-thumbnail__img--secondary"
+                                     width="480"
+                                     height="480"
+                                     style="--image-scale: 1;"
+                                     src="//product.hstatic.net/200000458129/product/upload_3d4c09a207224d9f9659dcb4ab97da55_medium.jpg"
+                                     alt="Điện thoại iPhone 13" />
+                                <img src="//theme.hstatic.net/200000458129/1001035927/14/icon-button-play.png?v=51" loading="lazy" class="video-icon" alt="video-play-button" />
+                            </a>
+                            <div class="label_product d-none">
+                                <div class="label_wrapper">
+                                    -15%
+                                </div>
+                            </div>
+                            <div class="label_product product_gift_label hidden" data-id="1037739910">
+                                <img src="//theme.hstatic.net/200000458129/1001035927/14/ega-product-gift.png?v=51" loading="lazy" width="20" height="20" alt="product gift" />
+                            </div>
+                            <div class="product-action">
+                                <div class="group_action" data-url="/products/dien-thoai-iphone-13">
+                                    <a title="Xem nhanh" href="/products/dien-thoai-iphone-13" data-handle="dien-thoai-iphone-13" class="xem_nhanh btn-circle btn-views btn_view btn right-to quick-view">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                    <a title="So sánh" data-id="1037739910" class="btn-circle btn-views btn js-compare-product-add">
+                                        <i class="fa fa-random"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name"><a href="/products/dien-thoai-iphone-13" title="Điện thoại iPhone 13">Điện thoại iPhone 13</a></h3>
+                            <div class="product-rating">
+                                <div class="starbaprv-widget starbaprv-preview-badge starbaprv-preview-badge--with-link" data-id="1037739910" data-url="dien-thoai-iphone-13"></div>
+                            </div>
+
+                            <div class="product-item-cta position-relative">
+                                <div class="price-box">
+                                    <span class="price">20,990,000₫</span>
+                                    <span class="compare-price">24,490,000₫</span>
+                                    <div class="label_product d-inline-block">
+                                        <div class="label_wrapper">
+                                            -15%
+                                        </div>
+                                    </div>
+                                </div>
+                                <input class="hidden" type="hidden" name="id" value="1082488511" />
+
+                                <button data-href="/products/dien-thoai-iphone-13" data-handle="dien-thoai-iphone-13" class="product-item-btn btn left-to quick-view" title="Tùy chọn" type="button">
+                                    <svg class="icon">
+                                        <use xlink:href="#icon-cart" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <span class="product-promo-tag product-promo-tag--3 product-promo-tag--text-2" style="--color: #8f8f8f; --background: transparent; --border-color: #ff1010;">
+                                Tặng gói bảo hành Gold trị giá 300K
+                            </span>
+
+                            <div class="product-promotion hidden" id="ega-salebox-1037739910">
+                                <h3 class="product-promotion__heading rounded-sm d-inline-flex align-items-center">
+                                    <img alt="KHUYẾN MÃI - ƯU ĐÃI" src="//theme.hstatic.net/200000458129/1001035927/14/icon-product-promotion.png?v=51" width="16" height="16" class="mr-2" />
+                                    KHUYẾN MÃI - ƯU ĐÃI
+                                </h3>
+
+                                <ul class="promotion-box">
+                                    <li>Nhập mã <strong>EGANY</strong> thêm 5% đơn hàng [coupon="EGANY"]</li>
+
+                                    <li>Giảm giá 10% khi mua từ 5 sản phẩm</li>
+
+                                    <li>Tặng phiếu mua hàng khi mua từ 500k</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script src="~/assets/js/slick-min.js" type="text/javascript"></script>
+    <script src="~/assets/js/datepicker.js" type="text/javascript"></script>
+    <script>
+        window.egaDeliveryValid = true;
+        window.EGADeliverySettings = {
+            general: {
+                enabled: true,
+                title: "HẸN GIỜ NHẬN HÀNG",
+                optionDefault: "Chọn thời gian",
+                headingColor: "#fa0909",
+                inputBackground: "#e6e6e6",
+                inputColor: "#000000",
+                startTime: "09:30",
+                endTime: "21:00",
+                waitTime: 120,
+                orderTime: 30,
+                orderTimeUnit: "1",
+                query: ".timedeli",
+                position: "left",
+                inputBorder: "#d1d1d2",
+                datepickerBg: "#dcdcdc",
+                labelDatePicker: "Ngày nhận hàng",
+                labelTimePicker: "Thời gian nhận hàng",
+            },
+            advanced: {
+                enableTimeSlots: true,
+
+                timeSlots: [{ title: "08h00 - 12h00" }, { title: " 14h00 - 18h00" }, { title: " 19h00 - 21h00" }],
+                availableDay: [
+                    {
+                        name: "1",
+                    },
+                    {
+                        name: "2",
+                    },
+                    {
+                        name: "3",
+                    },
+                    {
+                        name: "4",
+                    },
+                    {
+                        name: "5",
+                    },
+                    {
+                        name: "6",
+                    },
+                    {
+                        name: "0",
+                    },
+                ],
+            },
+        };
+
+        window.EGADeliverySettings.general = Object.assign(window.EGADeliverySettings.general, {
+            currentTemplate: "cart",
+            platform: Haravan,
+        });
+    </script>
+
+    <script src="~/assets/js/sweetalert-min.js"></script>
+    <script src="~/assets/js/slick-min.js" type="text/javascript"></script>
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.ShoppingCart/shoppingcart-list.js"></script>
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.ShoppingCart/shoppingcart-service.js"></script>
+}
+

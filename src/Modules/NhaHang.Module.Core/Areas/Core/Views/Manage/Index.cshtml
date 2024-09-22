@@ -1,0 +1,155 @@
+﻿@model IndexViewModel
+
+
+@{
+    ViewBag.Title = "Tài khoản";
+}
+@section additionalMeta {
+    <meta name="keywords" content="Tài khoản">
+    <meta name="description" content="Tài khoản">
+    <meta property="og:title" content="@ViewBag.Title">
+    <meta property="og:description" content="Tài khoản">
+    <meta property="og:url" content="~/login">
+    <meta property="og:image" content="~/media/logo/logo-ng.png ">
+    <meta property="og:image:alt" content="@ViewBag.Title">
+    <meta name="twitter:title" content="@ViewBag.Title">
+    <meta name="twitter:description" content="Tài khoản">
+    <meta name="twitter:title" content="@ViewBag.Title">
+    <meta name="twitter:description" content="Tài khoản">
+    <meta name="twitter:image" content="~/media/logo/logo-ng.png ">
+    <meta name="twitter:url" content="~/login">
+    <meta itemprop="name" content="@ViewBag.Title">
+    <meta itemprop="description" content="Tài khoản">
+    <meta itemprop="image" content="~/media/logo/logo-ng.png ">
+    <meta itemprop="url" content="~/login">
+    <link rel="canonical" href="~/login" />
+    <link rel="image_src" href="~/media/logo/logo-ng.png " />
+}
+@section head {
+    <link href="~/assets/css/account-style.css" rel="stylesheet" />
+}
+
+<section class="bread-crumb mb-3">
+    <span class="crumb-border"></span>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 a-left">
+                <ul class="breadcrumb m-0 px-0">
+                    <li>
+                        <a href="~/" target="_self"><span>Trang chủ</span></a>
+                        <span class="mr_lr">&nbsp;/&nbsp;</span>
+                    </li>
+                    <li>
+                        <a href="~/user" target="_self"><span>@Localizer["My Account"]</span></a>
+                        <span class="mr_lr">&nbsp;/&nbsp;</span>
+                    </li>
+
+                    <li class="active">
+                        <span><span>Tài khoản</span></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="login page_order section">
+    <div class="container card p-3">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-lg-3 col-left-ac">
+                <div class="block-account">
+                    <partial name="_AccountMenu" />
+                    <ul>
+                        <li><a class="title-info active" href="~/user">@Localizer["Account Dashboard"]</a></li>
+                        <li><a class="title-info" href="~/user/info">@Localizer["Account Information"]</a></li>
+                        <li><a class="title-info" href="~/user/change-password">@Localizer["Change Password"]</a></li>
+                        <li><a class="title-info" href="~/user/address">Sổ địa chỉ</a></li>
+                        <li><a class="title-info" href="~/user/orders">@Localizer["Order History"]</a></li>
+                        <li><a class="title-info" href="~/user/wishlist">@Localizer["Wish List"]</a></li>
+                        <li>
+                            <form asp-area="Core" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+                                <button type="submit" class="btn btn_base">Đăng xuất</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-lg-9">
+                <div class="col-right-account border-0 margin-top-20">
+                    <div class="block-account">
+                        <div class="block-title-account"><h1>Tài khoản</h1></div>
+                        <div class="block-content form-signup">
+                            <p>Tên tài khoản: <strong style="line-height: 20px;"> @Model.FullName!</strong></p>
+                            <p><i class="fa fa-envelope font-some"></i> <span>Email: @Model.Email </span></p>
+                            <p><i class="fa fa-phone font-some"></i> <span>Điện thoại: @Model.PhoneNumber </span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="payment_status">
+                    @if (ViewData["StatusMessage"] != null)
+                    {
+                        <i class="status_pending">
+                            <em>
+                                <span class="span_pending" style="color: green">
+                                    <strong><em>@ViewData["StatusMessage"]</em></strong>
+                                </span>
+                            </em>
+                        </i>
+                    }
+                </div>
+                <p class="btn-row">
+                    <button class="btn-edit-addr btn btn-primary btn-more" onclick="window.location.href='/user/info'" type="button">Chỉnh sửa</button>
+                </p>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 body_order">
+                        <div class="box-address">
+                            <h2 class="title-head">Địa chỉ giao hàng</h2>
+                            <div class="address box-des">
+                                <vc:default-shipping-address></vc:default-shipping-address>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 body_order">
+                        <div class="box-address">
+                            <h2 class="title-head"> @Localizer["Password"]</h2>
+                            <div class="box-des">
+                                <p>@Localizer["Password"]: ********</p>
+                                @if (Model.HasPassword)
+                                {
+                                    <a asp-area="Core" asp-controller="Manage" asp-action="ChangePassword" class="">
+                                        Thay đổi mật khẩu
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-area="Core" asp-controller="Manage" asp-action="SetPassword" class="">
+                                        @Localizer["Create"]
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 body_order">
+                        <div class="shipping_status">
+                            <span class="note"> @Localizer["External Logins"]:</span>
+                            <span class="span_" style="color: red">
+                                <strong>
+                                    <em>
+                                        @Model.Logins.Count <a asp-area="Core" asp-controller="Manage" asp-action="ManageLogins" class="btn-bracketed">@Localizer["Manage"]</a>
+                                    </em>
+                                </strong>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+ 
+
+
+
+

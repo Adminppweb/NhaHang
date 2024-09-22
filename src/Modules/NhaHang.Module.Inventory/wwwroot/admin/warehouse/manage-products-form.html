@@ -1,0 +1,153 @@
+﻿
+<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+             <h1 class="page-heading d-flex text-dark fw-bold my-0">
+                {{::vm.translate.get('Management products for warehouse')}}: (<span class="text-primary"> {{ vm.selectedWarehouse.name }} </span>)
+            </h1>
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <li class="breadcrumb-item text-muted">
+                    <a href="admin" class="text-muted text-hover-primary">{{::vm.translate.get('Home')}}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    <a href="javascript:;" class="text-muted text-hover-primary">
+                        {{::vm.translate.get('Inventory')}}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    {{::vm.translate.get('Management products for warehouse')}}
+                </li>
+            </ul>
+        </div>
+        <form class="form-inline">
+            <div class="d-flex align-items-center gap-2 gap-lg-3">
+                <div class="m-0">
+                        <select class="form-select" ng-change="vm.wareHouseSelectChange()" ng-model="vm.selectedWarehouse"
+                                ng-options="warehouse as warehouse.name for warehouse in vm.warehouses"></select>
+                </div>
+                <button class="btn btn-primary ml-5" ng-click="vm.addAllProducts()"><i class="la la-check-double mr-1"></i>{{::vm.translate.get('Add All Products')}}</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container container-xxl">
+        <div class="card card-flush" st-pipe="vm.getProducts" st-table="vm.products">
+            <div class="card-header border-0 pt-6">
+                <div class="col-lg-12">
+                    <div class="row g-8">
+                        <div class="col-lg-3">
+                            <!--<label class="form-label">{{::vm.translate.get('Product Name')}}</label>-->
+                            <div class="position-relative">
+                                <i class="ki-duotone ki-magnifier fs-3 text-gray-500 position-absolute top-50 translate-middle ms-6">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                                <input placeholder="{{::vm.translate.get('Product Name')}}" class="form-control ps-10" st-search="ProductName" />
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <!--<label class="form-label">{{::vm.translate.get('Product Sku')}}</label>-->
+                            <div class="position-relative">
+                                <i class="ki-duotone ki-barcode fs-3 text-gray-500 position-absolute top-50 translate-middle ms-6">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
+                                    <span class="path7"></span>
+                                    <span class="path8"></span>
+                                </i>
+                                <input placeholder="{{::vm.translate.get('Product Sku')}}" class="form-control ps-10" st-search="ProductSku" />
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <!--<label class="form-label">{{::vm.translate.get('Exist In Warehouse')}}</label>-->
+                            <select class="form-select" st-search="IsExistInWarehouse">
+                                <option value="">{{::vm.translate.get('All')}}</option>
+                                <option value="true">{{::vm.translate.get('Yes')}}</option>
+                                <option value="false">{{::vm.translate.get('No')}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body pt-10">
+                <div class="table-responsive">
+                    <table ng-if="vm.selectedWarehouse" class="table align-middle table-row-dashed">
+                        <thead>
+                             <tr class="fs-6 fw-bold text-gray-600">
+                                <th st-sort="Name" class="sortable">{{::vm.translate.get('Product Name')}}</th>
+                                <th st-sort="Sku" class="sortable">{{::vm.translate.get('Product Sku')}}</th>
+                                <th>{{::vm.translate.get('Exist')}}</th>
+                                <th>{{::vm.translate.get('Select to add')}}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="fw-semibold text-gray-600" ng-show="!vm.isLoading">
+                            <tr ng-repeat="item in vm.products">
+                                <td>{{item.name}}</td>
+                                <td>{{item.sku}}</td>
+                                <td>{{item.isExistInWarehouse}}</td>
+                                <td>
+                                    <div class="form-check mb-2" ng-if="!item.isExistInWarehouse">
+                                        <input class="form-check-input productid-select" type="checkbox" ng-disabled="item.isExistInWarehouse" name="selectedProductIds" value="{{item.id}}" />
+                                        <label class="form-check-label">
+                                            {{::vm.translate.get('Add to Warehouse')}}
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2" ng-if="item.isExistInWarehouse">
+                                        <input class="form-check-input productid-select" disabled type="checkbox" ng-disabled="item.isExistInWarehouse" checked name="selectedProductIds" />
+                                        <label class="form-check-label">
+                                            {{::vm.translate.get('Add to Warehouse')}}
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody class="fw-semibold text-gray-600" ng-show="vm.newsItem.length === 0">
+                            <tr class="odd">
+                                <td valign="top" colspan="8" class="dataTables_empty">
+                                    <div class="d-flex flex-column flex-center">
+                                        <img src="/media/illustrations/sketchy-1/5.png" class="mw-400px">
+                                        <div class="fs-1 fw-bolder text-dark mb-4">{{::vm.translate.get('No items found.')}}</div>
+                                        <div class="text-gray-400 fs-6 fw-semibold mb-10">{{::vm.translate.get('Start creating new users')}}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td st-pagination="" st-items-by-page="10" colspan="10" st-template="/_content/NhaHang.Module.Core/admin/common/pagination.custom.html">
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="card-rounded d-flex flex-stack flex-wrap p-5">
+                    <span class="nav flex-wrap border-transparent fw-bold"></span>
+                    <!--<button class="btn btn-primary" ng-disabled="newsItemForm.$invalid" ng-click="vm.save()">
+                        <span class="indicator-label" ng-hide="vm.showProgress"><i class="las la-check fs-2 me-2"></i>{{::vm.translate.get('Save Changes')}}</span>
+                        <span ng-show="vm.showProgress">
+                            {{::vm.translate.get('Please wait...')}}
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                    </button>-->
+                    <button class="btn btn-light-primary" ng-click="vm.addSelectedProducts()">
+                        <i class="las la-check fs-2 me-2"></i> {{::vm.translate.get('Add selected products')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

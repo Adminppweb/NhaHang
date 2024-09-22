@@ -1,0 +1,13 @@
+[
+  {
+    "outputFileName": "wwwroot/admin/expenditure.min.js",
+    "inputFiles": [
+      "wwwroot/admin/expenditure.module.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

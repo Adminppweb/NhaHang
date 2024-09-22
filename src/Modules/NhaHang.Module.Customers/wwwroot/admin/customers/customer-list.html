@@ -1,0 +1,111 @@
+﻿<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                {{::vm.translate.get('Customers')}}
+            </h1>
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <li class="breadcrumb-item text-muted">
+                    <a href="admin" class="text-muted text-hover-primary">{{::vm.translate.get('Home')}}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    <a href="javascript:;" class="text-muted text-hover-primary">
+                        {{::vm.translate.get('Customer')}}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    {{::vm.translate.get('Customers')}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container container-fluid">
+        <div class="card card-flush" st-pipe="vm.getCustomers" st-table="vm.customers">
+            <div class="card-header border-0 pt-6">
+                <div class="col-lg-12">
+                    <div class="row g-8">
+                        <div class="col-lg-3">
+                            <!--<label class="form-label">{{::vm.translate.get('News Name')}}</label>-->
+                            <div class="position-relative">
+                                <i class="ki-duotone ki-magnifier fs-3 text-gray-500 position-absolute top-50 translate-middle ms-6">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                                <input placeholder="{{ ::vm.translate.get('Customer')}}" class="form-control ps-10" st-search="FullName" />
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <!--<label class="form-label">{{::vm.translate.get('Customer Areas')}}</label>-->
+                            <select class="form-select" st-search="CustomerAreaId">
+                                <option value="">{{ ::vm.translate.get('All')}}</option>
+                                <option ng-repeat="item in vm.customerAreas" value="{{item.id}}">
+                                    {{item.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6">
+                            <st-date-range predicate="CreatedOn" before="query.before" after="query.after"></st-date-range>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body pt-10">
+                <div class="d-flex" ng-show="!vm.isLoading">
+                    <h5 class="text-gray-800 mb-1">
+                        {{vm.tableStateRef.pagination.totalItemCount | number:0}} {{::vm.translate.get('records found')}}
+                    </h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-middle table-row-dashed">
+                        <thead>
+                             <tr class="fs-6 fw-bold text-gray-600">
+                                <th class="sortable" st-sort="FullName">{{ ::vm.translate.get('Customer')}}</th>
+                                <th>{{ ::vm.translate.get('Customer Area')}}</th>
+                                <th>{{ ::vm.translate.get('Short content')}}</th>
+                                <th class="sortable" t-sort="CreatedOn">{{ ::vm.translate.get('Create date')}}</th>
+                                <th>{{ ::vm.translate.get('Actions')}}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="fw-semibold text-gray-600" ng-show="!vm.isLoading">
+                            <tr ng-repeat="customer in vm.customers">
+                                <td>{{customer.fullName}}</td>
+                                <td>{{customer.customerArea}}</td>
+                                <td>{{customer.content | limitTo: 50}}...</td>
+                                <td>{{customer.createdOn | date:'medium'}}</td>
+                                <td>
+                                    <a ui-sref="customer-preview({id: customer.id})" title="Edit" class="btn btn-clean btn-icon"> <i class="ki-outline ki-eye fs-2x"></i></a>
+                                    <a title="Delete" class="btn btn-clean btn-icon delete" ng-click="vm.deleteCustomer(customer)"> <i class="ki-outline ki-trash fs-2x text-danger"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody class="fw-semibold text-gray-600" ng-show="vm.newsItem.length === 0">
+                            <tr class="odd">
+                                <td valign="top" colspan="8" class="dataTables_empty">
+                                    <div class="d-flex flex-column flex-center">
+                                        <img src="/media/empty.jpg" class="mw-400px">
+                                       
+                                       
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td st-pagination="" st-items-by-page="10" colspan="10" st-template="/_content/NhaHang.Module.Core/admin/common/pagination.custom.html">
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

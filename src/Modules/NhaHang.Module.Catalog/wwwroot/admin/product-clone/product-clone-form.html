@@ -1,0 +1,38 @@
+﻿<div class="card card-custom card-stretch gutter-b">
+    <div class="card-header align-items-center">
+        <h1 class="card-title align-items-start flex-column">
+            <span class="card-label font-weight-bolder text-dark">{{::vm.translate.get('Clone Product')}}</span>
+        </h1>
+    </div>
+    <div class="card-body pt-10">
+        <form name="productCloneForm" class="form-horizontal">
+            <div class="alert alert-custom  alert-outline-danger fade show mb-5" role="alert" ng-show="vm.validationErrors">
+                <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                <div class="alert-text">
+                    <ul>
+                        <li ng-repeat="error in vm.validationErrors">{{error}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right text-right">{{::vm.translate.get('Product Name')}}</label>
+                <div class="col-sm-10">
+                    <input name="name" ng-model="vm.productClone.name" ng-change="vm.updateSlug()" required placeholder="{{::vm.translate.get('Product Name')}}" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right text-right">{{::vm.translate.get('Slug')}}</label>
+                <div class="col-sm-10">
+                    <input name="slug" ng-model="vm.productClone.slug" required placeholder="{{::vm.translate.get('Slug')}}" class="form-control" />
+                </div>
+            </div>
+            <div class="separator separator-dashed my-6"></div>
+            <div class="form-group row">
+                <div class="col-sm-12 text-center">
+                    <button class="btn btn-light-primary" ng-click="vm.save()"><i class="la la-check mr-1"></i> {{::vm.translate.get('Save')}}</button>
+                    <button ui-sref="product-edit({id: vm.productId})" class="btn btn-light-danger"><i class="la la-close mr-1"></i>{{::vm.translate.get('Cancel')}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

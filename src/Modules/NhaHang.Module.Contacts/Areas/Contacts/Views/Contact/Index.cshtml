@@ -1,0 +1,136 @@
+﻿@model NhaHang.Module.Contacts.Areas.Contacts.ViewModels.ContactVm
+@inject IConfiguration Config
+
+
+@{
+    ViewData["Title"] = Localizer["Contact Us"];
+}
+
+@section additionalMeta {
+    <meta name="keywords" content="NhaHang Chuyên thiết kế website, phần mềm chuẩn seo, tối ưu hiệu suất sử dụng" />
+    <meta name="description" content="NhaHang Chuyên thiết kế website, phần mềm chuẩn seo, tối ưu hiệu suất sử dụng" />
+    <meta property="og:title" content="@ViewBag.Title -  NhaHang Chuyên thiết kế website, phần mềm chuẩn seo, tối ưu hiệu suất sử dụng">
+    <meta property="og:description" content="NhaHang Chuyên thiết kế website, phần mềm chuẩn seo, tối ưu hiệu suất sử dụng">
+    <meta property="og:url" content="lien-he">
+    <meta property="og:image" content="./media/logo/logo-webhcm.jpg">
+    <meta property="og:image:alt" content="@ViewBag.Title -  NhaHang Chuyên thiết kế website, phần mềm chuẩn seo, tối ưu hiệu suất sử dụng">
+    <meta name="twitter:title" content="@ViewBag.Title -  NhaHang Chuyên thiết kế website, phần mềm chuẩn seo, tối ưu hiệu suất sử dụng">
+    <meta name="twitter:description" content="NhaHang Chuyên thiết kế website, phần mềm chuẩn seo, tối ưu hiệu suất sử dụng">
+    <meta name="twitter:title" content="@ViewBag.Title -  NhaHang Chuyên thiết kế website, phần mềm chuẩn seo, tối ưu hiệu suất sử dụng">
+    <meta name="twitter:image" content="./media/logo/logo-webhcm.jpg">
+    <meta name="twitter:url" content="lien-he">
+    <meta itemprop="name" content="@ViewBag.Title">
+    <meta itemprop="description" content="NhaHang Chuyên thiết kế website, phần mềm chuẩn seo, tối ưu hiệu suất sử dụng">
+    <meta itemprop="image" content="./media/logo/logo-webhcm.jpg">
+    <meta itemprop="url" content="lien-he">
+    <link rel="canonical" href="lien-he" />
+    <link rel="image_src" href="./media/logo/logo-webhcm.jpg" />
+}
+
+@section head {
+    <link href="./assets/css/style-contact.css" rel="stylesheet" />
+}
+
+<section class="section-hrvcontact-helpcenter">
+    <div class="container">
+        <div class="helpcenter-grouptitle">
+            <h2>Đăng ký tư vấn và hỗ trợ </h2>
+            <p class="subtitle">
+                Vui lòng điền các thông tin liên hệ, NhaHang sẽ liên hệ và giải đáp các	thắc mắc của bạn trong thời gian sớm nhất.
+            </p>
+        </div>
+        <div class="helpcenter-formdata">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <div class="helpcenter-form">
+                        <form action="/contact" class="contact-form form-horizontal" method="POST">
+                            <div class="fieldset">
+                                <div class="form-group field-group">
+                                    <div class="field-input-wrapper">
+                                        <input asp-for="FullName" class="form-control form-control-lg" type="text" placeholder="@Localizer["Full name"]" />
+                                        <span asp-validation-for="FullName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group field-group">
+                                    <div class="field-input-wrapper">
+                                        <input asp-for="PhoneNumber" class="form-control form-control-lg" type="text" placeholder="@Localizer["Phone number"]" />
+                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group field-group">
+                                    <div class="field-input-wrapper">
+                                        <input asp-for="EmailAddress" class="form-control form-control-lg" type="email" placeholder="@Localizer["Email"]" />
+                                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group field-group">
+                                    <div class="field-input-wrapper">
+                                        <input asp-for="Address" type="text" class="form-control form-control-lg" placeholder="@Localizer["Address"]">
+                                        <span asp-validation-for="Address" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group field-group">
+                                    <div class="field-input-wrapper">
+                                        <select class="form-control form-control-lg" asp-for="ContactAreaId">
+                                            @foreach (var item in Model.ContactAreas)
+                                            {
+                                                <option value="@item.Id"> @item.Name </option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group field-group">
+                                    <div class="field-input-wrapper">
+                                        <textarea minlength="10" placeholder="Nội dung cần liên hệ" maxlength="250" rows="4" asp-for="Content" class="field-textarea field-input body-contact"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group-button">
+                                <button type="submit" class="btn btn-success"><span>GỬI THÔNG TIN</span></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d924.7186432464491!2d106.76512136584348!3d10.825015386861155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1zNSDEkMaw4budbmcgMTEyLCBQaMaw4bubYyBMb25nIEEsIFF14bqtbiA5LCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1695459833592!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-hrvcontact-address">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 col-sm-12">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="address-contact-info">
+                            <p class="address--title">Thông tin liên hệ</p>
+                            <ul>
+                                <li><p><strong>Địa chỉ :</strong>5/2A đường 112, Phước Long A, Thành Phố Thủ Đức, Hồ Chí Minh.</p></li>
+                                <li><p><strong>Tổng đài hỗ trợ:</strong> <span>0967.947.079</span> </p></li>
+                                <li><p><strong>Email:</strong> <span>phanbinh.webhcm@gmail.com</span> </p></li>
+                                <li><p><strong>Giờ làm việc :</strong> Thứ 2 đến Thứ 6 từ 8h đến 18h; Thứ 7 và Chủ nhật từ 8h00 đến 17h00</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 ">
+                <div class="social-contact-info">
+                    <h3>Kết nối với NhaHang trên mạng xã hội</h3>
+                    <a href="//www.facebook.com/" target="_blank" class="facebook"></a>
+                    <a href="//plus.google.com/" target="_blank" class="google"></a>
+                    <a href="//twitter.com/" target="_blank" class="twitter"></a>
+                    <a href="//www.youtube.com/" target="_blank" class="youtube"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.Contacts/init-google-map.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=@Config["GoogleAppKey"]&callback=initMap"></script>
+}

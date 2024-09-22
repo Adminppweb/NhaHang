@@ -1,0 +1,122 @@
+﻿@model LoginViewModel
+@inject SignInManager<User> SignInManager
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.OpenIdConnect
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html class="h-full" data-theme="true" data-theme-mode="light" lang="en">
+<head>
+    <title>
+        Đăng nhập - Gunsan
+    </title>
+    <meta charset="utf-8" />
+    <meta content="follow, index" name="robots" />
+    <link href="" rel="canonical" />
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+    <meta content="Sign in page, using Tailwind CSS" name="description" />
+    <meta content="" name="twitter:site" />
+    <meta content="" name="twitter:creator" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta content="Đăng nhập - Gunsan" name="twitter:title" />
+    <meta content="Sign in page, using Tailwind CSS" name="twitter:description" />
+    <meta content="~/media/logo/logo_dark.png" name="twitter:image" />
+    <meta content="" property="og:url" />
+    <meta content="en_US" property="og:locale" />
+    <meta content="website" property="og:type" />
+    <meta content="" property="og:site_name" />
+    <meta content="Đăng nhập - Gunsan" property="og:title" />
+    <meta content="Sign in page, using Tailwind CSS" property="og:description" />
+    <meta content="~/media/logo/logo_dark.png" property="og:image" />
+    <link href="~/media/logo/logo_dark.png" rel="apple-touch-icon" sizes="180x180" />
+    <link href="~/media/logo/logo_dark.png" rel="icon" sizes="32x32" type="image/png" />
+    <link href="~/media/logo/logo_dark.png" rel="icon" sizes="16x16" type="image/png" />
+    <link href="~/media/logo/logo_dark.png" rel="shortcut icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link href="~/library-admin/vendors/apexcharts/apexcharts.css" rel="stylesheet" />
+    <link href="~/library-admin/vendors/keenicons/styles.bundle.css" rel="stylesheet" />
+    <link href="~/library-admin/css/styles.css" rel="stylesheet" />
+</head>
+<body class="antialiased flex h-full text-base text-gray-700 dark:bg-coal-500">
+    <style>
+        .branded-bg {
+            background-image: url('/media/banner.jpg');
+        }
+
+        .dark .branded-bg {
+            background-image: url('/media/banner.jpg');
+        }
+    </style>
+    <div class="grid lg:grid-cols-2 grow">
+        <div class="flex justify-center items-center p-8 lg:p-10 order-2 lg:order-1">
+            <div class="card max-w-[370px] w-full">
+                <form class="card-body flex flex-col gap-5 p-10" novalidate="novalidate" asp-area="Core" asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                    <div class="text-center mb-2.5">
+                        <h3 class="text-lg font-semibold text-gray-900 leading-none mb-2.5">
+                            Đăng nhập
+                        </h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="border-t border-gray-200 w-full">
+                        </span>
+                        <span class="text-2xs text-gray-500 font-medium uppercase">
+                            Or
+                        </span>
+                        <span class="border-t border-gray-200 w-full">
+                        </span>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="form-label text-gray-900">
+                            Email
+                        </label>
+                        <input asp-for="Email" placeholder="Email" class="input" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <div class="flex items-center justify-between gap-1">
+                            <label class="form-label text-gray-900">
+                                Mật khẩu
+                            </label>
+                            <a class="text-2sm link shrink-0" asp-action="ForgotPassword">
+                                Lấy lại mật khẩu?
+                            </a>
+                        </div>
+                        <label class="input">
+                            <input asp-for="Password" placeholder="Mật khẩu" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </label>
+                    </div>
+                    <label class="checkbox-group">
+                        <input class="checkbox checkbox-sm" asp-for="RememberMe" />
+                        <span class="checkbox-label">
+                            Ghi nhớ đăng nhập
+                        </span>
+                    </label>
+                    <button type="submit" class="btn btn-primary flex justify-center grow">
+                        Đăng nhập
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="lg:rounded-xl lg:border lg:border-gray-200 lg:m-5 order-1 lg:order-2 bg-top xxl:bg-center xl:bg-cover bg-no-repeat branded-bg">
+            <div class="flex flex-col p-8 lg:p-16 gap-4">
+                <a href="#">
+                    <img class="h-[28px] max-w-none" src="~/media/logo/logo_dark.png" />
+                </a>
+                <div class="flex flex-col gap-3">
+                    <h3 class="text-2xl font-semibold text-gray-900">
+                        Quản trị hệ thống nhà hàng GUNSAN
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/library-admin/js/core.bundle.js"></script>
+    <script src="~/library-admin/vendors/apexcharts/apexcharts.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+</body>
+</html>
+

@@ -1,0 +1,101 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hóa đơn - webhcm.com.vn</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6 text-center">
+                <h2>webhcm.com.vn</h2>
+                <p>Địa chỉ: 10/10 Đường 359, phường Phước Long B, Thành phố Thủ Đức, Tp Hồ Chí Minh</p>
+                <p>Điện thoại: 0938112697 - 0975256339</p>
+                <hr />
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row mt-4">
+            <div class="col text-center">
+                <h2>Hóa đơn</h2>
+                <p>Ngày: @Model.CreatedOn</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Khách hàng: @Model.CustomerName</p>
+                <p>
+                    Địa chỉ: @Model.ShippingAddress.AddressLine1, @Model.ShippingAddress.DistrictName @Model.ShippingAddress.StateOrProvinceName
+                </p>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th class="text-right">Số lượng</th>
+                            <th class="text-right">Giá</th>
+                            <th class="text-right">Tổng tiền</th>
+                            <th class="text-right">Thuế VAT</th>
+                            <th class="text-right">Số tiền đã bao gồm VAT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OrderItems)
+                        {
+                        <tr>
+                            <td>
+                                @item.ProductName
+                                @foreach (var opt in item.VariationOptions)
+                                {
+                                <span>@opt.OptionName: @opt.Value</span>
+                                }
+                            </td>
+                            <td class="text-right">@item.Quantity</td>
+                            <td class="text-right">@item.ProductPriceString</td>
+                            <td class="text-right">@item.TotalString</td>
+                            <td class="text-right">@item.TaxPercent</td>
+                            <td class="text-right">@item.TaxIncludedAmountString</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <div class="col-6" style="float:right">
+                <table class="table">
+                    <tr>
+                        <td>Tổng đơn hàng phụ</td>
+                        <td class="text-right">@Model.SubtotalString</td>
+                    </tr>
+                    <tr>
+                        <td>Phí vận chuyển</td>
+                        <td class="text-right">@Model.ShippingAmountString</td>
+                    </tr>
+                    <tr>
+                        <td>Thuế</td>
+                        <td class="text-right">@Model.TaxAmountString</td>
+                    </tr>
+                    <tr>
+                        <td>Chiết khấu</td>
+                        <td class="text-right">@Model.DiscountAmountString</td>
+                    </tr>
+                    <tr>
+                        <td>Phí thanh toán</td>
+                        <td class="text-right">@Model.PaymentFeeAmountString</td>
+                    </tr>
+                    <tr>
+                        <td>Tổng đơn đặt hàng</td>
+                        <td class="text-right"><strong>@Model.OrderTotalString</strong></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

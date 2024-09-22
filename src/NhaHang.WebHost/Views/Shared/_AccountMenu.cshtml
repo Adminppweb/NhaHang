@@ -1,0 +1,13 @@
+﻿@using NhaHang.Module.Core.Models
+@using NhaHang.Module.Core.Extensions
+
+@inject IWorkContext WorkContext
+@inject SignInManager<User> SignInManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <h5 class="title-account">Trang tài khoản</h5>
+    <p>Xin chào, <span style="color: #dd0115;">@((await WorkContext.GetCurrentUser()).FullName)</span>&nbsp;!</p>                
+}
+

@@ -1,0 +1,16 @@
+﻿@model IList<NhaHang.Module.Customers.Areas.Customers.ViewModels.EvaluateThumbnail>
+
+@if (Model.Any())
+{
+    int delay = 0;
+    int delayIncrement = 200;
+    @foreach (var evaluate in Model)
+    {
+        <div data-aos="zoom-in-right" data-aos-duration="@delay" class="item item-@evaluate.LinkImage">
+            <figure class="image-block">
+                <img src="@evaluate.ThumbnailUrl" alt="@evaluate.Name">
+            </figure>
+        </div>
+        delay += delayIncrement;
+    }
+}

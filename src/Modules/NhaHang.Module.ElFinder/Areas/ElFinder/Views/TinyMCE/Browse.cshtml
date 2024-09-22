@@ -1,0 +1,91 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/_content/NhaHang.Module.ElFinder/lib/elfinder/css/theme.css" />
+    <link rel="stylesheet" href="~/_content/NhaHang.Module.ElFinder/lib/elfinder/css/theme-gray.css" />
+    <link rel="stylesheet" href="~/_content/NhaHang.Module.ElFinder/lib/elfinder/css/elfinder.min.css" />
+</head>
+<body>
+
+    <div id="elfinder"></div>
+    <script src="~/_content/NhaHang.Module.ElFinder/jquery/jquery-3.7.1.js"></script>
+    <script src="~/_content/NhaHang.Module.ElFinder/jquery/jquery-ui-1.13.2.js"></script>
+    <script src="~/_content/NhaHang.Module.ElFinder/js/elfinder.min.js"></script>
+    <script src="~/_content/NhaHang.Module.ElFinder/js/i18n/elfinder.vi.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            var myCommands = elFinder.prototype._options.commands;
+            var disabled = ['extract', 'archive', 'resize', 'help', 'select'];
+            $.each(disabled, function (i, cmd) {
+                var idx = $.inArray(cmd, myCommands);
+                if (idx !== -1) {
+                    myCommands.splice(idx, 1);
+                }
+            });
+            var options = {
+                baseUrl: '/_content/NhaHang.Module.ElFinder/js/',
+                url: '/el-finder/file-system/connector', 
+                lang: 'vi',
+                rememberLastDir: false,
+                commands: myCommands,
+                uiOptions: {
+                    toolbar: [
+                        ['back', 'forward'],
+                        ['reload'],
+                        ['home', 'up'],
+                        ['mkdir', 'mkfile', 'upload'],
+                        ['open', 'download'],
+                        ['undo', 'redo'],
+                        ['info'],
+                        ['quicklook'],
+                        ['copy', 'cut', 'paste'],
+                        ['rm'],
+                        ['duplicate', 'rename', 'edit'],
+                        ['selectall', 'selectnone', 'selectinvert'],
+                        ['view', 'sort']
+                    ],
+                    cwd: {
+                        listView: {
+                            columns: ['name', 'size', 'date', 'kind'],
+                            iconsView: true
+                        },
+                        tmbSize: 48 
+                    }
+                },
+                themes: {
+
+                    'mt-light': 'https://robinn1.github.io/elFinder-Material-Theme/manifests/light.json'
+                },
+                getFileCallback: function (file, fm) {
+                    window.parent.postMessage({
+                        mceAction: {
+                            file: file
+                        }
+                    }, '*');
+                },
+                handlers: {
+                    init: function (event, elfinderInstance) {
+                        elfinderInstance.exec('view', 'icons');
+                    },
+                    tmb: function (event, elfinderInstance) {
+                        console.log('Thumbnail loaded:', event.data);
+                    }
+                },
+                width: '100%', 
+                height: 900 
+            };
+
+            $('#elfinder').elfinder(options).elfinder('instance');
+        });
+    </script>
+
+
+</body>
+</html>

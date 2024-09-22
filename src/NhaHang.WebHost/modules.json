@@ -1,0 +1,92 @@
+[
+  {
+    "id": "NhaHang.Module.Catalog",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.Contacts",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.Core",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.Customers",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.DinkToPdf",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.ElFinder",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.EmailSenderSmtp",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.Expenditure",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.Inventory",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.Localization",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.Orders",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.PaymentCoD",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.Payments",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.POS",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.Pricing",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.ShoppingCart",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.Staff",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  },
+  {
+    "id": "NhaHang.Module.StorageLocal",
+    "isBundledWithHost": true,
+    "version": "1.0.0"
+  }
+]

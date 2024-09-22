@@ -1,0 +1,84 @@
+﻿
+<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0n" ng-if="!vm.isEditMode">
+                {{::vm.translate.get('Create Product Option')}}
+            </h1>
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0" ng-if="vm.isEditMode">
+                {{::vm.translate.get('Edit Product Option')}}
+            </h1>
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <li class="breadcrumb-item text-muted">
+                    <a href="admin" class="text-muted text-hover-primary">{{::vm.translate.get('Home')}}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    <a href="javascript:;" class="text-muted text-hover-primary">
+                        {{::vm.translate.get('Catalog')}}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    <a href="javascript:;" class="text-muted text-hover-primary">
+                        {{::vm.translate.get('Product Option')}}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted" ng-if="!vm.isEditMode">
+                    {{::vm.translate.get('Create Product Option')}}
+                </li>
+                <li class="breadcrumb-item text-muted" ng-if="vm.isEditMode">
+                    {{::vm.translate.get('Edit Product Option')}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container container-xxl">
+        <div class="card card-flush py-4">
+            <div class="card-body pt-10">
+                <form name="productOptionForm" class="form-horizontal">
+                    <div class="alert alert-danger d-flex align-items-center p-5" ng-show="vm.validationErrors">
+                        <i class="ki-outline ki-call fs-2hx text-danger me-4"></i>
+                        <div class="d-flex flex-column">
+                            <h4 class="mb-1 text-danger" ng-repeat="error in vm.validationErrors">{{error}}</h4>
+                        </div>
+                    </div>
+                    <div class="mb-10 fv-row">
+                        <div class="row fv-row mb-7">
+                            <div class="col-md-2">
+                                <label class="fs-6 fw-semibold required form-label mt-2">
+                                    {{::vm.translate.get('Name')}}
+                                </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input name="name" ng-model="vm.productOption.name" placeholder="{{::vm.translate.get('Name')}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-6"></div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 text-center">
+                                <button class="btn btn-primary" ng-disabled="productOptionForm.$invalid" ng-click="vm.save()">
+                                    <span class="indicator-label" ng-hide="vm.showProgress">{{::vm.translate.get('Save Changes')}}</span>
+                                    <span ng-show="vm.showProgress">
+                                        {{::vm.translate.get('Please wait...')}}
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+                                <button ui-sref="product-option" class="btn btn-light-danger"><i class="la la-close mr-1"></i>{{::vm.translate.get('Cancel')}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

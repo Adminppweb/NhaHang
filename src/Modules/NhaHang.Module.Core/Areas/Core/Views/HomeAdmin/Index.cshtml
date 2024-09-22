@@ -1,0 +1,489 @@
+﻿@using System.Globalization
+@using System.IO
+@using Microsoft.Extensions.Configuration
+@using Newtonsoft.Json
+@using NhaHang.Infrastructure
+@using NhaHang.Infrastructure.Data
+@using NhaHang.Infrastructure.Localization
+@using NhaHang.Module.Core.Extensions
+@inject IWorkContext WorkContext
+@inject IConfiguration Config
+@inject IRepositoryWithTypedId<Culture, string> CultureRepository
+@{
+	Layout = null;
+	var assetBundling = Config.GetValue<bool>("Global.AssetBundling");
+	var defaultCulture = Config.GetValue<string>("Global.DefaultCultureAdminUI") ?? Config.GetValue<string>("Global.DefaultCultureUI");
+	var cultures = CultureRepository.Query().Where(x => x.Id != defaultCulture).Select(x => $"\"{x.Id}\"").ToArray();
+}
+
+
+<!DOCTYPE html>
+<html class="h-full" data-theme="true" data-theme-mode="light" lang="en" ng-app="simplAdmin">
+<head>
+    <title>Admin - @Localizer["Website system administration"] </title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Quản trị hệ thống website, được phát triển trên nền tảng Asp.Net Core" />
+    <meta name="keywords" content="Quản trị hệ thống website, được phát triển trên nền tảng Asp.Net Core" />
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Admin - Quản trị hệ thống website" />
+    <meta property="og:url" content="" />
+    <meta property="og:site_name" content="webhcm.com.vn" />
+    <link rel="canonical" href="" />
+    <link href="~/media/logo/logo_dark.png" type="image/x-icon" rel="shortcut icon" />
+    <meta content="~/media/logo/logo_dark.pngg" property="og:image" />
+    <link href="~/media/logo/logo_dark.png" rel="apple-touch-icon" sizes="180x180" />
+    <link href="~/media/logo/logo_dark.png" rel="icon" sizes="32x32" type="image/png" />
+    <link href="~/media/logo/logo_dark.png" rel="icon" sizes="16x16" type="image/png" />
+    <link href="~/media/logo/logo_dark.png" rel="shortcut icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="~/library-admin/vendors/apexcharts/apexcharts.css" rel="stylesheet"/>
+  <link href="~/library-admin/vendors/keenicons/styles.bundle.css" rel="stylesheet"/>
+  <link href="~/library-admin/css/styles.css" rel="stylesheet"/>
+    <!--end::Global Stylesheets Bundle-->
+    <link simpl-append-version="true" rel="stylesheet" href="~/lib/angular-material/angular-material.css" />
+    <link simpl-append-version="true" rel="stylesheet" href="~/lib/toastr/build/toastr.min.css" />
+    <link simpl-append-version="true" rel="stylesheet" href="~/lib/angular-ui-tree/angular-ui-tree.min.css" />
+    <link simpl-append-version="true" rel="stylesheet" href="~/lib/angular-bootstrap-colorpicker/css/colorpicker.min.css" />
+    <link simpl-append-version="true" rel="stylesheet" href="~/lib/flags/flags.min.css" />
+    <link simpl-append-version="true" rel="stylesheet" href="~/_content/NhaHang.Module.Core/admin/admin-core.css" />
+    <link rel="stylesheet" href="~/_content/NhaHang.Module.ElFinder/css/theme.min.css" />
+    <link rel="stylesheet" href="~/_content/NhaHang.Module.ElFinder/jquery/jquery-ui-1.13.2.css" />
+    <link rel="stylesheet" href="~/_content/NhaHang.Module.ElFinder/css/elfinder.full.min.css" />
+    <link rel="stylesheet" href="~/_content/NhaHang.Module.ElFinder/css/theme.min.css" />
+    <link rel="stylesheet" href="~/_content/NhaHang.Module.ElFinder/css/elfinder.min.css" />
+    <script>
+        window.Global_AssetVersion = "@Config["Global.AssetVersion"]";
+        window.Global_EnableCultures = [@Html.Raw(string.Join(",", cultures))];
+    </script>
+    <script simpl-append-version="true" src="~/lib/nouislider/distribute/nouislider.js"></script>
+    <script simpl-append-version="true" src="~/js/shared/common.js"></script>
+    <script simpl-append-version="true" src="~/js/shared/BaseUtility.js"></script>
+    <script>
+        var baseUtility = new BaseUtility();
+        baseUtility.initial();
+    </script>
+    <script simpl-append-version="true" src="~/lib/tinymce/tinymce.min.js"></script>
+    <link type="text/css" simpl-append-version="true" src="~/lib/tinymce/skins/ui/tinymce-5/skin.min.css" />
+
+    <script src="~/_content/NhaHang.Module.ElFinder/jquery/jquery-ui-1.13.2.js"></script>
+
+    <script simpl-append-version="true" src="~/js/shared/translations.js"></script>
+    <script simpl-append-version="true" src="~/lib/angular/angular.js"></script>
+    <script simpl-append-version="true" src="~/lib/angular-ui-router/angular-ui-router.js"></script>
+    <script simpl-append-version="true" src="~/lib/angular-animate/angular-animate.js"></script>
+    <script simpl-append-version="true" src="~/lib/angular-aria/angular-aria.js"></script>
+    <script simpl-append-version="true" src="~/lib/angular-messages/angular-messages.js"></script>
+    <script simpl-append-version="true" src="~/lib/angular-material/angular-material.js"></script>
+    <script simpl-append-version="true" src="~/lib/angular-smart-table/dist/smart-table.js"></script>
+    <script simpl-append-version="true" src="~/lib/ng-file-upload/dist/ng-file-upload.js"></script>
+    <script simpl-append-version="true" src="~/lib/angular-bootstrap/ui-bootstrap.js"></script>
+    <script simpl-append-version="true" src="~/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script simpl-append-version="true" src="~/lib/bootstrap-ui-datetime-picker/datetime-picker.js"></script>
+    <script simpl-append-version="true" src="~/lib/bootstrap-ui-datetime-picker/datetime-picker.tpls.js"></script>
+    <script simpl-append-version="true" src="~/lib/angular-ui-tinymce/tinymce.min.js"></script>
+    <script simpl-append-version="true" src="~/lib/angular-ui-tree/angular-ui-tree.js"></script>
+    <script simpl-append-version="true" src="~/lib/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
+    <script simpl-append-version="true" src="~/lib/toastr/build/toastr.min.js"></script>
+    <script simpl-append-version="true" src="~/js/bootbox/bootbox.js"></script>
+    <script simpl-append-version="true" src="~/lib/i18n/angular-locale_@(CultureInfo.CurrentCulture.Name.ToLower()).js"></script>
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.Core/admin/common/slugify.js"></script>
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.Core/admin/common/simplUtil.js"></script>
+    <script>
+        angular.module('simplAdmin', [
+            'ui.router',
+            'ngMaterial',
+            'ngMessages',
+            'smart-table',
+            'ngFileUpload',
+            'ui.bootstrap',
+            'ui.bootstrap.datetimepicker',
+            'ui.tree',
+            'ui.tinymce',
+            'colorpicker.module',
+            'simplAdmin.common',
+            'simplAdmin.elfinder',
+        @foreach (var angularModule in GlobalConfiguration.AngularModules)
+        {
+            <text>'@angularModule', </text>
+        }
+            'simplAdmin.dashboard'
+        ]);
+    </script>
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.Core/admin/admin-app-config.js"></script>
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.Core/admin/common/common.js"></script>
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.Core/admin/common/st-date-range.js"></script>
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.Core/admin/common/translation-service.js"></script>
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.Core/admin/common/page-select.js"></script>
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.Core/admin/common/tinymce.service.js"></script>
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.Core/admin/common/file-upload.js"></script>
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.Core/admin/dashboard/dashboard.module.js"></script>
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.ElFinder/admin/elfinder/elfinder.module.js"></script>
+
+    @foreach (var module in GlobalConfiguration.Modules)
+    {
+        var resourceStream = module.Assembly.GetManifestResourceStream($"{module.Id}.bundleconfig.json");
+        if (resourceStream == null)
+        {
+            continue;
+        }
+        using (var reader = new StreamReader(resourceStream))
+        {
+            string content = reader.ReadToEnd();
+            dynamic bundleConfigs = JsonConvert.DeserializeObject(content);
+            foreach (var configItems in bundleConfigs)
+            {
+                string outputFileName = configItems.outputFileName;
+                if (outputFileName.Contains("admin") && outputFileName.EndsWith(".js"))
+                {
+                    if (assetBundling)
+                    {
+                        <script simpl-append-version="true" src="~/_content/@module.Id/@outputFileName.Replace("wwwroot/", "")"></script>
+                    }
+                    else
+                    {
+                        foreach (string inputFile in configItems.inputFiles)
+                        {
+                            <script simpl-append-version="true" src="~/_content/@module.Id/@inputFile.Replace("wwwroot/", "")"></script>
+                        }
+                    }
+                }
+            }
+        }
+    }
+    <script type="text/javascript" src="~/_content/NhaHang.Module.ElFinder/lib/elfinder/js/elfinder.full.js"></script>
+    <script type="text/javascript" src="~/_content/NhaHang.Module.ElFinder/lib/elfinder/js/i18n/elfinder.vi.js"></script>
+    <script type="text/javascript" src="~/_content/NhaHang.Module.ElFinder/lib/elfinder/ui/button.js"></script>
+</head>
+<body class="antialiased flex h-full text-base text-gray-700 [--tw-page-bg:#f6f6f6] [--tw-page-bg-dark:var(--tw-coal-200)] [--tw-content-bg:var(--tw-light)] [--tw-content-bg-dark:var(--tw-coal-500)] [--tw-header-height:58px] [--tw-sidebar-width:58px] [--tw-navbar-height:56px] bg-[--tw-page-bg] dark:bg-[--tw-page-bg-dark]">
+    <!-- Theme Mode -->
+    <script>
+        const defaultThemeMode = 'light'; // light|dark|system
+        let themeMode;
+
+        if (document.documentElement) {
+            if (localStorage.getItem('theme')) {
+                themeMode = localStorage.getItem('theme');
+            } else if (document.documentElement.hasAttribute('data-theme-mode')) {
+                themeMode = document.documentElement.getAttribute('data-theme-mode');
+            } else {
+                themeMode = defaultThemeMode;
+            }
+
+            if (themeMode === 'system') {
+                themeMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            document.documentElement.classList.add(themeMode);
+        }
+    </script>
+    <div class="flex flex-col grow">
+        <header class="flex items-center fixed z-10 top-0 left-0 right-0 shrink-0 h-[--tw-header-height] bg-[--tw-page-bg] dark:bg-[--tw-page-bg-dark]" id="header">
+            <!-- Container -->
+            <div class="container-fluid flex justify-between items-stretch px-5 lg:ps-0 lg:gap-4" id="header_container">
+                <div class="flex items-center">
+                    <div class="flex items-center justify-center lg:w-[--tw-sidebar-width] gap-2 shrink-0">
+                        <button class="btn btn-icon btn-light btn-clear btn-sm -ms-2 lg:hidden" data-drawer-toggle="#sidebar">
+                            <i class="ki-filled ki-menu">
+                            </i>
+                        </button>
+                        <a href="./admin">
+                            <img class="dark:hidden min-h-[24px]" src="~/media/logo/logo-mini.png" />
+                            <img class="hidden dark:block min-h-[24px]" src="media/logo/logo-mini.png" />
+                        </a>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="menu menu-default" data-menu="true"></div>
+                    </div>
+                </div>
+                <!-- End of Logo -->
+                <!-- Topbar -->
+                <div class="flex items-center gap-1.5 lg:gap-3.5">
+                    <div class="flex items-center gap-1.5"></div>
+                    <div class="menu" data-menu="true">
+                        <div class="menu-item" data-menu-item-offset="0px, 9px" data-menu-item-placement="bottom-end" data-menu-item-trigger="click|lg:click">
+                            <div class="menu-toggle btn btn-icon rounded-full">
+                                <img class="size-8 rounded-full justify-center border border-gray-500 shrink-0" src="~/media/user/user.png" alt="User">
+                                </img>
+                            </div>
+                            <div class="menu-dropdown menu-default light:border-gray-300 w-full max-w-[250px]">
+                                <div class="flex items-center justify-between px-5 py-1.5 gap-1.5">
+                                    <div class="flex items-center gap-2">
+                                        <img class="size-9 rounded-full border-2 border-success" src="~/media/user/user.png" alt="user" />
+                                        <div class="flex flex-col gap-1.5">
+                                            <span class="text-sm text-gray-800 font-semibold leading-none">
+                                        @((await WorkContext.GetCurrentUser()).FullName)
+                                            </span>
+                                            <a class="text-xs text-gray-600 hover:text-primary font-medium leading-none">
+                                        @await WorkContext.GetCurrentUser()
+                                            </a>
+                                        </div>
+                                        </img>
+                                    </div>
+                                    <span class="badge badge-xs badge-primary badge-outline">
+                                        Pro
+                                    </span>
+                                </div>
+                                <div class="menu-separator"></div>
+                                <div class="flex flex-col">
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="~/user/info">
+                                            <span class="menu-icon">
+                                                <i class="ki-filled ki-badge">
+                                                </i>
+                                            </span>
+                                            <span class="menu-title">
+                                                Thông tin tài khoản
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="~/user/change-password">
+                                            <span class="menu-icon">
+                                                <i class="ki-filled ki-profile-circle">
+                                                </i>
+                                            </span>
+                                            <span class="menu-title">
+                                                Thay đổi mật khẩu
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="~/user/settings">
+                                            <span class="menu-icon">
+                                                <i class="ki-filled ki-message-programming">
+                                                </i>
+                                            </span>
+                                            <span class="menu-title">
+                                               Cài đặt
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="menu-separator">
+                                </div>
+                                <div class="flex flex-col">
+                                    <div class="menu-item px-4 py-1.5">
+                                        <form asp-area="Core" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+                                            <button type="submit" class="btn btn-sm btn-light justify-center">@Localizer["Sign Out"]</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Topbar -->
+            </div>
+            <!-- End of Container -->
+        </header>
+        <div class="wrapper flex grow flex-col pt-[--tw-header-height]">
+            <!-- Sidebar -->
+            <div class="fixed w-[--tw-sidebar-width] lg:top-[--tw-header-height] top-0 bottom-0 z-20 hidden lg:flex flex-col items-stretch shrink-0 group py-3 lg:py-0" data-drawer="true" data-drawer-class="drawer drawer-start top-0 bottom-0" data-drawer-enable="true|lg:false" id="sidebar">
+                <div class="flex grow shrink-0" id="sidebar_content">
+                    <div class="scrollable-y-auto grow gap-2.5 shrink-0 flex items-center flex-col" data-scrollable="true" data-scrollable-height="auto" data-scrollable-offset="0px" data-scrollable-wrappers="#sidebar_content">
+                        <a class="btn btn-icon btn-icon-lg rounded-full size-10 border border-transparent text-gray-600 hover:bg-light hover:text-primary hover:border-gray-300 [.active&amp;]:bg-light [.active&amp;]:text-primary [.active&amp;]:border-gray-300" data-tooltip="" data-tooltip-placement="right" href="html/demo3.html">
+                            <span class="menu-icon">
+                                <i class="ki-filled ki-chart-line-star">
+                                </i>
+                            </span>
+                            <span class="tooltip">
+                                Dashboard
+                            </span>
+                        </a>
+                        <a class="btn btn-icon btn-icon-lg rounded-full size-10 border border-transparent text-gray-600 hover:bg-light hover:text-primary hover:border-gray-300 [.active&amp;]:bg-light [.active&amp;]:text-primary [.active&amp;]:border-gray-300" data-tooltip="" data-tooltip-placement="right" href="html/demo3/public-profile/profiles/default.html">
+                            <span class="menu-icon">
+                                <i class="ki-filled ki-profile-circle">
+                                </i>
+                            </span>
+                            <span class="tooltip">
+                                Profile
+                            </span>
+                        </a>
+                        <a class="btn btn-icon btn-icon-lg rounded-full size-10 border border-transparent text-gray-600 hover:bg-light hover:text-primary hover:border-gray-300 [.active&amp;]:bg-light [.active&amp;]:text-primary [.active&amp;]:border-gray-300 active" data-tooltip="" data-tooltip-placement="right" href="html/demo3/account/home/get-started.html">
+                            <span class="menu-icon">
+                                <i class="ki-filled ki-setting-2">
+                                </i>
+                            </span>
+                            <span class="tooltip">
+                                Account
+                            </span>
+                        </a>
+                        <a class="btn btn-icon btn-icon-lg rounded-full size-10 border border-transparent text-gray-600 hover:bg-light hover:text-primary hover:border-gray-300 [.active&amp;]:bg-light [.active&amp;]:text-primary [.active&amp;]:border-gray-300" data-tooltip="" data-tooltip-placement="right" href="html/demo3/network/get-started.html">
+                            <span class="menu-icon">
+                                <i class="ki-filled ki-users">
+                                </i>
+                            </span>
+                            <span class="tooltip">
+                                Network
+                            </span>
+                        </a>
+                        <a class="btn btn-icon btn-icon-lg rounded-full size-10 border border-transparent text-gray-600 hover:bg-light hover:text-primary hover:border-gray-300 [.active&amp;]:bg-light [.active&amp;]:text-primary [.active&amp;]:border-gray-300" data-tooltip="" data-tooltip-placement="right" href="html/demo3/account/billing/plans.html">
+                            <span class="menu-icon">
+                                <i class="ki-filled ki-security-user">
+                                </i>
+                            </span>
+                            <span class="tooltip">
+                                Plans
+                            </span>
+                        </a>
+                        <a class="btn btn-icon btn-icon-lg rounded-full size-10 border border-transparent text-gray-600 hover:bg-light hover:text-primary hover:border-gray-300 [.active&amp;]:bg-light [.active&amp;]:text-primary [.active&amp;]:border-gray-300" data-tooltip="" data-tooltip-placement="right" href="html/demo3/account/security/security-log.html">
+                            <span class="menu-icon">
+                                <i class="ki-filled ki-messages">
+                                </i>
+                            </span>
+                            <span class="tooltip">
+                                Security Logs
+                            </span>
+                        </a>
+                        <a class="btn btn-icon btn-icon-lg rounded-full size-10 border border-transparent text-gray-600 hover:bg-light hover:text-primary hover:border-gray-300 [.active&amp;]:bg-light [.active&amp;]:text-primary [.active&amp;]:border-gray-300" data-tooltip="" data-tooltip-placement="right" href="html/demo3/account/notifications.html">
+                            <span class="menu-icon">
+                                <i class="ki-filled ki-shop">
+                                </i>
+                            </span>
+                            <span class="tooltip">
+                                Notifications
+                            </span>
+                        </a>
+                        <a class="btn btn-icon btn-icon-lg rounded-full size-10 border border-transparent text-gray-600 hover:bg-light hover:text-primary hover:border-gray-300 [.active&amp;]:bg-light [.active&amp;]:text-primary [.active&amp;]:border-gray-300" data-tooltip="" data-tooltip-placement="right" href="html/demo3/account/members/roles.html">
+                            <span class="menu-icon">
+                                <i class="ki-filled ki-cheque">
+                                </i>
+                            </span>
+                            <span class="tooltip">
+                                ACL
+                            </span>
+                        </a>
+                        <a class="btn btn-icon btn-icon-lg rounded-full size-10 border border-transparent text-gray-600 hover:bg-light hover:text-primary hover:border-gray-300 [.active&amp;]:bg-light [.active&amp;]:text-primary [.active&amp;]:border-gray-300" data-tooltip="" data-tooltip-placement="right" href="html/demo3/account/api-keys.html">
+                            <span class="menu-icon">
+                                <i class="ki-filled ki-code">
+                                </i>
+                            </span>
+                            <span class="tooltip">
+                                API Keys
+                            </span>
+                        </a>
+                        <a class="btn btn-icon btn-icon-lg rounded-full size-10 border border-transparent text-gray-600 hover:bg-light hover:text-primary hover:border-gray-300 [.active&amp;]:bg-light [.active&amp;]:text-primary [.active&amp;]:border-gray-300" data-tooltip="" data-tooltip-placement="right" href="https://keenthemes.com/metronic/tailwind/docs/">
+                            <span class="menu-icon">
+                                <i class="ki-filled ki-question">
+                                </i>
+                            </span>
+                            <span class="tooltip">
+                                Docs
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Sidebar -->
+            <div class="flex items-stretch lg:fixed z-5 top-[--tw-header-height] start-[--tw-sidebar-width] end-5 h-[--tw-navbar-height] mx-5 lg:mx-0 bg-[--tw-page-bg] dark:bg-[--tw-page-bg-dark]">
+                <div class="rounded-t-xl border border-gray-400 dark:border-gray-200 border-b-gray-300 dark:border-b-gray-200 bg-[--tw-content-bg] dark:bg-[--tw-content-bg-dark] flex items-stretch grow">
+                    <!-- Container -->
+                    <div class="container-fluid flex justify-between items-stretch gap-5">
+                        <div class="grid items-stretch">
+                            <div class="scrollable-x-auto flex items-stretch">
+                                <div class="menu gap-5 lg:gap-7.5" data-menu="true">
+                                    <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-gray-900 menu-item-here:border-b-gray-900" ui-sref-active="active">
+                                        <a class="menu-link gap-1.5" tabindex="0" ui-sref="dashboard">
+                                            <span class="menu-title text-nowrap text-sm text-gray-800 menu-item-active:text-gray-900 menu-item-active:font-medium menu-item-here:text-gray-900 menu-item-here:font-medium menu-item-show:text-gray-900 menu-link-hover:text-gray-900">
+                                                Thống kê
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-gray-900 menu-item-here:border-b-gray-900" ui-sref-active="active">
+                                        <a class="menu-link gap-1.5" tabindex="0" ui-sref="order">
+                                            <span class="menu-title text-nowrap text-sm text-gray-800 menu-item-active:text-gray-900 menu-item-active:font-medium menu-item-here:text-gray-900 menu-item-here:font-medium menu-item-show:text-gray-900 menu-link-hover:text-gray-900">
+                                                Danh sách hóa đơn
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-gray-900 menu-item-here:border-b-gray-900" ui-sref-active="active">
+                                        <div class="menu-link gap-1.5" tabindex="0">
+                                            <span class="menu-title text-nowrap text-sm text-gray-800 menu-item-active:text-gray-900 menu-item-active:font-medium menu-item-here:text-gray-900 menu-item-here:font-medium menu-item-show:text-gray-900 menu-link-hover:text-gray-900">
+                                                Cấu hình tên bàn
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-gray-900 menu-item-here:border-b-gray-900" ui-sref-active="active">
+                                        <div class="menu-link gap-1.5" tabindex="0">
+                                            <span class="menu-title text-nowrap text-sm text-gray-800 menu-item-active:text-gray-900 menu-item-active:font-medium menu-item-here:text-gray-900 menu-item-here:font-medium menu-item-show:text-gray-900 menu-link-hover:text-gray-900">
+                                                Quản lý kho
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-gray-900 menu-item-here:border-b-gray-900" ui-sref-active="active">
+                                        <a class="menu-link gap-2.5"  tabindex="0">
+                                            <span class="menu-title text-nowrap text-sm text-gray-800 menu-item-active:text-gray-900 menu-item-active:font-medium menu-item-here:text-gray-900 menu-item-here:font-medium menu-item-show:text-gray-900 menu-link-hover:text-gray-900">
+                                                Danh sách Order
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-gray-900 menu-item-here:border-b-gray-900" ui-sref-active="active">
+                                        <a class="menu-link gap-2.5" tabindex="0">
+                                            <span class="menu-title text-nowrap text-sm text-gray-800 menu-item-active:text-gray-900 menu-item-active:font-medium menu-item-here:text-gray-900 menu-item-here:font-medium menu-item-show:text-gray-900 menu-link-hover:text-gray-900">
+                                                Cấu hình thực đơn
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-gray-900 menu-item-here:border-b-gray-900" ui-sref-active="active">
+                                        <a class="menu-link gap-2.5" tabindex="0">
+                                            <span class="menu-title text-nowrap text-sm text-gray-800 menu-item-active:text-gray-900 menu-item-active:font-medium menu-item-here:text-gray-900 menu-item-here:font-medium menu-item-show:text-gray-900 menu-link-hover:text-gray-900">
+                                                Quản lý thu chi
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-gray-900 menu-item-here:border-b-gray-900" ui-sref-active="active">
+                                        <a class="menu-link gap-1.5" tabindex="0">
+                                            <span class="menu-title text-nowrap text-sm text-gray-800 menu-item-active:text-gray-900 menu-item-active:font-medium menu-item-here:text-gray-900 menu-item-here:font-medium menu-item-show:text-gray-900 menu-link-hover:text-gray-900">
+                                                Quản lý công
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-gray-900 menu-item-here:border-b-gray-900" ui-sref-active="active">
+                                        <a class="menu-link gap-1.5" tabindex="0">
+                                            <span class="menu-title text-nowrap text-sm text-gray-800 menu-item-active:text-gray-900 menu-item-active:font-medium menu-item-here:text-gray-900 menu-item-here:font-medium menu-item-show:text-gray-900 menu-link-hover:text-gray-900">
+                                                Xem tất cả order
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-gray-900 menu-item-here:border-b-gray-900" ui-sref-active="active">
+                                        <a class="menu-link gap-1.5" tabindex="0">
+                                            <span class="menu-title text-nowrap text-sm text-gray-800 menu-item-active:text-gray-900 menu-item-active:font-medium menu-item-here:text-gray-900 menu-item-here:font-medium menu-item-show:text-gray-900 menu-link-hover:text-gray-900">
+                                                Cấu hình kiểu thu chi
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-gray-900 menu-item-here:border-b-gray-900" ui-sref-active="active">
+                                        <a class="menu-link gap-1.5" tabindex="0">
+                                            <span class="menu-title text-nowrap text-sm text-gray-800 menu-item-active:text-gray-900 menu-item-active:font-medium menu-item-here:text-gray-900 menu-item-here:font-medium menu-item-show:text-gray-900 menu-link-hover:text-gray-900">
+                                                Quản lý khách hàng
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-gray-900 menu-item-here:border-b-gray-900" ui-sref-active="active">
+                                        <a class="menu-link gap-1.5" tabindex="0">
+                                            <span class="menu-title text-nowrap text-sm text-gray-800 menu-item-active:text-gray-900 menu-item-active:font-medium menu-item-here:text-gray-900 menu-item-here:font-medium menu-item-show:text-gray-900 menu-link-hover:text-gray-900">
+                                                Thông báo bếp
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Container -->
+                </div>
+            </div>
+            <!-- End of Navbar -->
+            <main class="flex flex-col grow rounded-b-xl bg-[--tw-content-bg] dark:bg-[--tw-content-bg-dark] border-x border-b border-gray-400 dark:border-gray-200 lg:mt-[--tw-navbar-height] mx-5 lg:ms-[--tw-sidebar-width] lg:me-5 pt-7 mb-5" role="content">
+                    <div ui-view></div>
+            </main>
+            <!-- End of Main -->
+        </div>
+    </div>
+    <script src="~/library-admin/js/core.bundle.js"></script>
+    <script src="~/library-admin/vendors/apexcharts/apexcharts.min.js"></script>
+    <script src="~/library-admin/js/widgets/general.js"> </script>
+</body>
+</html>

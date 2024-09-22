@@ -1,0 +1,91 @@
+﻿@model RegisterViewModel
+@inject SignInManager<User> SignInManager
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.OpenIdConnect
+@{
+    Layout = null;
+}
+
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <title>Đăng ký] - GUNSAN</title>
+    <meta name="description" content="GUNSAN">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="~/media/logo/faricon.png" type="image/x-icon" rel="shortcut icon" />
+    <link href="~/_content/Webhcm.Module.Core/css/login.css" rel="stylesheet" type="text/css">
+    <link href="~/_content/Webhcm.Module.Core/css/style.bundle.css" rel="stylesheet" type="text/css">
+
+</head>
+<body class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable">
+    <div class="d-flex flex-column flex-root">
+        <div class="login login-4 login-signin-on d-flex flex-row-fluid">
+            <div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat" style="background-image: url('/media/bg/bg-3.jpg');">
+                <div class="login-form text-center p-7 position-relative">
+                    <div class="d-flex flex-center mb-5">
+                        <a href="/">
+                            <img src="~/media/logo/logo-ac.png" class="max-h-150px" alt="logo">
+                        </a>
+                    </div>
+                    <div>
+                        <div class="mb-10">
+                            <h2>Đăng ký]</h2>
+                            <div class="text-muted font-weight-bold">@Localizer["Create a new account."]</div>
+                        </div>
+                        <form class="form fv-plugins-bootstrap fv-plugins-framework" asp-area="Core" asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" role="form">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group mb-5 fv-plugins-icon-container">
+                                <input asp-for="Email" placeholder="@Localizer["Email"]" class="form-control h-auto form-control-solid py-4 px-8" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-5 fv-plugins-icon-container">
+                                <input asp-for="FullName" placeholder="@Localizer["Full name"]" class="form-control h-auto form-control-solid py-4 px-8" />
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-5 fv-plugins-icon-container">
+                                <input asp-for="Password" placeholder="@Localizer["Password"]" class="form-control h-auto form-control-solid py-4 px-8" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-5 fv-plugins-icon-container">
+                                <input asp-for="ConfirmPassword" placeholder="@Localizer["Confirm password"]" class="form-control h-auto form-control-solid py-4 px-8" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                            <div class="form-group d-flex flex-wrap flex-center mt-10">
+                                <button type="submit" class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-2">Đăng ký]</button>
+                                <a asp-area="Core" asp-controller="Account" asp-action="Login" class="btn btn-light-danger font-weight-bold px-9 py-4 my-3 mx-2">@Localizer["Cancel"]</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="separator separator-solid my-4"></div>
+                    @{
+                        var schemes = await SignInManager.GetExternalAuthenticationSchemesAsync();
+                        var loginProviders = schemes.Where(scheme => scheme.DisplayName != OpenIdConnectDefaults.AuthenticationScheme).ToList();
+                        if (loginProviders.Count == 0)
+                        {
+                            <div>
+                                <p>
+                                    There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                    for details on setting up this ASP.NET application to support logging in via external services.
+                                </p>
+                            </div>
+                        }
+                        else
+                        {
+                            <form asp-area="Core" asp-controller="Account" asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                                <div>
+                                    <p>
+                                        @foreach (var provider in loginProviders)
+                                        {
+                                            <button type="submit" class="btn btn-light-primary btn-block" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.Name</button>
+                                        }
+                                    </p>
+                                </div>
+                            </form>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

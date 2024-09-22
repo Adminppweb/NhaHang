@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName></SccProjectName>
+    <SccProvider></SccProvider>
+    <SccAuxPath></SccAuxPath>
+    <SccLocalPath></SccLocalPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\admin\localization.module.js" />
+    <None Include="wwwroot\admin\localization\localization-form.js" />
+    <None Include="wwwroot\admin\localization\localization-service.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NhaHang.Module.Core\NhaHangg.Module.Core.csproj" />
+  </ItemGroup>
+
+</Project>

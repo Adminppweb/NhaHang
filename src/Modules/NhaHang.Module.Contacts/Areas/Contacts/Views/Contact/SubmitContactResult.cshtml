@@ -1,0 +1,75 @@
+﻿@inject IConfiguration Config
+@{ ViewData["Title"] = Localizer["Contact Us"]; }
+
+
+@section head {
+    <link href="./assets/css/contact_style.css" rel="stylesheet" />
+}
+
+<div class="breadcrumb_background margin-bottom-40">
+    <div class="title_full">
+        <section class="bread-crumb">
+            <span class="crumb-border"></span>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 a-left">
+                        <ul class="breadcrumb">
+                            <li class="home">
+                                <a href="~/" title="@Localizer["Home"]">
+                                    <span>@Localizer["Home"]</span>
+                                </a>
+                                <span class="mr_lr">&nbsp;/&nbsp;</span>
+                            </li>
+
+                            <li>
+                                <strong>
+                                    <span>@Localizer["Contact Us"] </span>
+                                </strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="page_contact article-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-xs-12">
+                <div class="product_sale">
+                    <div class="product_sale_title">
+                        <h1>
+                            <span>@Localizer["Contact Us"]</span>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="page-login page_cotact">
+                    <h1 class="title-head-contact a-left hidden"><span>Thông tin liên hệ</span></h1>
+                    <div id="pagelogin">
+                        <div class="form-signup clearfix">
+                            <div class="row" style="color:green">
+                                <h1>@Localizer["THANK YOU FOR SUBSCRIBING!"]</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="select_mapss col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="maps_iframe">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.920135864553!2d106.78618617478018!3d10.893674089262312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d8eb50a40909%3A0x7e669d9fa63389ba!2zNzAgS2h1IFBo4buRIMSQw7RuZyBBLCDEkMO0bmcgSG_DoCwgRMSpIEFuLCBCw6xuaCBExrDGoW5nLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1694764563350!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.Contacts/init-google-map.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=@Config["GoogleAppKey"]&callback=initMap"></script>
+}

@@ -1,0 +1,116 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName></SccProjectName>
+    <SccProvider></SccProvider>
+    <SccAuxPath></SccAuxPath>
+    <SccLocalPath></SccLocalPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <Content Remove="Controllers\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <None Remove="Controllers\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>	
+    <None Include="Areas\Core\Views\Account\AccessDenied.cshtml" />
+    <None Include="Areas\Core\Views\Account\ConfirmEmail.cshtml" />
+    <None Include="Areas\Core\Views\Account\ExternalLoginConfirmation.cshtml" />
+    <None Include="Areas\Core\Views\Account\ExternalLoginFailure.cshtml" />
+    <None Include="Areas\Core\Views\Account\ForgotPassword.cshtml" />
+    <None Include="Areas\Core\Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <None Include="Areas\Core\Views\Account\Lockout.cshtml" />
+    <None Include="Areas\Core\Views\Account\Login.cshtml" />
+    <None Include="Areas\Core\Views\Account\Register.cshtml" />
+    <None Include="Areas\Core\Views\Account\ResetPassword.cshtml" />
+    <None Include="Areas\Core\Views\Account\ResetPasswordConfirmation.cshtml" />
+    <None Include="Areas\Core\Views\Account\SendCode.cshtml" />
+    <None Include="Areas\Core\Views\Account\VerifyCode.cshtml" />
+    <None Include="Areas\Core\Views\Dashboard\HomeTemplate.cshtml" />
+    <None Include="Areas\Core\Views\EmailTemplate\AccountRegisteredConfirmationEmailModel.cshtml" />
+    <None Include="Areas\Core\Views\HomeAdmin\Index.cshtml" />
+    <None Include="Areas\Core\Views\Home\Index.cshtml" />
+    <None Include="Areas\Core\Views\Manage\ChangePassword.cshtml" />
+    <None Include="Areas\Core\Views\Manage\Index.cshtml" />
+    <None Include="Areas\Core\Views\Manage\ManageLogins.cshtml" />
+    <None Include="Areas\Core\Views\Manage\SetPassword.cshtml" />
+    <None Include="Areas\Core\Views\Manage\UserInfo.cshtml" />
+    <None Include="Areas\Core\Views\Manage\UserSettings.cshtml" />
+    <None Include="Areas\Core\Views\Shared\Components\DefaultShippingAddress\Default.cshtml" />
+    <None Include="Areas\Core\Views\Shared\Components\Pagination\Default.cshtml" />
+    <None Include="Areas\Core\Views\Shared\_WidgetInstances.cshtml" />
+    <None Include="Areas\Core\Views\TestDevExtreme\Index.cshtml" />
+    <None Include="Areas\Core\Views\UserAddress\Create.cshtml" />
+    <None Include="Areas\Core\Views\UserAddress\Edit.cshtml" />
+    <None Include="Areas\Core\Views\UserAddress\List.cshtml" />
+    <None Include="Areas\Core\Views\UserAddress\_AddressForm.cshtml" />
+    <None Include="Areas\Core\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Core\Views\_ViewStart.cshtml" />
+    <None Include="Views\TestDevExtreme1\Index.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\admin\admin-app-config.js" />
+    <None Include="wwwroot\admin\common\common.js" />
+    <None Include="wwwroot\admin\common\exception.js" />
+    <None Include="wwwroot\admin\common\logger.js" />
+    <None Include="wwwroot\admin\common\page-select.js" />
+    <None Include="wwwroot\admin\common\simplUtil.js" />
+    <None Include="wwwroot\admin\common\slugify.js" />
+    <None Include="wwwroot\admin\common\st-date-range.js" />
+    <None Include="wwwroot\admin\common\translation-service.js" />
+    <None Include="wwwroot\admin\configuration\configuration-service.js" />
+    <None Include="wwwroot\admin\configuration\configuration.js" />
+    <None Include="wwwroot\admin\core.module.js" />
+    <None Include="wwwroot\admin\countries\country-form.js" />
+    <None Include="wwwroot\admin\countries\country-list.js" />
+    <None Include="wwwroot\admin\countries\country-service.js" />
+    <None Include="wwwroot\admin\customergroups\customergroup-form.js" />
+    <None Include="wwwroot\admin\customergroups\customergroup-list.js" />
+    <None Include="wwwroot\admin\customergroups\customergroup-service.js" />
+    <None Include="wwwroot\admin\dashboard\dashboard.module.js" />
+    <None Include="wwwroot\admin\district\district-form.js" />
+    <None Include="wwwroot\admin\district\district-list.js" />
+    <None Include="wwwroot\admin\district\district-service.js" />
+    <None Include="wwwroot\admin\information\information-service.js" />
+    <None Include="wwwroot\admin\information\information.js" />
+    <None Include="wwwroot\admin\stateprovince\state-province-form.js" />
+    <None Include="wwwroot\admin\stateprovince\state-province-list.js" />
+    <None Include="wwwroot\admin\stateprovince\state-province-service.js" />
+    <None Include="wwwroot\admin\themes\online-theme-list.js" />
+    <None Include="wwwroot\admin\themes\theme-details.js" />
+    <None Include="wwwroot\admin\themes\theme-list.js" />
+    <None Include="wwwroot\admin\themes\theme-service.js" />
+    <None Include="wwwroot\admin\user\user-form.js" />
+    <None Include="wwwroot\admin\user\user-list.js" />
+    <None Include="wwwroot\admin\user\user-service.js" />
+    <None Include="wwwroot\admin\widget\widget-instance-list.js" />
+    <None Include="wwwroot\admin\widget\widget-service.js" />
+    <None Include="wwwroot\image\abstract-9.svg" />
+    <None Include="wwwroot\js\Pagination.js" />
+    <None Include="wwwroot\main.js" />
+    <None Include="wwwroot\user-address.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\NhaHang.Infrastructure\NhaHangg.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\admin\core.module.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

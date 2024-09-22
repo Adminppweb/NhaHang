@@ -1,0 +1,101 @@
+﻿@model NhaHang.Module.Core.Areas.Core.ViewModels.UserAddressFormViewModel
+
+@{
+    ViewBag.Title = "Thay đổi địa chỉ";
+}
+@section additionalMeta {
+    <meta name="keywords" content="Thay đổi địa chỉ">
+    <meta name="description" content="Thay đổi địa chỉ">
+    <meta property="og:title" content="@ViewBag.Title">
+    <meta property="og:description" content="Thay đổi địa chỉ">
+    <meta property="og:url" content="~/user/address">
+    <meta property="og:image" content="~/media/logo/logo-ng.png ">
+    <meta property="og:image:alt" content="@ViewBag.Title">
+    <meta name="twitter:title" content="@ViewBag.Title">
+    <meta name="twitter:description" content="Thay đổi địa chỉ">
+    <meta name="twitter:title" content="@ViewBag.Title">
+    <meta name="twitter:description" content="Thay đổi địa chỉ">
+    <meta name="twitter:image" content="~/media/logo/logo-ng.png ">
+    <meta name="twitter:url" content="~/user/address">
+    <meta itemprop="name" content="@ViewBag.Title">
+    <meta itemprop="description" content="Thay đổi địa chỉ">
+    <meta itemprop="image" content="~/media/logo/logo-ng.png ">
+    <meta itemprop="url" content="~/user/address">
+    <link rel="canonical" href="~/user/address" />
+    <link rel="image_src" href="~/media/logo/logo-ng.png " />
+}
+@section head {
+    <link href="~/assets/css/account-style.css" rel="stylesheet" />
+}
+
+<section class="bread-crumb mb-3">
+    <span class="crumb-border"></span>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 a-left">
+                <ul class="breadcrumb m-0 px-0">
+                    <li>
+                        <a href="~/" target="_self"><span>Trang chủ</span></a>
+                        <span class="mr_lr">&nbsp;/&nbsp;</span>
+                    </li>
+                    <li>
+                        <a href="~/user" target="_self"><span>@Localizer["My Account"]</span></a>
+                        <span class="mr_lr">&nbsp;/&nbsp;</span>
+                    </li>
+                    <li>
+                        <a href="~/user/address" target="_self"><span>Sổ địa chỉ</span></a>
+                        <span class="mr_lr">&nbsp;/&nbsp;</span>
+                    </li>
+
+                    <li class="active">
+                        <span><span>Thay đổi địa chỉ</span></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="signup page_customer_account section">
+    <div class="container card p-3">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-lg-3 col-left-ac">
+                <div class="block-account">
+                    <partial name="_AccountMenu" />
+                    <ul>
+                        <li><a class="title-info" href="~/user">@Localizer["Account Dashboard"]</a></li>
+                        <li><a class="title-info" href="~/user/info">@Localizer["Account Information"]</a></li>
+                        <li><a class="title-info" href="~/user/change-password">@Localizer["Change Password"]</a></li>
+                        <li><a class="title-info active" href="~/user/address">Sổ địa chỉ</a></li>
+                        <li><a class="title-info" href="~/user/orders">@Localizer["Order History"]</a></li>
+                        <li><a class="title-info" href="~/user/wishlist">@Localizer["Wish List"]</a></li>
+                        <li>
+                            <form asp-area="Core" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+                                <button type="submit" class="btn btn_base">Đăng xuất</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 col-lg-9">
+                <h1 class="title-head">Thay đổi địa chỉ</h1>
+                <div class="row">
+                    <div class="col-xs-12 col-lg-12 col-md-12 col-xl-12">
+                        <div style="border-top: 1px #ebebeb solid;padding-top: 16px;margin-top: 20px;">
+                            <div class="form-signup clearfix">
+                                <form asp-area="Core" asp-controller="UserAddress" asp-action="Edit" method="POST">
+                                    <partial name="_AddressForm" model="Model" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/_content/NhaHang.Module.Core/user-address.js"></script>
+}

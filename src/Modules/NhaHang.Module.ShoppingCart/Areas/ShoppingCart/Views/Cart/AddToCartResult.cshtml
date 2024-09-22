@@ -1,0 +1,39 @@
+﻿@model NhaHang.Module.ShoppingCart.Areas.ShoppingCart.ViewModels.AddToCartResultVm
+
+
+<div class="modal-header" style="background-color:#eff8f0">
+    <h4 class="modal-title" style="color:#2eb346">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.00006 15.3803C12.0761 15.3803 15.3804 12.076 15.3804 7.99995C15.3804 3.92391 12.0761 0.619629 8.00006 0.619629C3.92403 0.619629 0.619751 3.92391 0.619751 7.99995C0.619751 12.076 3.92403 15.3803 8.00006 15.3803Z" fill="#2EB346"></path>
+            <path d="M8 16C3.58916 16 0 12.4115 0 8C0 3.58916 3.58916 0 8 0C12.4115 0 16 3.58916 16 8C16 12.4115 12.4115 16 8 16ZM8 1.23934C4.27203 1.23934 1.23934 4.27203 1.23934 8C1.23934 11.728 4.27203 14.7607 8 14.7607C11.728 14.7607 14.7607 11.7273 14.7607 8C14.7607 4.27203 11.728 1.23934 8 1.23934Z" fill="#2EB346"></path>
+            <path d="M7.03336 10.9434C6.8673 10.9434 6.70865 10.8771 6.59152 10.7582L4.30493 8.43438C4.06511 8.19023 4.06821 7.7986 4.31236 7.55816C4.55652 7.31898 4.94877 7.32145 5.18858 7.5656L7.0154 9.42213L10.7948 5.25979C11.0259 5.00635 11.4176 4.98838 11.6698 5.21766C11.9232 5.44757 11.9418 5.8392 11.7119 6.09326L7.49193 10.7408C7.3773 10.8672 7.21618 10.9403 7.04577 10.944C7.04143 10.9434 7.03771 10.9434 7.03336 10.9434Z" fill="white"></path>
+        </svg>
+        <span>Thêm vào giỏ hàng thành công</span>
+    </h4>
+    <button type="button" class="close pull-right" data-dismiss="modal">
+        <span aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i></span>
+        <span class="sr-only"> </span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="sale-pop-wrap">
+        <div class="sale-pop-img">
+            <img src="@Model.ProductImage" class="img-fluid" loading="lazy" alt="@Model.ProductName" width="80" height="80">
+        </div>
+        <div class="sale-pop-body">
+            <div class="sale-pop-name">
+                <a href="@Model.ProductSlug">@Model.ProductName</a>
+                <div class="selected-attribute">
+                    @Model.VariationName
+                </div>
+            </div>
+            <span class="sale-pop-desc"> @Model.ProductPriceString</span>
+        </div>
+    </div>
+    <div class="cart-action" style="margin-top:10px">
+        <a data-dismiss="modal" class="btn btn-main btn-full">Tiếp tục mua hàng</a>
+        <a href="~/cart" class="btn btn-main checkout_button btn-full">Xem giỏ hàng</a>
+    </div>
+</div>
+
+@* @Localizer["Cart subtotal"]: @Model.CartAmountString *@

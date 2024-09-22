@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName></SccProjectName>
+    <SccProvider></SccProvider>
+    <SccAuxPath></SccAuxPath>
+    <SccLocalPath></SccLocalPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Areas\ShoppingCart\Views\Cart\AddToCartResult.cshtml" />
+    <None Include="Areas\ShoppingCart\Views\Cart\Index.cshtml" />
+    <None Include="Areas\ShoppingCart\Views\Shared\Components\CartBadge\Default.cshtml" />
+    <None Include="Areas\ShoppingCart\Views\_ViewImports.cshtml" />
+    <None Include="Areas\ShoppingCart\Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\add-to-cart.js" />
+    <None Include="wwwroot\shoppingcart-list.js" />
+    <None Include="wwwroot\shoppingcart-service.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NhaHang.Module.Catalog\NhaHang.Module.Catalog.csproj" />
+    <ProjectReference Include="..\NhaHang.Module.Core\NhaHang.Module.Core.csproj" />
+    <ProjectReference Include="..\NhaHang.Module.Pricing\NhaHang.Module.Pricing.csproj" />
+  </ItemGroup>
+
+</Project>

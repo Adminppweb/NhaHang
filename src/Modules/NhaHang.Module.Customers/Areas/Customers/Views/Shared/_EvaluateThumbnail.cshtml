@@ -1,0 +1,19 @@
+﻿@model NhaHang.Module.Customers.Areas.Customers.ViewModels.EvaluateThumbnail
+
+
+<li>
+    <div class="pad">
+        <div class="images">
+            <a href="@Model.Slug" title="@Model.Name">
+                <img src="@Model.ThumbnailUrl" alt="@Model.Name">
+            </a>
+        </div>
+        <div class="info">
+            <h3>
+                <a href="@Model.Slug" title="@Model.Name">
+                    @Model.Name
+                </a>
+            </h3>
+        </div>
+    </div>
+</li>

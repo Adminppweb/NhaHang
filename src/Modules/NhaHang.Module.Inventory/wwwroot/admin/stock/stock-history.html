@@ -1,0 +1,62 @@
+﻿<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+             <h1 class="page-heading d-flex text-dark fw-bold my-0">
+                {{::vm.translate.get('Stock history')}}
+            </h1>
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <li class="breadcrumb-item text-muted">
+                    <a href="admin" class="text-muted text-hover-primary">{{::vm.translate.get('Home')}}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    <a href="javascript:;" class="text-muted text-hover-primary">
+                        {{::vm.translate.get('Inventory')}}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    {{::vm.translate.get('Stock history')}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container container-xxl">
+        <div class="card card-flush">
+            <div class="card-body pt-10">
+                <div class="table-responsive">
+                    <table class="table align-middle table-row-dashed">
+                        <thead>
+                             <tr class="fs-6 fw-bold text-gray-600">
+                                <th>{{::vm.translate.get('Product Name')}}</th>
+                                <th>{{::vm.translate.get('Create date')}}</th>
+                                <th>{{::vm.translate.get('Created By')}}</th>
+                                <th>{{::vm.translate.get('Adjusted Quantity')}}</th>
+                                <th>{{::vm.translate.get('Note')}}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="fw-semibold text-gray-600">
+                            <tr ng-repeat="item in vm.history">
+                                <td>{{item.name}}</td>
+                                <td>{{item.createdOn | date:'medium'}}</td>
+                                <td>{{item.fullName}}</td>
+                                <td>{{item.adjustedQuantity}}</td>
+                                <td>{{item.note}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button ui-sref="stocks" class="btn btn-secondary"><i class="las la-arrow-left mr-1"></i>{{::vm.translate.get('Back')}}</button>
+            </div>
+        </div>
+    </div>
+</div>

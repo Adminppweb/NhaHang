@@ -1,0 +1,27 @@
+﻿<div class="d-flex justify-content-between align-items-center flex-wrap" ng-if="pages.length >= 2">
+    <div class="d-flex flex-wrap py-2 mr-3 pagination">
+        <ul class="pagination">
+            <li class="paginate_button page-item">
+                <a ng-click="selectPage(1)" class="btn btn-icon btn-sm btn-light-primary"><i class="ki-outline ki-double-left icon-xs"></i></a>
+            </li>
+            <li class="paginate_button page-item">
+                <a ng-click="selectPage(currentPage - 1)" class="btn btn-icon btn-sm btn-light-primary"><i class="ki-outline ki-left icon-xs"></i></a>
+            </li>
+            <li class="paginate_button page-item">
+                <a><page-select></page-select> </a>
+            </li>
+            <li class="paginate_button page-item">
+                <h2 class="mr-2 my-1 ml-2">/</h2>
+            </li>
+            <li class="paginate_button page-item">
+                <a class="btn btn-sm border-0 btn-light-primary">{{numPages}}</a>
+            </li>
+            <li class="paginate_button page-item">
+                <a ng-click="selectPage(currentPage + 1)" class="btn btn-icon btn-sm btn-light-primary"><i class="ki-outline ki-right icon-xs"></i></a>
+            </li>
+            <li class="paginate_button page-item">
+                <a ng-click="selectPage(numPages)" class="btn btn-icon btn-sm btn-light-primary"><i class="ki-outline ki-double-right icon-xs"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>

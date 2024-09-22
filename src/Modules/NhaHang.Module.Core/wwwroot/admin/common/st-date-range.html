@@ -1,0 +1,21 @@
+﻿
+<div class="relative">
+    <div class="input input-lg">
+        <input type="text" placeholder="Thời gian đầu" uib-datepicker-popup="yyyy/MM/dd" ng-model="after" is-open="isAfterOpen"
+               ng-change="changeDate(after)" />
+        <button class="btn btn-icon btn-sm" type="button" ng-click="openAfter($event)">
+            <i class="ki-filled ki-calendar">
+            </i>
+        </button>
+    </div>
+</div> <div class="relative">
+    <div class="input input-lg">
+        <input type="text" placeholder="Thời gian sau" uib-datepicker-popup="yyyy/MM/dd" ng-model="before" is-open="isBeforeOpen"
+               close-text="Close" ng-change="changeDate(before)" />
+        <button class="btn btn-icon btn-sm" type="button" ng-click="openBefore($event)">
+            <i class="ki-filled ki-calendar">
+            </i>
+        </button>
+    </div>
+    </div>
+

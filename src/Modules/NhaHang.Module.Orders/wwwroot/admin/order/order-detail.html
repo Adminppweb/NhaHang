@@ -1,0 +1,443 @@
+﻿
+
+<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+            <h1 class="page-heading d-flex text-dark fw-bold my-0">
+                {{::vm.translate.get('Order Details')}}: #{{vm.order.id}}
+            </h1>
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <li class="breadcrumb-item text-muted">
+                    <a href="admin" class="text-muted text-hover-primary">{{::vm.translate.get('Home')}}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    {{::vm.translate.get('Order')}}
+                </li>
+            </ul>
+        </div>
+        <div class="d-flex align-items-center gap-2 gap-lg-3">
+            <a ui-sref="order" class="btn btn-icon btn-light btn-active-secondary btn-sm ms-auto">
+                <i class="ki-duotone ki-left fs-2"></i>
+            </a>
+            <a href="/api/invoices/print/{{vm.order.id}}" class="btn btn-sm btn-secondary fw-bold">
+                <i class="ki-outline ki-folder-down fs-2"></i>{{::vm.translate.get('Download Invoice')}}
+            </a>
+        </div>
+    </div>
+</div>
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container container-xxl">
+        <div class="card">
+            <div class="card-body p-lg-20">
+                <div class="d-flex flex-column flex-xl-row">
+                    <div class="flex-lg-row-fluid me-xl-18 mb-10 mb-xl-0">
+                        <div class="mt-n1">
+                            <div class="d-flex flex-stack pb-10">
+                                <a href="#">
+                                    <img alt="Logo" src="/media/logo/logo-ng.png" class="w-125px" />
+                                </a>
+                                <a class="btn btn-outline btn-outline-dashed btn-outline-danger btn-active-light-danger">
+                                    {{vm.order.orderTotalString}}
+                                </a>
+                            </div>
+                            <div class="m-0">
+                                <div class="fw-bold fs-3 text-gray-800 mb-8">{{::vm.translate.get('Order Details')}}: <span class="text-primary">#{{vm.order.id}}</span></div>
+                                <div class="row g-5 mb-11">
+                                    <div class="col-sm-6">
+                                        <div class="fw-semibold fs-7 text-gray-600 mb-1">{{::vm.translate.get('Order Date')}}:</div>
+                                        <div class="fw-bold fs-6 text-gray-800">{{vm.order.createdOn | date:'medium'}}</div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="fw-semibold fs-7 text-gray-600 mb-1">{{::vm.translate.get('Order Status')}}:</div>
+                                        <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
+                                            <span ng-if="vm.order.orderStatusString === 'New'" class="badge badge-light-info">
+                                                {{::vm.translate.get(vm.order.orderStatusString)}}
+                                            </span>
+                                            <span ng-if="vm.order.orderStatusString === 'OnHold'" class="badge badge-light-dark">
+                                                {{::vm.translate.get(vm.order.orderStatusString)}}
+                                            </span>
+                                            <span ng-if="vm.order.orderStatusString === 'PendingPayment'" class="badge badge-light-warning">
+                                                {{::vm.translate.get(vm.order.orderStatusString)}}
+                                            </span>
+                                            <span ng-if="vm.order.orderStatusString === 'PaymentReceived'" class="badge badge-light-primary">
+                                                {{::vm.translate.get(vm.order.orderStatusString)}}
+                                            </span>
+                                            <span ng-if="vm.order.orderStatusString === 'PaymentFailed'" class="badge badge-light-danger">
+                                                {{::vm.translate.get(vm.order.orderStatusString)}}
+                                            </span>
+                                            <span ng-if="vm.order.orderStatusString === 'Invoiced'" class="badge badge-light-info">
+                                                {{::vm.translate.get(vm.order.orderStatusString)}}
+                                            </span>
+                                            <span ng-if="vm.order.orderStatusString === 'Shipping'" class="badge badge-light-warning">
+                                                {{::vm.translate.get(vm.order.orderStatusString)}}
+                                            </span>
+                                            <span ng-if="vm.order.orderStatusString === 'Shipped'" class="badge badge-light-success">
+                                                {{::vm.translate.get(vm.order.orderStatusString)}}
+                                            </span>
+                                            <span ng-if="vm.order.orderStatusString === 'Complete'" class="badge badge-light-success">
+                                                {{::vm.translate.get(vm.order.orderStatusString)}}
+                                            </span>
+                                            <span ng-if="vm.order.orderStatusString === 'Canceled'" class="badge badge-light-danger">
+                                                {{::vm.translate.get(vm.order.orderStatusString)}}
+                                            </span>
+                                            <span ng-if="vm.order.orderStatusString === 'Refunded'" class="badge badge-light-secondary">
+                                                {{::vm.translate.get(vm.order.orderStatusString)}}
+                                            </span>
+                                            <span ng-if="vm.order.orderStatusString === 'Closed'" class="badge badge-light-dark">
+                                                {{::vm.translate.get(vm.order.orderStatusString)}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-5 mb-12">
+                                    <div class="col-sm-6">
+                                        <div class="fw-semibold fs-7 text-gray-600 mb-1">{{::vm.translate.get('Address Information')}}</div>
+                                        <div class="fw-bold fs-6 text-gray-800">{{vm.order.shippingAddress.contactName}}</div>
+                                        <div class="fw-bold fs-6 text-gray-800">{{vm.order.shippingAddress.phone}}</div>
+                                        <div class="fw-semibold fs-7 text-gray-600">
+                                            {{vm.order.shippingAddress.addressLine1}}
+                                            <br />{{vm.order.shippingAddress.addressLine2}}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="fw-semibold fs-7 text-gray-600 mb-1">{{::vm.translate.get('Order Note')}}</div>
+                                        <div class="fw-semibold fs-7 text-gray-600">
+                                            <textarea class="form-control" disabled="disabled" rows="3">{{vm.order.orderNote}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-0">
+                        <div class="d-print-none border border-dashed border-gray-300 card-rounded h-lg-100 min-w-md-350px p-9 bg-lighten">
+                            <h6 class="mb-8 fw-bolder text-gray-600 text-hover-primary"><a ui-sref="user-edit({id: vm.order.customerId})">{{vm.order.customerName}}</a></h6>
+                            <div class="mb-6">
+                                <div class="fw-semibold text-gray-600 fs-7">{{::vm.translate.get('Email')}}:</div>
+                                <div class="fw-bold text-gray-800 fs-6">{{vm.order.customerEmail}}</div>
+                            </div>
+                            <div class="mb-15">
+                                <div class="fw-semibold text-gray-600 fs-7">{{::vm.translate.get('Phone')}}:</div>
+                                <div class="fw-bold text-gray-800 fs-6">
+                                    {{vm.order.customerPhone}}
+                                </div>
+                            </div>
+                            <h6 class="mb-8 fw-bolder text-gray-600 text-hover-primary">{{::vm.translate.get('Sub Orders')}}</h6>
+                            <div class="mb-6" ng-if="vm.order.isMasterOrder">
+                                <div class="fw-bold fs-6 text-gray-800" ng-repeat="id in vm.order.subOrderIds">
+                                    {{::vm.translate.get('Order')}}
+                                    <a ui-sref="order-detail({id: id})" class="link-primary ps-1">#{{id}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row gx-5 gx-xl-5 mt-5">
+            <div class="col-xxl-6">
+                <div class="card card-flush h-xl-100">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h2>{{::vm.translate.get('Payment')}}: {{vm.order.paymentMethod}}</h2>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <payment-list-by-order order-id="vm.orderId"></payment-list-by-order>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card card-flush h-xl-100">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h2>{{::vm.translate.get('Shipping')}}: {{vm.order.shippingMethod}}</h2>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-right">
+                            <shipment-list-by-order order-id="vm.orderId"></shipment-list-by-order>
+                            <button class="btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary mt-5" ui-sref="shipment-create({orderId: vm.order.id})">
+                                {{::vm.translate.get('Add Shipment')}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-5">
+            <div class="card-header">
+                <div class="card-title">
+                    <h2>{{::vm.translate.get('Product Information')}}</h2>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive border-bottom">
+                    <table class="table">
+                        <thead>
+                            <tr class="border-bottom fs-6 fw-bold text-muted">
+                                <th class="">{{::vm.translate.get('Product')}}</th>
+                                <th class="">{{::vm.translate.get('Price')}}</th>
+                                <th class="">{{::vm.translate.get('Quantity')}}</th>
+                                <th class="">{{::vm.translate.get('Total')}}</th>
+                                <th class="">{{::vm.translate.get('Tax')}}</th>
+                                <th class="">{{::vm.translate.get('Percent')}}</th>
+                                <th class="">{{::vm.translate.get('Discount Amount')}}</th>
+                                <th class="text-right font-weight-bold text-muted text-uppercase">{{::vm.translate.get('Row Total')}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in vm.order.orderItems" class="text-gray-700">
+                                <td>
+                                    <div class="d-flex flex-column font-weight-bold">
+                                        <a ui-sref="product-edit({id: item.productId})" class="text-primary mb-1 font-size-lg">
+                                            {{item.productName}}
+                                        </a>
+                                        <ul ng-if="item.variationOptions.length > 0">
+                                            <li class="text-muted" ng-repeat="opt in item.variationOptions">
+                                                <span>{{opt.optionName}}:</span> {{opt.value}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>{{item.productPriceString}}</td>
+                                <td>
+                                    <div class="d-flex flex-column flex-grow-1 font-weight-bold">
+                                        <span class="mb-1">
+                                            <span class="badge badge-light-info">{{item.quantity}}</span>
+                                        </span>
+                                        <span class="mb-1" ng-if="item.shippedQuantity">
+                                            {{::vm.translate.get('Shipped')}}
+                                            <span class="badge badge-light-info">{{item.shippedQuantity}}</span>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>{{item.totalString}}</td>
+                                <td>{{item.taxAmountString}}</td>
+                                <td>{{item.taxPercent}}</td>
+                                <td>{{item.discountAmountString}}</td>
+                                <td class="text-danger">{{item.rowTotalString}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-5">
+            <div class="card-header">
+                <div class="card-title">
+                    <h2>{{::vm.translate.get('Order Total & Action')}}</h2>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row gx-5 gx-xl-5 mt-5">
+                    <div class="col-xxl-6">
+                        <div class="timeline">
+                            <div class="timeline-item" ng-repeat="item in vm.orderHistories">
+                                <div class="timeline-line w-40px"></div>
+                                <div class="timeline-icon symbol symbol-circle symbol-40px me-4">
+                                    <div class="symbol-label bg-light">
+                                        <i class="ki-outline ki-notepad-edit fs-2 text-gray-500"></i>
+                                    </div>
+                                </div>
+                                <div class="timeline-content mt-n1">
+                                    <div class="pe-3">
+                                        <div class="fs-5 fw-semibold mb-2">{{item.note}}</div>
+                                        <div class="d-flex align-items-center mt-1 fs-6">
+                                            <div class="text-muted me-2 fs-7">{{item.createdOn | date:'medium'}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="overflow-auto pb-5">
+                                        <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap align-items-center border border-dashed border-gray-300 rounded px-7 py-3 mb-5">
+                                            <a ng-if="item.createdById >= 10" ui-sref="user-edit({id: item.createdById})" class="text-primary fw-bold me-1">
+                                                {{item.createdByFullName}}
+                                                <span ng-if="item.createdById < 10">
+                                                    {{item.createdByFullName}}
+                                                </span>
+                                            </a>
+                                            <div class="min-w-175px pe-2">
+                                                <span ng-if="item.oldStatus">
+                                                    <span ng-if="item.oldStatus === 'New'" class="badge badge-light-info">
+                                                        {{::vm.translate.get(item.oldStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.oldStatus === 'OnHold'" class="badge badge-light-dark">
+                                                        {{::vm.translate.get(item.oldStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.oldStatus === 'PendingPayment'" class="badge badge-light-warning">
+                                                        {{::vm.translate.get(item.oldStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.oldStatus === 'PaymentReceived'" class="badge badge-light-primary">
+                                                        {{::vm.translate.get(item.oldStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.oldStatus === 'PaymentFailed'" class="badge badge-light-danger">
+                                                        {{::vm.translate.get(item.oldStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.oldStatus === 'Invoiced'" class="badge badge-light-info">
+                                                        {{::vm.translate.get(item.oldStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.oldStatus === 'Shipping'" class="badge badge-light-warning">
+                                                        {{::vm.translate.get(item.oldStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.oldStatus === 'Shipped'" class="badge badge-light-success">
+                                                        {{::vm.translate.get(item.oldStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.oldStatus === 'Complete'" class="badge badge-light-success">
+                                                        {{::vm.translate.get(item.oldStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.oldStatus === 'Canceled'" class="badge badge-light-danger">
+                                                        {{::vm.translate.get(item.oldStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.oldStatus === 'Refunded'" class="badge badge-light-secondary">
+                                                        {{::vm.translate.get(item.oldStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.oldStatus === 'Closed'" class="badge badge-light-dark">
+                                                        {{::vm.translate.get(item.oldStatus)}}
+                                                    </span>
+                                                    &rarr;
+                                                </span>
+                                                <span>
+                                                    <span ng-if="item.newStatus === 'New'" class="badge badge-light-info">
+                                                        {{::vm.translate.get(item.newStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.newStatus === 'OnHold'" class="badge badge-light-dark">
+                                                        {{::vm.translate.get(item.newStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.newStatus === 'PendingPayment'" class="badge badge-light-warning">
+                                                        {{::vm.translate.get(item.newStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.newStatus === 'PaymentReceived'" class="badge badge-light-primary">
+                                                        {{::vm.translate.get(item.newStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.newStatus === 'PaymentFailed'" class="badge badge-light-danger">
+                                                        {{::vm.translate.get(item.newStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.newStatus === 'Invoiced'" class="badge badge-light-info">
+                                                        {{::vm.translate.get(item.newStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.newStatus === 'Shipping'" class="badge badge-light-warning">
+                                                        {{::vm.translate.get(item.newStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.newStatus === 'Shipped'" class="badge badge-light-success">
+                                                        {{::vm.translate.get(item.newStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.newStatus === 'Complete'" class="badge badge-light-success">
+                                                        {{::vm.translate.get(item.newStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.newStatus === 'Canceled'" class="badge badge-light-danger">
+                                                        {{::vm.translate.get(item.newStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.newStatus === 'Refunded'" class="badge badge-light-secondary">
+                                                        {{::vm.translate.get(item.newStatus)}}
+                                                    </span>
+                                                    <span ng-if="item.newStatus === 'Closed'" class="badge badge-light-dark">
+                                                        {{::vm.translate.get(item.newStatus)}}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed separator-border-2 my-4"></div>
+                        <form name="orderStatusForm" class="form-horizontal">
+                            <div class="col-sm-offset-2 bg-danger" ng-show="vm.validationErrors">
+                                <ul>
+                                    <li ng-repeat="error in vm.validationErrors">{{error}}</li>
+                                </ul>
+                            </div>
+                            <label class="form-label fs-6 fw-bold text-gray-700 mb-3">{{::vm.translate.get('Order Status')}}</label>
+                            <div class="mb-5">
+                                <!--<select placeholder="{{::vm.translate.get('Order Status')}}" class="form-select form-select-solid" ng-model="vm.order.orderStatus">
+                                    <option ng-repeat="order in vm.orderStatus" ng-if="order.name === 'New'" value="{{order.name}}">Mới</option>
+                                    <option ng-repeat="order in vm.orderStatus" ng-if="order.name === 'OnHold'" value="{{order.name}}">Đang Giữ</option>
+                                    <option ng-repeat="order in vm.orderStatus" ng-if="order.name === 'PendingPayment'" value="{{order.name}}">Đang Chờ Thanh Toán</option>
+                                    <option ng-repeat="order in vm.orderStatus" ng-if="order.name === 'PaymentReceived'" value="{{order.name}}">Đã Nhận Thanh Toán</option>
+                                    <option ng-repeat="order in vm.orderStatus" ng-if="order.name === 'PaymentFailed'" value="{{order.name}}">Thanh Toán Thất Bại</option>
+                                    <option ng-repeat="order in vm.orderStatus" ng-if="order.name === 'Invoiced'" value="{{order.name}}">Đã Lập Hóa Đơn</option>
+                                    <option ng-repeat="order in vm.orderStatus" ng-if="order.name === 'Shipping'" value="{{order.name}}">Đang Vận Chuyển</option>
+                                    <option ng-repeat="order in vm.orderStatus" ng-if="order.name === 'Shipped'" value="{{order.name}}">Đã Vận Chuyển</option>
+                                    <option ng-repeat="order in vm.orderStatus" ng-if="order.name === 'Complete'" value="{{order.name}}">Hoàn Tất</option>
+                                    <option ng-repeat="order in vm.orderStatus" ng-if="order.name === 'Canceled'" value="{{order.name}}">Đã Hủy</option>
+                                    <option ng-repeat="order in vm.orderStatus" ng-if="order.name === 'Refunded'" value="{{order.name}}">Đã Hoàn Tiền</option>
+                                    <option ng-repeat="order in vm.orderStatus" ng-if="order.name === 'Closed'" value="{{order.name}}">Đã Đóng</option>
+                                </select>-->
+                                <select class="form-select form-select-solid" ng-model="vm.order.orderStatus" ng-options="s.id as s.name for s in vm.orderStatus"></select>
+                            </div>
+                            <div class="mb-5">
+                                <textarea name="description" ng-model="vm.orderStatusNote" rows="3" placeholder="{{::vm.translate.get('Note')}}" class="form-control form-control-solid"></textarea>
+                            </div>
+                            <div class="mb-0">
+                                <button type="submit" ng-click="vm.changeOrderStatus()" class="btn btn-primary w-100">
+                                    <i class="ki-outline ki-check fs-3"></i>{{::vm.translate.get('Save')}}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xxl-6">
+                        <div class="table-responsive">
+                            <table class="table align-middle table-row-bordered mb-0 fs-6 gy-5 min-w-300px">
+                                <tbody class="fw-semibold text-gray-600">
+                                    <tr>
+                                        <td class="text-muted">
+                                            <div class="d-flex align-items-center">
+                                                {{::vm.translate.get('Subtotal')}}
+                                            </div>
+                                        </td>
+                                        <td class="fw-bold text-end">{{vm.order.subtotalString}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">
+                                            <div class="d-flex align-items-center">
+                                                {{::vm.translate.get('Shipping')}}
+                                            </div>
+                                        </td>
+                                        <td class="fw-bold text-end">
+                                            {{vm.order.shippingAmountString}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">
+                                            <div class="d-flex align-items-center">
+                                                {{::vm.translate.get('Tax')}}
+                                            </div>
+                                        </td>
+                                        <td class="fw-bold text-end">{{vm.order.taxAmountString}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">
+                                            <div class="d-flex align-items-center">
+                                                {{::vm.translate.get('Discount')}}
+                                            </div>
+                                        </td>
+                                        <td class="fw-bold text-end">{{vm.order.discountAmountString}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">
+                                            <div class="d-flex align-items-center">
+                                                {{::vm.translate.get('Payment Fee')}}
+                                            </div>
+                                        </td>
+                                        <td class="fw-bold text-end">{{vm.order.paymentFeeAmountString}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">
+                                            <div class="d-flex align-items-center">
+                                                {{::vm.translate.get('Order Total')}}
+                                            </div>
+                                        </td>
+                                        <td class="fw-bold text-danger text-end">{{vm.order.orderTotalString}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

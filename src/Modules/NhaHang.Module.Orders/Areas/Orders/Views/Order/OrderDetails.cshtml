@@ -1,0 +1,251 @@
+﻿@model NhaHang.Module.Orders.Areas.Orders.ViewModels.OrderDetailVm
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+}
+@section additionalMeta {
+    <meta name="keywords" content="Chi tiết đơn hàng">
+    <meta name="description" content="Chi tiết đơn hàng">
+    <meta property="og:title" content="@ViewBag.Title">
+    <meta property="og:description" content="Chi tiết đơn hàng">
+    <meta property="og:url" content="~/user/wishlist">
+    <meta property="og:image" content="~/media/logo/logo-ng.png ">
+    <meta property="og:image:alt" content="@ViewBag.Title">
+    <meta name="twitter:title" content="@ViewBag.Title">
+    <meta name="twitter:description" content="Chi tiết đơn hàng">
+    <meta name="twitter:title" content="@ViewBag.Title">
+    <meta name="twitter:description" content="Chi tiết đơn hàng">
+    <meta name="twitter:image" content="~/media/logo/logo-ng.png ">
+    <meta name="twitter:url" content="~/user/wishlist">
+    <meta itemprop="name" content="@ViewBag.Title">
+    <meta itemprop="description" content="Chi tiết đơn hàng">
+    <meta itemprop="image" content="~/media/logo/logo-ng.png ">
+    <meta itemprop="url" content="~/user/wishlist">
+    <link rel="canonical" href="~/user/wishlist" />
+    <link rel="image_src" href="~/media/logo/logo-ng.png " />
+}
+@section head {
+    <link href="~/assets/css/account-style.css" rel="stylesheet" />
+}
+<section class="bread-crumb mb-3">
+    <span class="crumb-border"></span>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 a-left">
+                <ul class="breadcrumb m-0 px-0">
+                    <li>
+                        <a href="~/" target="_self"><span>Trang chủ</span></a>
+                        <span class="mr_lr">&nbsp;/&nbsp;</span>
+                    </li>
+                    <li>
+                        <a href="~/user" target="_self"><span>@Localizer["My Account"]</span></a>
+                        <span class="mr_lr">&nbsp;/&nbsp;</span>
+                    </li>
+                    <li>
+                        <a href="~/user/orders" target="_self"><span>@Localizer["Order detail"]</span></a>
+                        <span class="mr_lr">&nbsp;/&nbsp;</span>
+                    </li>
+                    <li class="active">
+                        <span>Chi tiết đơn hàng</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="login page_order section">
+    <div class="container card p-3">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-lg-3 col-left-ac">
+                <div class="block-account">
+                    <partial name="_AccountMenu" />
+                    <ul>
+                        <li><a class="title-info" href="~/user">@Localizer["Account Dashboard"]</a></li>
+                        <li><a class="title-info" href="~/user/info">@Localizer["Account Information"]</a></li>
+                        <li><a class="title-info" href="~/user/change-password">@Localizer["Change Password"]</a></li>
+                        <li><a class="title-info" href="~/user/address">Sổ địa chỉ</a></li>
+                        <li><a class="title-info active" href="~/user/orders">@Localizer["Order History"]</a></li>
+                        <li><a class="title-info" href="~/user/wishlist">@Localizer["Wish List"]</a></li>
+                        <li>
+                            <form asp-area="Core" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+                                <button type="submit" class="btn btn_base">Đăng xuất</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-lg-9">
+                <div class="head-title clearfix">
+                    <h1>Chi tiết đơn hàng #@Model.Id</h1>
+                    <span class="note order_date">
+                        Ngày tạo: @Model.CreatedOn.DateTime
+                    </span>
+                </div>
+                <div class="payment_status">
+                    <span class="note">Trạng thái đơn hàng:</span>
+                    <i class="status_pending">
+                        <em>
+                            <span class="span_pending" style="color: red">
+                                <strong><em>@Localizer[Model.OrderStatusString]</em></strong>
+                            </span>
+                        </em>
+                    </i>
+                </div>
+                @* <div class="shipping_status">
+                    <span class="note">Trạng thái vận chuyển:</span>
+                    <span class="span_" style="color: red">
+                        <strong><em>Chưa giao hàng</em></strong>
+                    </span>
+                </div> *@
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 body_order">
+                        <div class="box-address">
+                            <h2 class="title-head">Địa chỉ giao hàng</h2>
+                            <div class="address box-des">
+                                <p> <strong>@Model.ShippingAddress.ContactName</strong></p>
+                                <p> <strong>@Model.ShippingAddress.Phone</strong></p>
+                                <p>
+                                    Địa chỉ:
+                                    @Model.ShippingAddress.AddressLine1 <br />
+                                    @Model.ShippingAddress.AddressLine2
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 body_order">
+                        <div class="box-address">
+                            <h2 class="title-head">
+                                Phương thức thanh toán
+                            </h2>
+                            <div class="box-des">
+                                @if (Model.PaymentMethod == "CashOnDelivery")
+                                {
+                                    <p>Thanh toán khi giao hàng (COD) ( @Model.PaymentMethod)</p>
+                                }
+                                @if (Model.PaymentMethod == "Braintree")
+                                {
+                                    <p>Thanh toán qua cổng Braintree ( @Model.PaymentMethod)</p>
+                                }
+                                @if (Model.PaymentMethod == "Cashfree")
+                                {
+                                    <p>Thanh toán qua cổng Cashfree ( @Model.PaymentMethod)</p>
+                                }
+                                @if (Model.PaymentMethod == "MomoPayment")
+                                {
+                                    <p>Thanh toán qua ví điện tử Momo ( @Model.PaymentMethod)</p>
+                                }
+                                @if (Model.PaymentMethod == "NganLuong")
+                                {
+                                    <p>Thanh toán qua cổng NganLuong ( @Model.PaymentMethod)</p>
+                                }
+                                @if (Model.PaymentMethod == "PaypalExpress")
+                                {
+                                    <p>Thanh toán qua cổng PaypalExpress ( @Model.PaymentMethod)</p>
+                                }
+                                @if (Model.PaymentMethod == "Stripe")
+                                {
+                                    <p>Thanh toán qua cổng Stripe ( @Model.PaymentMethod)</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 body_order">
+                        <div class="box-address">
+                            <h2 class="title-head">
+                                Phương thức vận chuyển
+                            </h2>
+                            <div class="box-des">
+                                    @if (Model.ShippingMethod == "Free")
+                                    {
+                                        <p>Miễn phí vận chuyển ( @Model.ShippingMethod)</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Phí vận chuyển theo khu vực ( @Model.ShippingMethod)</p>
+                                    }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="table-order">
+                            <div class="table-responsive-block table_mobile">
+                                <table id="order_details" class="table table-cart">
+                                    <thead class="thead-default theborder">
+                                        <tr>
+                                            <th>@Localizer["Product"]</th>
+                                            <th>@Localizer["Price"]</th>
+                                            <th>@Localizer["Quantity"]</th>
+                                            <th>@Localizer["Row Total"]</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.OrderItems)
+                                        {
+                                            <tr>
+                                                <td class="link" data-title="@item.ProductName">
+                                                    <div class="image_order">
+                                                        <a title="@item.ProductName" href="~/@item.ProductSlug">
+                                                            <img src="@item.ProductImage" alt="@item.ProductName">
+                                                        </a>
+                                                    </div>
+                                                    <div class="content_right">
+                                                        <a class="title_order" href="~/@item.ProductSlug" title="@item.ProductName">@item.ProductName</a>
+                                                        <p class="sku_order">
+                                                            Mã sản phẩm: @item.ProductSku
+                                                        </p> 
+                                                        <p class="sku_order">
+                                                            Giảm giá: @item.DiscountAmountString
+                                                        </p>
+                                                        <div class="bottom_mb">
+                                                            <div class="quantity_mb">
+                                                                x @item.Quantity
+                                                            </div>
+                                                            <div class="sum_mb">
+                                                                @item.ProductPriceString
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td data-title="Giá" class="numeric">@item.ProductPriceString</td>
+                                                <td data-title="Số lượng" class="numeric">@item.Quantity</td>
+                                                <td data-title="Tổng" class="numeric">@item.RowTotalString
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <table class="table totalorders">
+                                <tfoot>
+                                     <tr class="order_summary">
+                                        <td>@Localizer["Subtotal"]</td>
+                                        <td class="total money right">@Model.SubtotalString</td>
+                                    </tr>
+                                     <tr class="order_summary">
+                                        <td>@Localizer["Shipping"]</td>
+                                        <td class="total money right">@Model.ShippingAmountString</td>
+                                    </tr>
+                                     <tr class="order_summary">
+                                        <td>@Localizer["Tax"]</td>
+                                        <td class="total money right">@Model.TaxAmountString</td>
+                                    </tr>
+                                    <tr class="order_summary discount">
+                                        <td>@Localizer["Discount"]</td>
+                                        <td class="total money right">@Model.DiscountAmountString</td>
+                                    </tr>
+                                     <tr class="order_summary">
+                                        <td>@Localizer["Payment Fee"]</td>
+                                        <td class="total money right">@Model.PaymentFeeAmountString</td>
+                                    </tr>
+                                     <tr class="order_summary">
+                                        <td><strong>@Localizer["Order Total"]</strong></td>
+                                        <td class="right"><strong style="color:#CA170E;font-size:19px;">@Model.OrderTotalString</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

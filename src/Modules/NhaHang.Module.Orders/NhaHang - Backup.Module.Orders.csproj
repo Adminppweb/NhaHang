@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName></SccProjectName>
+    <SccProvider></SccProvider>
+    <SccAuxPath></SccAuxPath>
+    <SccLocalPath></SccLocalPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Orders\Views\Checkout\Error.cshtml" />
+    <None Include="Areas\Orders\Views\Checkout\Shipping.cshtml" />
+    <None Include="Areas\Orders\Views\Checkout\Success.cshtml" />
+    <None Include="Areas\Orders\Views\EmailTemplates\OrderEmailToCustomer.cshtml" />
+    <None Include="Areas\Orders\Views\Order\OrderDetails.cshtml" />
+    <None Include="Areas\Orders\Views\Order\OrderHistoryList.cshtml" />
+    <None Include="Areas\Orders\Views\Shared\Components\OrderSummaryMobile\Default.cshtml" />
+    <None Include="Areas\Orders\Views\Shared\Components\OrderSummary\Default.cshtml" />
+    <None Include="Areas\Orders\Views\Shared\InvoicePdf.cshtml" />
+    <None Include="Areas\Orders\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Orders\Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\admin\orders.module.js" />
+    <None Include="wwwroot\admin\order\order-create.js" />
+    <None Include="wwwroot\admin\order\order-detail.js" />
+    <None Include="wwwroot\admin\order\order-list.js" />
+    <None Include="wwwroot\admin\order\order-service.js" />
+    <None Include="wwwroot\admin\order\order-sum-widget.directive.js" />
+    <None Include="wwwroot\admin\order\order-widget.directive.js" />
+    <None Include="wwwroot\checkout.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NhaHang.Module.Catalog\NhaHangg.Module.Catalog.csproj" />
+    <ProjectReference Include="..\NhaHang.Module.Core\NhaHangg.Module.Core.csproj" />
+    <ProjectReference Include="..\NhaHang.Module.Pricing\NhaHangg.Module.Pricing.csproj" />
+    <ProjectReference Include="..\NhaHang.Module.ShoppingCart\NhaHangg.Module.ShoppingCart.csproj" />
+  </ItemGroup>
+
+</Project>

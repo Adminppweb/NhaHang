@@ -1,0 +1,169 @@
+﻿<div class="d-flex align-items-center justify-content-between flex-wrap mt-2 mb-5">
+    <div class="mr-3">
+        <h1 class="card-title align-items-start flex-column">
+            <span class="card-label font-weight-bolder text-dark">{{::vm.translate.get('Info Contact')}}</span>
+        </h1>
+    </div>
+</div>
+
+<div class="card card-custom card-stretch gutter-b">
+    <div class="card-body pt-10">
+        <form name="infomationForm" class="form-horizontal">
+            <div class="alert alert-custom  alert-outline-danger mb-5" role="alert" ng-show="vm.validationErrors">
+                <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                <div class="alert-text">
+                    <ul>
+                        <li ng-repeat="error in vm.validationErrors">{{error}}</li>
+                    </ul>
+                </div>
+            </div>
+            <input type="hidden" ng-model="vm.infomation.id" />
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right" title="{{::vm.translate.get('Address')}}">{{::vm.translate.get('Address')}}</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="flaticon-placeholder-3"></i></span>
+                        </div>
+                        <input name="address" ng-model="vm.infomation.address" placeholder="{{::vm.translate.get('Address')}}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right" title="{{::vm.translate.get('Email')}}">{{::vm.translate.get('Email')}}</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="flaticon-email"></i></span>
+                        </div>
+                        <input name="email" ng-model="vm.infomation.email" placeholder="{{::vm.translate.get('Email')}}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right" title="{{::vm.translate.get('Phone')}}">{{::vm.translate.get('Phone')}}</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="flaticon2-phone"></i></span>
+                        </div>
+                        <input name="phone" ng-model="vm.infomation.phone" placeholder="{{::vm.translate.get('Phone')}}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right" title="{{::vm.translate.get('Fax')}}">{{::vm.translate.get('Fax')}}</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="flaticon-support"></i></span>
+                        </div>
+                        <input name="fax" ng-model="vm.infomation.fax" placeholder="{{::vm.translate.get('Fax')}}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right" title="{{::vm.translate.get('TaxCode')}}">{{::vm.translate.get('TaxCode')}}</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="flaticon-mark"></i></span>
+                        </div>
+                        <input name="taxcode" ng-model="vm.infomation.taxcode" placeholder="{{::vm.translate.get('TaxCode')}}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right" title="{{::vm.translate.get('Zalo')}}">{{::vm.translate.get('Zalo')}}</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="flaticon2-phone"></i></span>
+                        </div>
+                        <input name="zalo" ng-model="vm.infomation.zalo" placeholder="{{::vm.translate.get('Zalo')}}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right" title="{{::vm.translate.get('Facebook')}}">{{::vm.translate.get('Facebook')}}</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="flaticon-facebook-letter-logo"></i></span>
+                        </div>
+                        <input name="facebook" ng-model="vm.infomation.facebook" placeholder="{{::vm.translate.get('Facebook')}}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right" title="{{::vm.translate.get('Twiter')}}">{{::vm.translate.get('Twitter')}}</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="flaticon-twitter-logo"></i></span>
+                        </div>
+                        <input name="twiter" ng-model="vm.infomation.twiter" placeholder="{{::vm.translate.get('Twiter')}}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right" title="{{::vm.translate.get('Instagram')}}">{{::vm.translate.get('Instagram')}}</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="flaticon-instagram-logo"></i></span>
+                        </div>
+                        <input name="instagram" ng-model="vm.infomation.instagram" placeholder="{{::vm.translate.get('Instagram')}}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right" title="{{::vm.translate.get('Youtube')}}">{{::vm.translate.get('Youtube')}}</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="flaticon-youtube"></i></span>
+                        </div>
+                        <input name="youtube" ng-model="vm.infomation.youtube" placeholder="{{::vm.translate.get('Youtube')}}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right" title="{{::vm.translate.get('Pinterest')}}">{{::vm.translate.get('Pinterest')}}</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="flaticon-linkedin"></i></span>
+                        </div>
+                        <input name="pinterest" ng-model="vm.infomation.pinterest" placeholder="{{::vm.translate.get('Pinterest')}}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right text-right">{{::vm.translate.get('Description')}}</label>
+                <div class="col-sm-10">
+                    <summernote on-image-upload="vm.descUpload(files)" editor="vm.descEditor" ng-model="vm.infomation.description"></summernote>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right">{{::vm.translate.get('Open')}}</label>
+                <div class="col-sm-6">
+                    <input name="open" type="time" id="open" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-right" title="{{::vm.translate.get('Close')}}">{{::vm.translate.get('Close')}}</label>
+                <div class="col-sm-6">
+                    <input name="close" id="close" type="time" class="form-control" />
+                </div>
+            </div>
+            <div class="separator separator-dashed my-6"></div>
+            <div class="form-group row">
+                <div class="col-sm-12 text-center">
+                    <button class="btn btn-light-primary" ng-click="vm.save()"><i class="la la-check mr-1"></i> {{::vm.translate.get('Save')}}</button>
+                    <button ui-sref="dashboard" class="btn btn-light-danger"><i class="la la-close mr-1"></i>{{::vm.translate.get('Cancel')}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

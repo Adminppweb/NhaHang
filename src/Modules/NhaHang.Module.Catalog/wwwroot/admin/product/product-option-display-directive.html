@@ -1,0 +1,65 @@
+﻿
+<div class="modal fade" id="{{vm.modelId}}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-900px">
+        <div class="modal-content rounded">
+            <div class="modal-header">
+                <h4 class="modal-title">{{vm.title}}</h4>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <i class="ki-duotone ki-cross fs-1">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                    </i>
+                </div>
+            </div>
+            <div class="modal-body scroll-y mx-5 mx-xl-10 pt-0 pb-15">
+                <form class="form-horizontal">
+                    <div class="d-flex flex-wrap gap-5 mt-10 mb-10">
+                        <div class="fv-row w-100 flex-md-root fv-plugins-icon-container">
+                            <label class="btn btn-outline btn-outline-dashed btn-active-light-primary d-flex text-start p-6">
+                                <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
+                                    <input class="form-check-input" type="radio" ng-model="vm.option.displayType" value="text">
+                                </span>
+                                <span class="ms-5">
+                                    <span class="fs-4 fw-bold text-gray-800 d-block">Hiển thị dạng văn bảng</span>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="fv-row w-100 flex-md-root">
+                            <label class="btn btn-outline btn-outline-dashed btn-active-light-primary  d-flex text-start p-6">
+                                <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
+                                    <input class="form-check-input" type="radio" ng-model="vm.option.displayType" value="color">
+                                </span>
+                                <span class="ms-5">
+                                    <span class="fs-4 fw-bold text-gray-800 d-block">Hiển thị dạng màu sắc</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="separator separator-dashed my-4"></div>
+
+                    <div class="mh-475px scroll-y me-n7 pe-7">
+                        <div class="row fv-row mb-7" ng-repeat="val in vm.option.values">
+                            <div class="col-md-2">
+                                <label class="fs-6 fw-semibold form-label mt-2">
+                                    {{val.key}}
+                                </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input placeholder="{{::vm.translate.get('key')}}Key" class="form-control" ng-show="vm.option.displayType == 'text'" type="text" ng-model="val.display" />
+                                <div ng-show="vm.option.displayType == 'color'" class="form-inline">
+                                    <div class="input-group">
+                                        <span class="input-group-text" style="display:inline-block;width:70px;background-color:{{val.display}}"></span>
+                                        <input type="text" class="form-control" colorpicker ng-model="val.display" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>

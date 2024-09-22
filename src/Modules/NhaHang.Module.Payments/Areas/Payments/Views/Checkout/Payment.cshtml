@@ -1,0 +1,76 @@
+﻿@model NhaHang.Module.Payments.Areas.Payments.ViewModels.CheckoutPaymentForm
+
+@{
+    ViewBag.Title = "Payment Information";
+}
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="" />
+    <title>Anbachwater - Thanh toán đơn hàng</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Anbachwater - Thanh toán đơn hàng" />
+    <meta name="keywords" content="Anbachwater - Thanh toán đơn hàng" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Anbachwater - Thanh toán đơn hàng" />
+    <meta property="og:url" content="https://keenthemes.com/metronic" />
+    <meta property="og:site_name" content="Anbachwater - Thanh toán đơn hàng" />
+    <link rel="shortcut icon" href="/media/logo/faricon-anbach.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+    <link href="/_content/NhaHang.Module.Core/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/_content/NhaHang.Module.Core/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <script simpl-append-version="true" src="~/lib/angular/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+</head>
+<body id="kt_body" class="app-blank">
+    <div class="d-flex flex-column flex-root" id="kt_app_root">
+        <div class="d-flex flex-column flex-lg-row flex-column-fluid">
+            <div class="d-flex flex-column flex-lg-row-fluid  min-w-lg-900px p-10 order-2 order-lg-1">
+                <div class="d-flex flex-stack pb-10">
+                    <a href="~/">
+                        <img alt="ANBACH WATER" src="/media/logo/logo-anbach.jpg" width="200" height="100">
+                    </a>
+                    <form asp-area="Order" asp-controller="Checkout" asp-action="Cancel" method="post" id="logoutForm">
+                        <button type="submit" class="btn btn-outline btn-outline-dashed btn-outline-danger btn-active-light-danger">
+                            <i class="ki-duotone ki-arrow-left fs-4 me-1"><span class="path1"></span><span class="path2"></span></i>
+                            Hủy đơn hàng
+                        </button>
+                    </form>
+                </div>
+                <div class="row gx-9 gy-6">
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">@TempData["Error"]</div>
+                    }
+                    @foreach (var paymentProvider in Model.PaymentProviders)
+                    {
+                        <div class="col-xl-12">
+                            <div class="paymentProvider-@paymentProvider.Id">
+                                @if (!string.IsNullOrWhiteSpace(paymentProvider.LandingViewComponentName))
+                                {
+                                    @await Component.InvokeAsync(paymentProvider.LandingViewComponentName)
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="d-flex flex-lg-row-fluid bgi-size-cover min-w-lg-300px bgi-position-center order-1 order-lg-2" style="background-color: #fcfcfc">
+                @await Component.InvokeAsync("OrderSummary")
+            </div>
+        </div>
+    </div>
+    <script src="/_content/NhaHang.Module.Core/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="/_content/NhaHang.Module.Core/assets/js/scripts.bundle.js"></script>
+    <script simpl-append-version="true" src="~/_content/NhaHang.Module.Orders/checkout.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+</body>
+</html>
+

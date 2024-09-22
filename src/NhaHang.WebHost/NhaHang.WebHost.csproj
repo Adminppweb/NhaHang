@@ -1,0 +1,84 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup Label="Globals">
+	  <SccProjectName></SccProjectName>
+	  <SccProvider></SccProvider>
+	  <SccAuxPath></SccAuxPath>
+	  <SccLocalPath></SccLocalPath>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<UserSecretsId>aspnet-Modular.WebHost-dca604fa-ee10-4a6c-8e7d-8cc79dca8c8f</UserSecretsId>
+		<EnableDefaultContentItems>false</EnableDefaultContentItems>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+		<!--<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>-->
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="wwwroot\**\*;modules.json;appsettings.json;Modules\**\*;Themes\**\*;Views\**\*">
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="wwwroot\media\brand\**" />
+	  <Content Remove="wwwroot\media\brand\**" />
+	  <EmbeddedResource Remove="wwwroot\media\brand\**" />
+	  <None Remove="wwwroot\media\brand\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="wwwroot\media\banner.jpg" />
+	  <None Remove="wwwroot\media\empty.jpg" />
+	  <None Remove="wwwroot\media\Frame-price.png" />
+	  <None Remove="wwwroot\media\logo.png" />
+	  <None Remove="wwwroot\media\logo\logo-mini.png" />
+	  <None Remove="wwwroot\media\logo_dark.png" />
+	  <None Remove="wwwroot\media\pay-sucss.png" />
+	  <None Remove="wwwroot\media\table.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Modules\NhaHang.Module.Catalog\NhaHang.Module.Catalog.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.Contacts\NhaHang.Module.Contacts.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.Core\NhaHang.Module.Core.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.Customers\NhaHang.Module.Customers.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.DinkToPdf\NhaHang.Module.DinkToPdf.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.ElFinder\NhaHang.Module.ElFinder.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.EmailSenderSmtp\NhaHang.Module.EmailSenderSmtp.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.Expenditure\NhaHang.Module.Expenditure.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.Inventory\NhaHang.Module.Inventory.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.Localization\NhaHang.Module.Localization.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.Orders\NhaHang.Module.Orders.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.PaymentCoD\NhaHang.Module.PaymentCoD.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.Payments\NhaHang.Module.Payments.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.Post\NhaHang.Module.POS.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.Pricing\NhaHang.Module.Pricing.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.Report\NhaHang.Module.Report.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.ShoppingCart\NhaHang.Module.ShoppingCart.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.Staff\NhaHang.Module.Staff.csproj" />
+		<ProjectReference Include="..\Modules\NhaHang.Module.StorageLocal\NhaHang.Module.StorageLocal.csproj" />	
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="IdentityServer4.AspNetIdentity" Version="3.0.1" />
+		<PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+		<PackageReference Include="Microsoft.AspNetCore.Antiforgery" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.27" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.27" />
+		<PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+		<PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.1-dev-00767" />
+		<PackageReference Include="MediatR" Version="7.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+	</ItemGroup>
+</Project>

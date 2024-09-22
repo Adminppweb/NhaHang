@@ -1,0 +1,27 @@
+﻿
+        <div class="table-responsive border-bottom">
+            <table class="table">
+                <thead>
+                    <tr class="border-bottom fs-6 fw-bold text-muted">
+                        <th>{{::vm.translate.get('#')}}</th>
+                        <th>{{::vm.translate.get('Amount')}}</th>
+                        <th>{{::vm.translate.get('Fee')}}</th>
+                        <th>{{::vm.translate.get('Status')}}</th>
+                        <th>{{::vm.translate.get('Gateway Transaction Id')}}</th>
+                        <th>{{::vm.translate.get('Create date')}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in vm.payments" class="text-gray-700">
+                        <td>{{item.id}}</td>
+                        <td>{{item.amountString}}</td>
+                        <td>{{item.paymentFeeString}}</td>
+                        <td>{{item.status}}</td>
+                        <td>{{item.gatewayTransactionId}}</td>
+                        <td>{{item.createdOn | date:'medium' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+  
+    

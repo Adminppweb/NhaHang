@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName></SccProjectName>
+    <SccProvider></SccProvider>
+    <SccAuxPath></SccAuxPath>
+    <SccLocalPath></SccLocalPath>
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <EmbeddedResource Include="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\admin\inventory.module.js" />
+    <None Include="wwwroot\admin\stock\stock-form.js" />
+    <None Include="wwwroot\admin\stock\stock-history.js" />
+    <None Include="wwwroot\admin\stock\stock-service.js" />
+    <None Include="wwwroot\admin\warehouse\manage-products-form.js" />
+    <None Include="wwwroot\admin\warehouse\warehouse-form.js" />
+    <None Include="wwwroot\admin\warehouse\warehouse-list.js" />
+    <None Include="wwwroot\admin\warehouse\warehouse-service.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NhaHang.Module.Core\NhaHang.Module.Core.csproj" />
+    <ProjectReference Include="..\NhaHang.Module.Catalog\NhaHang.Module.Catalog.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,170 @@
+﻿<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+            <h1 class="page-heading d-flex text-dark fw-bold my-0">
+                {{::vm.translate.get('Product Price Management')}}
+            </h1>
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <li class="breadcrumb-item text-muted">
+                    <a href="admin" class="text-muted text-hover-primary">{{::vm.translate.get('Home')}}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    {{::vm.translate.get('Catalog')}}
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    {{::vm.translate.get('Product Price Management')}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container container-xxl">
+        <div class="card card-flush" st-pipe="vm.getProducts" st-table="vm.products">
+            <div class="card-header border-0 pt-6">
+                <div class="col-lg-12">
+                    <div class="row g-8">
+                        <div class="col-lg-3">
+                            <!--<label class="form-label">{{::vm.translate.get('Product Name')}}</label>-->
+                            <div class="position-relative">
+                                <i class="ki-duotone ki-magnifier fs-3 text-gray-500 position-absolute top-50 translate-middle ms-6">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                                <input placeholder="{{::vm.translate.get('Product Name')}}" class="form-control ps-10" st-search="ProductName" />
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <!--<label class="form-label">{{::vm.translate.get('Product Sku')}}</label>-->
+                            <div class="position-relative">
+                                <i class="ki-duotone ki-magnifier fs-3 text-gray-500 position-absolute top-50 translate-middle ms-6">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                                <input placeholder="{{::vm.translate.get('Product Sku')}}" class="form-control ps-10" st-search="ProductSku" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body pt-10">
+                <div class="d-flex" ng-show="!vm.isLoading">
+                    <h5 class="text-gray-700 mb-5">
+                        {{vm.tableStateRef.pagination.totalItemCount | number:0}} {{::vm.translate.get('records found')}}
+                    </h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-middle table-row-dashed">
+                        <thead>
+                            <tr class="fs-7 fw-bold text-gray-400 border-bottom-0">
+                                <th class="p-0 pb-3 min-w-200px text-start">{{::vm.translate.get('Product Name')}}</th>
+                                <th class="p-0 pb-3 min-w-125px text-start">{{::vm.translate.get('Current Price')}}</th>
+                                <th class="p-0 pb-3 min-w-125px text-start">{{::vm.translate.get('Old Price')}}</th>
+                                <th class="p-0 pb-3 min-w-125px text-start pe-12">{{::vm.translate.get('Special Price')}}</th>
+                                <th class="p-0 pb-3 w-125px text-start pe-7">{{::vm.translate.get('Time')}}</th>
+                                <th class="p-0 pb-3 w-175px text-start">{{::vm.translate.get('New Price')}}</th>
+                                <th class="p-0 pb-3 w-175px text-start">{{::vm.translate.get('New Old Price')}}</th>
+                            </tr>
+                            <!--<tr class="fs-6 fw-bold text-gray-600">
+                                <th class="w-160px">{{::vm.translate.get('Product Name')}}</th>
+                                <th>{{::vm.translate.get('Current Price')}}</th>
+                                <th>{{::vm.translate.get('Old Price')}}</th>
+                                <th>{{::vm.translate.get('Special Price')}}</th>
+                                <th class="w-160px">{{::vm.translate.get('Time')}}</th>
+                                <th>{{::vm.translate.get('New Price')}}</th>
+                                <th>{{::vm.translate.get('New Old Price')}}</th>
+                            </tr>-->
+                        </thead>
+                        <tbody class="fw-semibold text-gray-600" ng-show="!vm.isLoading">
+                            <tr ng-repeat="item in vm.products">
+                                <td class="text-start">
+                                    <div class="d-flex align-items-center">
+                                        <a ui-sref="product-edit({id: item.id})" class="symbol symbol-50px me-3">
+                                            <span class="symbol-label" style="background-image: url('{{item.thumbnailImageUrl}}');">
+                                            </span>
+                                        </a>
+                                        <div class="d-flex justify-content-start flex-column">
+                                            <a ui-sref="product-edit({id: item.id})" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6"> {{item.name}}</a>
+                                            <span class="text-gray-400 fw-semibold d-block fs-7"> SKU: {{item.sku}}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-flex flex-column font-weight-bold">
+                                        <span class="text-dark-75 font-size-lg">{{item.price | number}}</span>
+                                        <label class="text-primary" for="newPrice_{{item.id}}">{{item.newPrice | number}}</label>
+                                    </div>
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-flex flex-column font-weight-bold">
+                                        <span class="text-dark-75 font-size-lg">{{(item.oldPrice | number) || '-'}}</span>
+                                        <label class="text-primary" for="newPrice_{{item.id}}">{{item.newOldPrice | number}}</label>
+                                    </div>
+                                </td>
+                                <td class="text-start">
+                                    {{item.specialPrice || '-'}}
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-flex flex-column">
+                                        <div class="text-gray-400">
+                                            {{(item.specialPriceStart | date:'short') || '-'}}
+                                        </div>
+                                        <div class="text-gray-400">
+                                            {{(item.specialPriceEnd | date:'short') || '-'}}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-start">
+                                    <div class="input-number">
+                                        <input id="newPrice_{{item.id}}" type="text" decimal maxlength="10" name="newPrice" ng-model="item.newPrice" placeholder="{{::vm.translate.get('New Price')}}" class="form-control" />
+                                    </div>
+                                </td>
+                                <td class="text-start">
+                                    <div class="input-number">
+                                        <input id="newOldPrice_{{item.id}}" type="text" decimal maxlength="10" name="newOldPrice" ng-model="item.newOldPrice" placeholder="{{::vm.translate.get('New Old Price')}}" class="form-control" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody class="fw-semibold text-gray-600" ng-show="vm.item.length === 0">
+                            <tr class="odd">
+                                <td valign="top" colspan="8" class="dataTables_empty">
+                                    <div class="d-flex flex-column flex-center">
+                                        <img src="/media/illustrations/sketchy-1/5.png" class="mw-400px">
+                                        <div class="fs-1 fw-bolder text-dark mb-4">{{::vm.translate.get('No items found.')}}</div>
+                                        <div class="text-gray-400 fs-6 fw-semibold mb-10">{{::vm.translate.get('Start creating new users')}}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td st-pagination="" st-items-by-page="10" colspan="10" st-template="/_content/NhaHang.Module.Core/admin/common/pagination.custom.html">
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="separator separator-dashed"></div>
+            <div class="card-footer">
+                <div class="d-flex flex-end font-weight-bold">
+                    <button class="btn btn-primary" ng-click="vm.save()">
+                        <span class="indicator-label" ng-hide="vm.showProgress">{{::vm.translate.get('Save Changes')}}</span>
+                        <span ng-show="vm.showProgress">
+                            {{::vm.translate.get('Please wait...')}}
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

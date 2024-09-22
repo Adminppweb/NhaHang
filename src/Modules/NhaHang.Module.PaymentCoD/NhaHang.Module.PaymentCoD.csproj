@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName></SccProjectName>
+    <SccProvider></SccProvider>
+    <SccAuxPath></SccAuxPath>
+    <SccLocalPath></SccLocalPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\PaymentCoD\Views\Shared\Components\CoDLanding\Default.cshtml" />
+    <None Include="Areas\PaymentCoD\Views\_ViewImports.cshtml" />
+    <None Include="Areas\PaymentCoD\Views\_ViewStart.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NhaHang.Module.Core\NhaHang.Module.Core.csproj" />
+    <ProjectReference Include="..\NhaHang.Module.Orders\NhaHang.Module.Orders.csproj" />
+    <ProjectReference Include="..\NhaHang.Module.Payments\NhaHang.Module.Payments.csproj" />
+  </ItemGroup>
+
+</Project>

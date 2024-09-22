@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName></SccProjectName>
+    <SccProvider></SccProvider>
+    <SccAuxPath></SccAuxPath>
+    <SccLocalPath></SccLocalPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+    <Content Remove="wwwroot\admin\invoice\invoice-service.js" />
+    <Content Remove="wwwroot\admin\invoice\invoice.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Report\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Report\Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\admin\invoice\invoice-service.js" />
+    <None Include="wwwroot\admin\invoice\invoice.js" />
+    <None Include="wwwroot\admin\report.module.js" />
+    <None Include="wwwroot\admin\report\report-list.js" />
+    <None Include="wwwroot\admin\report\report-service.js" />
+    <None Include="wwwroot\admin\report\report.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\NhaHang.Infrastructure\NhaHang.Infrastructure.csproj" />
+    <ProjectReference Include="..\NhaHang.Module.Core\NhaHang.Module.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Report\ViewModels\" />
+  </ItemGroup>
+
+</Project>

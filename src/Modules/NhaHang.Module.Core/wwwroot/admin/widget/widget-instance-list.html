@@ -1,0 +1,108 @@
+﻿
+
+<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                {{::vm.translate.get('Widget Instances')}}
+            </h1>
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <li class="breadcrumb-item text-muted">
+                    <a href="admin" class="text-muted text-hover-primary">{{::vm.translate.get('Home')}}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    <a href="javascript:;" class="text-muted text-hover-primary">{{::vm.translate.get('Website')}}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    {{::vm.translate.get('Widget Instances')}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container container-xxl">
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <div class="card card-custom card-stretch gutter-b">
+                        <div class="card-body">
+                            <div class="d-flex flex-column gap-5">
+                                <div class="d-flex align-items-center" ng-repeat="widget in vm.widgets">
+                                    <i class="ki-duotone ki-right fs-2 ms-n1 me-3"></i>
+                                    <a class="fw-semibold text-gray-800 text-hover-primary fs-5 m-0" ui-sref="{{widget.createUrl}}">
+                                        {{::vm.translate.get(widget.name)}}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-9">
+                    <div class="card card-custom card-stretch gutter-b">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table align-middle table-row-dashed fs-6 gy-5">
+                                    <thead>
+                                         <tr class="fs-6 fw-bold text-gray-600">
+                                            <th>{{::vm.translate.get('Name')}}</th>
+                                            <th>{{::vm.translate.get('Widget Type')}}</th>
+                                            <th>{{::vm.translate.get('Widget Zone')}}</th>
+                                            <th>{{::vm.translate.get('Publish Start')}}</th>
+                                            <th>{{::vm.translate.get('Actions')}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="fw-semibold text-gray-600">
+                                        <tr ng-repeat="instance in vm.widgetInstances">
+                                            <td>
+                                                <div class="d-flex align-items-center mb-1">
+                                                    {{instance.name}}
+                                                    <span class="badge badge-light-success me-auto ms-2">
+                                                        {{instance.displayOrder}}
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {{::vm.translate.get(instance.widgetType)}}
+                                            </td>
+                                            <td>
+                                                <span ng-if="instance.widgetZone === 'Silde trang chủ'" class="badge me-auto ms-2 badge-outline-info">{{instance.widgetZone}}</span>
+                                                <span ng-if="instance.widgetZone === 'Giới thiệu html'" class="badge me-auto ms-2 badge-outline-secondary">{{instance.widgetZone}}</span>
+                                                <span ng-if="instance.widgetZone === 'Danh mục trước'" class="badge me-auto ms-2 badge-outline-warning">{{instance.widgetZone}}</span>
+                                                <span ng-if="instance.widgetZone === 'Danh mục sau'" class="badge me-auto ms-2 badge-outline-primary">{{instance.widgetZone}}</span>
+                                                <span ng-if="instance.widgetZone === 'Giới thiệu html sau'" class="badge me-auto ms-2 badge-outline-dark">{{instance.widgetZone}}</span>
+                                                <span ng-if="instance.widgetZone === 'Nội dung ở giữa trang'" class="badge me-auto ms-2 badge-outline-success">{{instance.widgetZone}}</span>
+                                                <span ng-if="instance.widgetZone === 'Nội dung cuối trang'" class="badge me-auto ms-2 badge-outline-light">{{instance.widgetZone}}</span>
+                                            </td>
+                                            <!--<td>
+        <span ng-if="instance.widgetZone === 'Home Featured'" class="badge me-auto ms-2 badge-outline-info">{{::vm.translate.get(instance.widgetZone)}}</span>
+        <span ng-if="instance.widgetZone === 'Home After Featured'" class="badge me-auto ms-2 badge-outline-secondary">{{::vm.translate.get(instance.widgetZone)}}</span>
+        <span ng-if="instance.widgetZone === 'Home Featured Right'" class="badge me-auto ms-2 badge-outline-warning">{{::vm.translate.get(instance.widgetZone)}}</span>
+        <span ng-if="instance.widgetZone === 'Home Main Content'" class="badge me-auto ms-2 badge-outline-primary">{{::vm.translate.get(instance.widgetZone)}}</span>
+        <span ng-if="instance.widgetZone === 'Home After Main Content'" class="badge me-auto ms-2 badge-outline-dark">{{::vm.translate.get(instance.widgetZone)}}</span>
+    </td>-->
+                                            <td>
+                                                <div class="d-flex flex-column">
+                                                    {{instance.publishStart | date:'medium'}}
+                                                    {{instance.publishEnd | date:'medium'}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a ui-sref="{{instance.editUrl}}({id: instance.id})" title="Edit" class="btn btn-clean btn-icon"> <i class="ki-outline ki-notepad-edit fs-2x"></i></a>
+                                                <button ng-click="vm.deleteWidgetInstance(instance)" class="btn btn-clean btn-icon delete"> <i class="ki-outline ki-trash fs-2x text-danger"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

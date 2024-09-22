@@ -1,0 +1,190 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.AspNetCore.Http
+@using System.IO
+@using Microsoft.Extensions.Configuration
+@using Newtonsoft.Json
+@using NhaHang.Infrastructure
+@using NhaHang.Module.Core.Extensions;
+@inject IConfiguration Config
+@inject IWorkContext _workContext;
+@{
+    var assetBundling = Config.GetValue<bool>("Global.AssetBundling");
+    var userCurrent = await _workContext.GetCurrentUser();
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] | Website Nha Hang </title>
+    @RenderSection("additionalMeta", false)
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="robots" content="index,follow" />
+    <link rel="icon" href="" type="image/x-icon" />
+    <link rel="shortcut icon" href="" type="image/x-icon" />
+    <!-- style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/library-client/css/all.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="~/library-client/css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" href="~/library-client/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/library-client/css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="~/library-client/css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="~/library-client/css/home.css" media="screen" />
+    @RenderSection("head", required: false)
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm">
+        <div class="container">
+            <div class="d-block d-sm-none logo_mobile">
+                <a class="navbar-brand mr-auto mr-lg-0 logo" href="~/"><img src="~/media/logo/logo_dark.png" /></a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="offcanvas">
+                <span class="navbar-toggler-icon"><i class="fal fa-bars"></i></span>
+            </button>
+
+            <div class="navbar-collapse offcanvas-collapse justify-content-md-center" id="navbarsExampleDefault">
+                <ul class="navbar-nav menu_head">
+                    <li class="nav-item"><a class="nav-link" title="Thực đơn" href="/thuc-don">Thực đơn</a></li>
+                    <li class="nav-item"><a class="nav-link" title="Đặt bàn" href="/dat-ban.html">Đặt bàn</a></li>
+                    <li class="nav-item active d-none d-sm-block">
+                        <a class="nav-link" title="Homepage" href="/">
+                            <div class="logo_me"><img src="~/media/logo/logo_dark.png" /></div>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" title="Ưu đãi & tin tức" href="/tin-tuc">Ưu đãi & tin tức</a></li>
+                    <li class="nav-item"><a class="nav-link" title="Về chúng tôi" href="/gioi-thieu.html">Về chúng tôi</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @RenderBody()
+    <footer>
+        <a class="gotop" href="#" title="Lên đầu trang"><i class="fas fa-arrow-up"></i></a>
+        <div class="container footer">
+            <div class="row footer_contact">
+                <div class="col-sm-2 logofo">
+                    <p><img src="~/media/logo/logo.png" alt="Soowoon" width="237" height="160" /></p>
+                </div>
+                <div class="col-sm-6">
+                    <h5 class="tieude_ft">CÔNG TY CỔ PHẦN ĐẦU TƯ VÀ THƯƠNG MẠI PHƯỢNG HOÀNG PION</h5>
+                    <p class="khch-hng"><strong>Trụ sở chính</strong></p>
+                    <p class="khch-hng"><span class="s-76-ng">Số 76 đường Hòa Bình, Phường Thái Học, Thành phố Chí Linh, Hải Dương.</span></p>
+                    <p class="khch-hng"><span class="s-76-ng">GPĐK: 0102721191 cấp ngày 13/09/2021</span></p>
+                    <p class="khch-hng"><span class="s-76-ng">ĐT: 097 497 5918</span></p>
+                    <p class="khch-hng"><span class="s-76-ng">Email: ngominhhoang96@gmail.com</span></p>
+                </div>
+
+                <div class="col-sm-4">
+                    <h5 class="tieude_ft">THÔNG TIN</h5>
+                    <div class="menulist">
+                        <ul>
+                            <li class="nav-item"><a class="nav-link" title="Giới thiệu" href="/gioi-thieu.html">Giới thiệu</a></li>
+                            <li class="nav-item"><a class="nav-link" title="Liên hệ" href="/lien-he">Liên hệ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row copyenito">
+                <div class="col-12 col-sm-12 col-lg-12">
+                    <p>© COPYRIGHT PHƯỢNG HOÀNG PION 2023. ALL RIGHTS RESERVED</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="~/library-client/js/jquery.js"></script>
+    <script type="text/javascript" src="~/library-client/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/library-client/js/lazysizes.min.js"></script>
+    <script src="~/library-client/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/library-client/js/home.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <script>
+        $(".chung_nhan").owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            autoplay: false,
+            responsive: {
+                0: {
+                    items: 2,
+                },
+                600: {
+                    items: 4,
+                },
+                1000: {
+                    items: 6,
+                },
+            },
+        });
+
+        $(".banchay").owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: false,
+            dots: false,
+            autoplay: false,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                600: {
+                    items: 1,
+                },
+                1000: {
+                    items: 3,
+                },
+            },
+        });
+
+        $(".list_pro_home_1").owlCarousel({
+            loop: true,
+            margin: 2,
+            nav: false,
+            dots: false,
+            autoplay: false,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                600: {
+                    items: 1,
+                },
+                1000: {
+                    items: 4,
+                },
+            },
+        });
+
+        $(function () {
+            "use strict";
+
+            $('[data-toggle="offcanvas"]').on("click", function () {
+                $(".offcanvas-collapse").toggleClass("open");
+            });
+        });
+    </script>
+    <link rel="stylesheet" href="~/library-client/css/default.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/library-client/css/bar.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/library-client/css/nivo-slider.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="~/library-client/js/jquery.nivo.slider.js"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $("#slider").nivoSlider({
+                animSpeed: 500,
+                pauseTime: 3000,
+            });
+        });
+    </script>
+    <script simpl-append-version="true" src="/_content/NhaHang.Module.Core/main.js"></script>
+    @RenderSection("scripts", required: false)
+    <partial name="_AnalyticsScript" />
+</body>
+</html>
+
+
+

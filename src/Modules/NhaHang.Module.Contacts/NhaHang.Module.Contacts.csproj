@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName></SccProjectName>
+    <SccProvider></SccProvider>
+    <SccAuxPath></SccAuxPath>
+    <SccLocalPath></SccLocalPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Contacts\Views\Contact\Index.cshtml" />
+    <None Include="Areas\Contacts\Views\Contact\SubmitContactResult.cshtml" />
+    <None Include="Areas\Contacts\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Contacts\Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\admin\contact-area\contact-area-form.js" />
+    <None Include="wwwroot\admin\contact-area\contact-area-list.js" />
+    <None Include="wwwroot\admin\contact-area\contact-area-service.js" />
+    <None Include="wwwroot\admin\contact-area\contact-area-translation-form.js" />
+    <None Include="wwwroot\admin\contacts.module.js" />
+    <None Include="wwwroot\admin\contacts\contact-list.js" />
+    <None Include="wwwroot\admin\contacts\contact-service.js" />
+    <None Include="wwwroot\admin\contacts\contact.js" />
+    <None Include="wwwroot\admin\contacts\contact-widget.directive.js" />
+    <None Include="wwwroot\init-google-map.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NhaHang.Module.Core\NhaHang.Module.Core.csproj" />
+  </ItemGroup>
+
+</Project>

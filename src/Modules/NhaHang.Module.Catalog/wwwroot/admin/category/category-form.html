@@ -1,0 +1,341 @@
+﻿
+<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0n" ng-if="!vm.isEditMode">
+                {{::vm.translate.get('Create Category')}}
+            </h1>
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0" ng-if="vm.isEditMode">
+                {{::vm.translate.get('Edit Category')}}
+            </h1>
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <li class="breadcrumb-item text-muted">
+                    <a href="admin" class="text-muted text-hover-primary">{{::vm.translate.get('Home')}}</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    <a href="javascript:;" class="text-muted text-hover-primary">
+                        {{::vm.translate.get('Product')}}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    <a href="javascript:;" class="text-muted text-hover-primary">
+                        {{::vm.translate.get('Category')}}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted" ng-if="!vm.isEditMode">
+                    {{::vm.translate.get('Create Category')}}
+                </li>
+                <li class="breadcrumb-item text-muted" ng-if="vm.isEditMode">
+                    {{::vm.translate.get('Edit Category')}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container container-xxl">
+        <form name="categoryForm" class="form-horizontal">
+            <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-5">
+                <li class="nav-item">
+                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#General">{{::vm.translate.get('General Information')}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link pb-4" data-bs-toggle="tab" href="#Description">{{::vm.translate.get('Description')}}</a>
+                </li>
+                <li class="nav-item" ng-if="vm.isEditMode">
+                    <a class="nav-link pb-4" data-bs-toggle="tab" href="#Product">{{::vm.translate.get('Product')}}</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="General" role="tab-panel">
+                    <div class="row">
+                        <div class="alert alert-danger d-flex align-items-center p-5" ng-show="vm.validationErrors">
+                            <i class="ki-outline ki-call fs-2hx text-danger me-4"></i>
+                            <div class="d-flex flex-column">
+                                <h4 class="mb-1 text-danger" ng-repeat="error in vm.validationErrors">{{error}}</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-flush py-4">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <h2>{{::vm.translate.get('Thumbnail')}}</h2>
+                                    </div>
+                                </div>
+                                <div class="card-body text-center pt-0">
+                                    <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3">
+                                        <div class="image-input-wrapper w-150px h-150px">
+                                            <img ngf-src="vm.category.thumbnailImage" ngf-resize="{width: 150, height: 150, quality: 0.9}">
+                                        </div>
+                                        <div class="image-input-wrapper w-150px h-150px mt-10" ng-show="!vm.category.thumbnailImage && vm.category.thumbnailImageUrl">
+                                            <img class="mt-5" ng-src="{{vm.category.thumbnailImageUrl}}" style="width: 100px; height: 100px" />
+                                        </div>
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                            <i class="ki-duotone ki-pencil fs-7">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                            </i>
+                                            <input type="file" ngf-select ng-model="vm.category.thumbnailImage" name="thumbnailImage" ngf-accept="'image/*'" />
+                                        </label>
+                                    </div>
+                                    <div class="text-muted fs-7">
+                                        {{::vm.translate.get('Set the thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted')}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-flush py-4 mt-10">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <h2>{{::vm.translate.get('Status')}}</h2>
+                                    </div>
+                                    <div class="card-toolbar">
+                                        <div ng-if="vm.category.isPublished === true" class="rounded-circle bg-primary w-15px h-15px"></div>
+                                        <div ng-if="!vm.category.isPublished === true" class="rounded-circle bg-danger w-15px h-15px"></div>
+                                    </div>
+                                </div>
+                                <div class="card-body pt-0">
+                                    <div class="mb-10">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" ng-model="vm.category.isPublished">
+                                            <label class="form-check-label">{{::vm.translate.get('Published')}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="mb-10">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" ng-model="vm.category.includeInMenu" />
+                                            <label class="form-check-label">
+                                                {{::vm.translate.get('Include In Menu')}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="d-flex flex-column gap-7 gap-lg-10">
+                                <div class="card card-flush py-4">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h2>{{::vm.translate.get('General Information')}}</h2>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="mb-7 fv-row">
+                                            <label class="required form-label">{{::vm.translate.get('Class Item Name')}}</label>
+                                            <input name="name" ng-model="vm.category.name" ng-change="vm.updateSlug()" required placeholder="{{::vm.translate.get('Class Item Name')}}" class="form-control mb-2" />
+                                        </div>
+                                        <div class="mb-7 fv-row">
+                                            <label class="required form-label">{{::vm.translate.get('Slug')}}</label>
+                                            <div class="d-flex">
+                                                <input name="slug" required disabled="disabled" ng-model="vm.category.slug" type="text" placeholder="{{::vm.translate.get('Slug')}}" class="form-control me-3 flex-grow-1"
+                                                       value="vm.category.slug" />
+                                                <button class="btn btn-light-primary fw-bold flex-shrink-0" id="copySlugButton" ng-disabled="!vm.category.slug" ng-click="vm.copySlug()">
+                                                    {{::vm.translate.get('Coppy link')}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="mb-7 fv-row">
+                                            <label class="form-label">{{::vm.translate.get('Parent Class Category')}}</label>
+                                            <select class="form-select form-select-solid" ng-model="vm.category.parentId"
+                                                    ng-options="category.id as category.name for category in vm.categorys">
+                                                <option value="">Top</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-7 fv-row">
+                                            <label class="form-label">{{::vm.translate.get('Display Order')}}</label>
+                                            <input type="number" name="displayOrder" ng-model="vm.category.displayOrder" placeholder="{{::vm.translate.get('Display Order')}}" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card card-flush py-4">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h2>{{::vm.translate.get('Meta Options SEO')}}</h2>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="mb-10">
+                                            <label class="fs-6 fw-bold form-label mt-2">{{::vm.translate.get('Meta Tag Title')}}</label>
+                                            <input name="metaTitle" ng-model="vm.category.metaTitle" placeholder="{{::vm.translate.get('Meta Title')}}" class="form-control" />
+                                            <div class="text-muted fs-7">
+                                                {{::vm.translate.get('Set a meta tag title. Recommended to be simple and precise keywords.')}}
+                                            </div>
+                                        </div>
+                                        <div class="mb-10">
+                                            <label class="fs-6 fw-bold form-label mt-2">{{::vm.translate.get('Meta Tag Keywords')}}</label>
+                                            <textarea name="metaKeywords" ng-model="vm.category.metaKeywords" placeholder="{{::vm.translate.get('Meta Keywords')}}" class="form-control" rows="2"></textarea>
+                                            <div class="text-muted fs-7">
+                                                {{::vm.translate.get('Set a list of keywords that the tutor is related to. Separate the keywords by adding a comma, between each keyword.')}}
+                                            </div>
+                                        </div>
+                                        <div class="mb-10">
+                                            <label class="fs-6 fw-bold form-label mt-2">{{::vm.translate.get('Meta Tag Description')}}</label>
+                                            <textarea ui-tinymce="vm.tinymceMetaDescriptionOptions" name="metaDescription" class="form-control" ng-model="vm.category.metaDescription"></textarea>
+                                            <div class="text-muted fs-7">
+                                                {{::vm.translate.get('Set a meta tag description to the tutor for increased SEO ranking.')}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="Description" class="tab-pane fade" role="tab-panel">
+                    <div class="card card-flush py-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h2>{{::vm.translate.get('Description')}}</h2>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0">
+                            <textarea ui-tinymce="vm.tinymceDescriptionOptions" name="description" class="form-control" ng-model="vm.category.description"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Product" class="tab-pane fade" role="tab-panel">
+                    <div class="card card-flush py-4" st-pipe="vm.getProducts" st-table="vm.products">
+                        <div class="card-header">
+                            <div class="col-xxl-12">
+                                <div class="row g-8">
+                                    <div class="col-lg-4">
+                                        <!--<label class="form-label">{{::vm.translate.get('Product Name')}}</label>-->
+                                        <div class="position-relative">
+                                            <i class="ki-duotone ki-magnifier fs-3 text-gray-500 position-absolute top-50 translate-middle ms-6">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                            </i>
+                                            <input placeholder="{{::vm.translate.get('Product Name')}}" class="form-control ps-10" st-search="Name" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <!--<label class="form-label">{{::vm.translate.get('Published')}}</label>-->
+                                        <select class="form-select" st-search="IsPublished">
+                                            <option value="">{{::vm.translate.get('All')}}</option>
+                                            <option value="true">{{::vm.translate.get('Yes Published')}}</option>
+                                            <option value="false">{{::vm.translate.get('No Published')}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="table-responsive">
+                                <table class="table align-middle table-row-dashed fs-6 gy-5">
+                                    <thead>
+                                         <tr class="fs-6 fw-bold text-gray-600">
+                                            <th>{{::vm.translate.get('Product Name')}}</th>
+                                            <th>{{::vm.translate.get('Is Published')}}</th>
+                                            <th st-sort="IsFeaturedProduct" class="sortable">{{::vm.translate.get('Is Featured in this Category')}}</th>
+                                            <th st-sort="DisplayOrder" class="sortable">{{::vm.translate.get('Display Order')}}</th>
+                                            <th class="text-center">{{::vm.translate.get('Actions')}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-show="!vm.isLoading">
+                                        <tr ng-repeat-start="product in vm.products">
+                                            <td>
+                                                <a ui-sref="product-edit({id: product.id})" class="text-gray-800 text-hover-primary fs-5 fw-bold">
+                                                    {{product.productName}}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <div ng-if="product.isProductPublished" class="badge badge-light-success">{{::vm.translate.get('Published')}}</div>
+                                                <div ng-if="!product.isProductPublished" class="badge badge-light-danger">{{::vm.translate.get('UnPublished')}}</div>
+                                            </td>
+                                            <td>
+                                                <div ng-if="product.isFeaturedProduct" class="badge badge-light-success">{{::vm.translate.get('Featured')}}</div>
+                                                <div ng-if="!product.isFeaturedProduct" class="badge badge-light-danger">{{::vm.translate.get('UnFeatured')}}</div>
+                                            </td>
+                                            <td>{{product.displayOrder}}</td>
+                                            <td>
+                                                <a ng-show="!product.isEditing" ng-click="vm.editProduct(product)" title="Edit" class="btn btn-clean btn-icon"> <i class="ki-outline ki-notepad-edit fs-2x"></i></a>
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="product.isEditing" ng-repeat-end>
+                                            <td>
+                                                <input value="{{product.productName}}" disabled="disabled" class="form-control" />
+                                            </td>
+                                            <td>
+                                                <input ng-if="product.isProductPublished" value="{{::vm.translate.get('Published')}}" disabled="disabled" class="form-control" />
+                                                <input ng-if="!(product.isProductPublished)" value="{{::vm.translate.get('UnPublished')}}" disabled="disabled" class="form-control" />
+                                            </td>
+                                            <td>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" ng-model="product.editingIsFeaturedProduct">
+                                                    <label class="form-check-label">
+                                                        {{::vm.translate.get('Featured')}}
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="number" ng-model="product.editingDisplayOrder" placeholder="" class="form-control" />
+                                            </td>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <button type="submit" ng-click="vm.saveProduct(product)" class="btn btn-icon btn-outline btn-outline-dashed me-2">
+                                                            <span class="indicator-label" ng-hide="vm.showProgressClass"> <i class="ki-outline ki-double-check fs-2x text-primary"></i></span>
+                                                            <span ng-show="vm.showProgressClass">
+                                                                {{::vm.translate.get('Please wait...')}}
+                                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <button type="button" class="btn btn-icon btn-outline btn-outline-dashed me-2" ng-click="product.isEditing = false">
+                                                            <i class="ki-outline ki-cross-circle fs-2x text-danger"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody class="fw-semibold text-gray-600" ng-show="vm.product.length === 0">
+                                        <tr class="odd">
+                                            <td valign="top" colspan="8" class="dataTables_empty">
+                                                <div class="d-flex flex-column flex-center">
+                                                    <img src="/media/illustrations/sketchy-1/5.png" class="mw-400px">
+                                                    <div class="fs-1 fw-bolder text-dark mb-4">{{::vm.translate.get('No items found.')}}</div>
+                                                    <div class="text-gray-400 fs-6 fw-semibold mb-10">{{::vm.translate.get('Start creating new product')}}</div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td class="text-center" st-pagination="" st-items-by-page="10" colspan="10" st-template="/_content/NhaHang.Module.Core/admin/common/pagination.custom.html">
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-10">
+                <div class="d-flex justify-content-end">
+                    <a ui-sref="category" class="btn btn-light-danger me-5"><i class="la la-close mr-1"></i> {{::vm.translate.get('Cancel')}}</a>
+                    <button class="btn btn-primary" ng-disabled="categoryForm.$invalid" ng-click="vm.save()">
+                        <span class="indicator-label" ng-hide="vm.showProgress">{{::vm.translate.get('Save Changes')}}</span>
+                        <span ng-show="vm.showProgress">
+                            {{::vm.translate.get('Please wait...')}}
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

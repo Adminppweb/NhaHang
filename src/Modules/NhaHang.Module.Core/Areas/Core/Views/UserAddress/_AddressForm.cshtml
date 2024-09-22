@@ -1,0 +1,57 @@
+﻿@model NhaHang.Module.Core.Areas.Core.ViewModels.UserAddressFormViewModel
+
+
+<fieldset class="form-group">
+	<label>@Localizer["Contact name"]</label>
+	<input asp-for="ContactName" type="text" class="form-control">
+</fieldset>
+<fieldset class="form-group">
+	<label>@Localizer["Phone"]</label>
+	<input asp-for="Phone" type="text" class="form-control">
+</fieldset>
+<div class="row">
+	<div class="col-md-6 col-12">
+		<fieldset class="form-group">
+			<label>@Localizer["Country"]</label>
+			<select asp-for="CountryId" asp-items="Model.Countries" class="form-control"></select>
+		</fieldset>
+	</div>
+	<div class="col-md-6 col-12">
+		<fieldset class="form-group">
+			<label>@Localizer["State or Province"]</label>
+			<select asp-for="StateOrProvinceId" asp-items="Model.StateOrProvinces" class="form-control">
+				<option value="">@Localizer["Choose one"]</option>
+			</select>
+		</fieldset>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4 col-12">
+		<fieldset id="form-group-district" class="form-group @(@Model.DisplayDistrict ? "" : "d-none")">
+			<label>@Localizer["District"]</label>
+			<select asp-for="DistrictId" asp-items="Model.Districts" class="form-control">
+				<option value=""></option>
+			</select>
+		</fieldset>
+	</div>
+	<div class="col-md-4 col-12">
+		<fieldset id="form-group-city" class="form-group @(@Model.DisplayCity ? "" : "d-none")">
+			<label>@Localizer["City"]</label>
+			<input asp-for="City" type="text" class="form-control">
+		</fieldset>
+	</div>
+	<div class="col-md-4 col-12">
+		<fieldset id="form-group-postalcode" class="form-group @(@Model.DisplayZipCode ? "" : "d-none")">
+			<label>@Localizer["Postal Code"]</label>
+			<input asp-for="ZipCode" type="text" class="form-control">
+		</fieldset>
+	</div>
+</div>
+<fieldset class="form-group">
+	<label>@Localizer["Address"]</label>
+	<input asp-for="AddressLine1" type="text" class="form-control">
+</fieldset>
+<div class="btn-row">
+	<button class="btn btn-lg btn-dark-address btn-outline article-readmore btn-close" type="button" onclick="window.location.href='/user/address'"><span>Hủy</span></button>
+	<button class="btn btn-lg btn-primary btn-submit" type="submit"><span>Lưu địa chỉ</span></button>
+</div>

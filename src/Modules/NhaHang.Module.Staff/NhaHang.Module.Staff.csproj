@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+	<PropertyGroup Label="Globals">
+		<SccProjectName></SccProjectName>
+		<SccProvider></SccProvider>
+		<SccAuxPath></SccAuxPath>
+		<SccLocalPath></SccLocalPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="bundleconfig.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\NhaHang.Infrastructure\NhaHang.Infrastructure.csproj" />
+		<ProjectReference Include="..\NhaHang.Module.Core\NhaHang.Module.Core.csproj" />
+	</ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Staff\Controllers\" />
+    <Folder Include="Areas\Staff\ViewModels\" />
+    <Folder Include="Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+</Project>

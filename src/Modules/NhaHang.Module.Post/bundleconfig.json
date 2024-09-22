@@ -1,0 +1,13 @@
+[
+  {
+    "outputFileName": "wwwroot/admin/pos.min.js",
+    "inputFiles": [
+      "wwwroot/admin/pos.module.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

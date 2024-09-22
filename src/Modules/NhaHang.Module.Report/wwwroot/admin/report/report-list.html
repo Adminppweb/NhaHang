@@ -1,0 +1,72 @@
+﻿
+<div class="card card-custom card-stretch gutter-b">
+    <div class="card-header align-items-center py-5">
+        <h1 class="card-title align-items-start flex-column">
+            <span class="card-label font-weight-bolder text-dark">{{::vm.translate.get('Contacts')}}</span>
+        </h1>
+    </div>
+   <div class="card-body pt-10">
+        <div class="table-responsive">
+            <table class="table table-head-custom table-vertical-center" st-pipe="vm.getContacts" st-table="vm.contacts">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="form-group">
+                                <input placeholder="{{ ::vm.translate.get('Customer')}}" class="form-control form-control-solid" st-search="FullName" />
+                            </div>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <select class="form-control form-control-solid" st-search="ContactAreaId">
+                                    <option value="">{{ ::vm.translate.get('All')}}</option>
+                                    <option ng-repeat="item in vm.contactAreas" value="{{item.id}}">
+                                        {{item.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </th>
+                        <th colspan="2"><st-date-range predicate="CreatedOn" before="query.before" after="query.after"></st-date-range></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th class="sortable col-md-2 text-center" st-sort="FullName">{{ ::vm.translate.get('Customer')}}</th>
+                        <th class="col-md-2 text-center">{{ ::vm.translate.get('Contact Area')}}</th>
+                        <th class="col-md-5 text-center">{{ ::vm.translate.get('Short content')}}</th>
+                        <th class="sortable col-md-2 text-center" t-sort="CreatedOn">{{ ::vm.translate.get('Create date')}}</th>
+                        <th class="col-md-1 text-center">{{ ::vm.translate.get('Actions')}}</th>
+                    </tr>
+                    <tr>
+                        <th ng-show="!vm.isLoading" colspan="5">{{vm.tableStateRef.pagination.totalItemCount | number:0}} {{::vm.translate.get('records found')}}</th>
+                    </tr>
+                </thead>
+                <tbody ng-show="!vm.isLoading">
+                    <tr ng-repeat="contact in vm.contacts">
+                        <td>{{contact.fullName}}</td>
+                        <td>{{contact.contactArea}}</td>
+                        <td>{{contact.content | limitTo: 50}}...</td>
+                        <td>{{contact.createdOn | date:'medium'}}</td>
+                        <td>
+                            <a ui-sref="contact-preview({id: contact.id})" title="View" class="btn btn-light-primary btn-xs"> <span class="glyphicon glyphicon-search"></span></a>
+                            <button ng-click="vm.deleteContact(contact)" class="btn btn-clean btn-icon delete"> <i class="la la-trash-alt icon-lg text-danger"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody ng-show="vm.isLoading">
+                    <tr>
+                        <td colspan="5">
+                            <div class="d-flex flex-center text-center text-muted min-h-200px">
+                                <div class="spinner spinner-track spinner-primary mr-10"></div>{{::vm.translate.get('Loading...')}}
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="text-center" st-pagination="" st-items-by-page="10" colspan="10" st-template="/_content/NhaHang.Module.Core/admin/common/pagination.custom.html">
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
